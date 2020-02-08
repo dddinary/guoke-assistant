@@ -1,0 +1,64 @@
+<cu-custom bgColor="bg-gradual-green" isBack="true">
+    <view slot="backText">返回</view>
+    <view slot="content">讲座详情</view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-titles text-red "></text>
+      <text class="text-bold">{{curLecture.name}}</text>
+    </view>
+</view>
+<view class="cu-list menu sm-border card-menu margin-top">
+    <view class="cu-item">
+      <view class="content">
+        <text class="cuIcon-crownfill text-purple"></text>
+        <text class="text-back">类别: </text>
+        <text class="text-back">{{curLecture.category}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="cuIcon-circlefill text-pink"></text>
+        <text class="text-back">开设院系: </text>
+        <text class="text-back">{{curLecture.dpt}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="cuIcon-timefill text-green"></text>
+        <text class="text-back">开始时间: </text>
+        <text class="text-back">{{curLecture.start}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="cuIcon-countdownfill text-red"></text>
+        <text class="text-back">结束时间: </text>
+        <text class="text-back">{{curLecture.end}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="cuIcon-locationfill text-blue"></text>
+        <text class="text-back">主会场: </text>
+        <text class="text-back">{{curLecture.venue}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="cuIcon-locationfill text-yellow"></text>
+        <text class="text-back">分会场: </text>
+        <text class="text-back">{{curLecture.fu_venue}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content padding-top-sm padding-bottom-sm">
+        <text class="cuIcon-icon text-orange"></text>
+        <text class="text-back" space="ensp">介绍: </text>
+        <text class="text-back">{{curLecture.desc}}</text>
+      </view>
+    </view>
+    <button class="cu-btn block bg-cyan round margin-tb-sm lg" bindtap="tapBack">
+        <text class="cuIcon-back_android"></text> 返回
+    </button>
+</view>

@@ -1,0 +1,4 @@
+/* pages/lecture/lecture.wxss */
+.cu-card>.cu-item {
+    margin: 5rpx 10rpx;
+}

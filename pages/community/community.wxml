@@ -1,0 +1,30 @@
+<view class="main-wrapper" style="min-height:100%;padding-bottom:{{PlaceHolderHeight}}rpx;">
+<cu-custom bgColor="bg-gradual-blue">
+    <view slot="content">新鲜事</view>
+</cu-custom>
+<view class="head flex solid-bottom padding-top-sm justify-between">
+  <view class="padding-left">
+    <view class="cu-btn sm round {{kind==0?'bg':'lines'}}-green margin-lr-sm" data-kind='0' bindtap="changeKind">全部</view>
+    <view class="cu-btn sm round {{kind==1?'bg':'lines'}}-green margin-lr-sm" data-kind='1'  bindtap="changeKind">匿名</view>
+  </view>
+  <view class="padding-right">
+    <view class="flex-twice flex justify-end padding-bottom-sm">
+      <picker mode="selector" bindchange="changeOrder" value="{{order}}" range="{{orderList}}">
+          <view class="flex text-lg">
+              <text class="cuIcon-triangleupfill sm text-gray margin-top-xs"></text>
+              <view class="text-black text-bold">{{orderList[order]}}</view>
+              <text class="cuIcon-triangledownfill sm text-gray margin-top-xs"></text>
+          </view>
+      </picker>
+    </view>
+  </view>
+</view>
+<view class="container">
+  <view class="cu-card dynamic">
+    <post-card class="cu-item shadow" wx:for="{{posts}}" wx:key="index" bindtap="goPost" data-pid="{{item.id}}" 
+    post="{{item}}" author="{{students[item.uid]}}" showShare="{{false}}">
+    </post-card>
+  </view>
+</view>
+</view>
+<custom-tab-bar  PageCur='community'></custom-tab-bar>

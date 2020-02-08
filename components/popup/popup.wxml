@@ -1,0 +1,26 @@
+<view class="wx-popup" hidden="{{flag}}">
+  <view class='popup-container'>
+    <view class="wx-popup-title">{{course.name}}</view>
+    <view class="wx-popup-con">
+        <view class="con-item">课程代码:<text class="course-attr">{{course.code}}</text></view>
+        <view class="con-item">开设单位:<text class="course-attr">{{course.dpt}}</text></view>
+        <view class="con-item">课程属性:<text class="course-attr">{{course.attr}}</text></view>
+        <view class="con-item">专业:<text class="course-attr">{{course.major}}</text></view>
+        <view class="con-item">课时:<text class="course-attr">{{course.keshi}}</text></view>
+        <view class="con-item">学分:<text class="course-attr">{{course.score}}</text></view>
+        <view class="con-item">授课方式:<text class="course-attr">{{course.shouke}}</text></view>
+        <view class="con-item">教授:<text class="course-attr">{{course.professor}}</text></view>
+        <view class="con-item">讲师:<text class="course-attr">{{course.lecturer}}</text></view>
+        <view class="con-item">助教:<text class="course-attr">{{course.assistant}}</text></view>
+        <view class="con-item">
+            上课时间:
+            <view wx:for="{{course.time_place}}" wx:key="index" class="week-day">
+              <text class="course-attr">周{{weekDayText[item.weekday]}}:{{item.jie}}节@{{item.room}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="wx-popup-btn">
+      <text class="btn-ok" bindtap='_tapok'>确定</text>
+    </view>
+  </view>
+</view>

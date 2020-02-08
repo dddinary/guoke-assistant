@@ -1,0 +1,25 @@
+.card-wrapper {
+    margin: 0rpx 0rpx;
+}
+.text-content {
+    margin: 0rpx 20rpx;
+}
+.cu-avatar {
+    width: 80rpx;
+    height: 80rpx;
+}
+.cu-list.menu-avatar>.cu-item {
+    height: 100rpx;
+}
+.cu-list.menu-avatar>.cu-item>.cu-avatar {
+    left: 20rpx;
+}
+
+.cu-list.menu-avatar>.cu-item .content {
+    left: 110rpx;
+    line-height: normal;
+}
+
+.post-time {
+    margin-left: 12rpx;
+}

@@ -1,0 +1,56 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">发布</view>
+</cu-custom>
+<view class="margin-left margin-right">
+    <form bindsubmit="pubPost">
+        <view class="cu-form-group margin-top">
+            <textarea placeholder-style="font-size: 12px;" style="{{'height: ' + textHeight + 'px;'}}" disabled="{{modalName!=''}}" bindinput="onTextareaInput" placeholder="有什么新鲜事儿？或者有什么想问大家的？"></textarea>
+        </view>
+        <view class="cu-form-group">
+		    <view class="title">匿名发布</view>
+		    <switch class="orange radius sm" checked="{{kind==1}}" bindchange="tapAnonymousSwitch"></switch>
+	    </view>
+        <view class="padding-xl">
+            <button class="cu-btn block bg-red shadow lg" form-type="submit">
+                <text class="cuIcon-upload"></text>
+                <text space="ensp"> 发布</text>
+            </button>
+        </view>
+    </form>
+    <view class='cu-load load-modal' wx:if="{{modalName === 'loading'}}">
+        <view class='cuIcon-emojifill text-orange'></view>
+        <!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
+        <view class='gray-text'>发布中...</view>
+    </view>
+    <view class="cu-modal {{modalName=='failed'?'show':''}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content">发布失败</view>
+                <view class="action" bindtap="hideModal">
+                    <text class="cuIcon-close text-red"></text>
+                </view>
+            </view>
+            <view class="padding-xl">请检查网络并确认已登录</view>
+        </view>
+    </view>
+    <view class="cu-modal {{modalName=='shouldLogin'?'show':''}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+            <view class="content">请先登录</view>
+            <view class="action" bindtap="cancelLogin">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+            </view>
+            <view class="padding-xl">
+            目前只有登录以后才可能发布内容哦~
+            </view>
+            <view class="cu-bar bg-white justify-end">
+            <view class="action">
+                <button class="cu-btn line-green text-green" bindtap="cancelLogin">取消</button>
+                <button class="cu-btn bg-green margin-left" bindtap="goLogin">确定</button>
+            </view>
+            </view>
+        </view>
+    </view>
+</view>

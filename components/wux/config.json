@@ -1,0 +1,21 @@
+{
+    "components": [
+        "textarea",
+        "upload",
+        "alert",
+        "fab-button",
+        "image",
+        "notice-bar",
+        "timeago",
+        "cicle",
+        "notification",
+        "spin",
+        "toptips",
+        "keyboard",
+        "refresher",
+        "virtual-list"
+    ],
+    "themes": {
+        "light": "white"
+    }
+}

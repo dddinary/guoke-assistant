@@ -1,0 +1,22 @@
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view bindtap="switchTab" data-cur="shedule" class="action text-{{PageCur=='shedule'?'green':'gray'}}" >
+    <view class="cuIcon-home{{PageCur=='shedule'?'fill':''}}"></view> 课表
+  </view>
+
+  <view bindtap="switchTab" data-cur="lecture" class="action text-{{PageCur=='lecture'?'green':'gray'}}">
+    <view class="cuIcon-new{{PageCur=='lecture'?'fill':''}}"></view> 讲座
+  </view>
+  
+  <view class="action text-gray add-action">
+    <button class="cu-btn cuIcon-add bg-green shadow" bindtap='toPublish'></button> 发布
+  </view>
+  
+  <view bindtap="switchTab" data-cur="community" class="action text-{{PageCur=='community'?'green':'gray'}}">
+    <view class="cuIcon-community{{PageCur=='community'?'fill':''}}"></view> 校闻
+  </view>
+  
+  <view bindtap="switchTab" data-cur="me" class="action text-{{PageCur=='me'?'green':'gray'}}">
+    <view class="cuIcon-my{{PageCur=='me'?'fill':''}}"></view> 我的
+  </view>
+</view>
+

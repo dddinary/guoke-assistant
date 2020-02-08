@@ -1,0 +1,4 @@
+/* pages/news/news.wxss */
+.cu-card>.cu-item {
+    margin: 0rpx 20rpx 8rpx 20rpx;
+}

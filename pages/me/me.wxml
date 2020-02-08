@@ -1,0 +1,50 @@
+<view class="UCenter-bg bg-gradual-green">
+    <button class="cu-btn round lg bg-white" wx:if="{{!stuInfo.name}}" bindtap="skipToLogin">点击登录</button>
+    <view wx:else class="text-center">
+        <image wx:if="{{!stuInfo.avatar}}" id="stu-avatar" class="png" mode="widthFix" src="http://api.btstu.cn/sjtx/api.php?lx=c3&format=images"></image>
+        <image wx:else id="stu-avatar" class="png" mode="widthFix" src="{{stuInfo.avatar}}"></image>
+        <view class="text-lg">{{stuInfo.dpt}}</view>
+        <view class="margin-top-xs text-xl text-bold">
+            <text>{{stuInfo.name}}</text>
+        </view>
+        <view class="flex justify-end margin-top-sm" style="width:720rpx;">
+        <view class="flex-item text-lg" bindtap="whetherLogout">
+            <view class="cuIcon-exit lg text-black">退出</view>
+        </view>
+        </view>
+    </view>
+</view>
+
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+<view class="cu-item arrow">
+    <view class="content" bindtap="skipToLogin">
+    <text class="cuIcon-refresh text-red"></text>
+    <text class="text-grey">更新课表</text>
+    </view>
+</view>
+<view class="cu-item arrow">
+    <view class="content" bindtap="clearPwdBtn">
+    <text class="cuIcon-deletefill text-yellow"></text>
+    <text class="text-grey">清除用户名密码</text>
+    </view>
+</view>
+<view class="cu-item arrow">
+    <view class="content" bindtap="clearAllBtn">
+    <text class="cuIcon-delete text-blue"></text>
+    <text class="text-grey">清除所有数据</text>
+    </view>
+</view>
+<view class="cu-item arrow">
+    <view class="content" bindtap="showQrcode">
+    <text class="cuIcon-appreciatefill text-red"></text>
+    <text class="text-grey">赞赏支持</text>
+    </view>
+</view>
+<view class="cu-item arrow">
+    <button class="cu-btn content" open-type="contact">
+    <text class="cuIcon-writefill text-cyan"></text>
+    <text class="text-grey">联系客服</text>
+    </button>
+</view>
+</view>
+<custom-tab-bar  PageCur='me'></custom-tab-bar>

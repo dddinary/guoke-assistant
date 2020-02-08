@@ -1,0 +1,22 @@
+.flex-item {
+  width: 95rpx;
+  height: 100px;
+}
+
+.kcb-item {
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.left {
+  width: 50rpx;
+  height: 100rpx;
+  font-size: 9pt;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

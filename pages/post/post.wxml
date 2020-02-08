@@ -1,0 +1,54 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+</cu-custom>
+<view class="body-container">
+    <view class="cu-card dynamic no-card">
+    <view class="cu-item shadow">
+        <post-card class="cu-item shadow" post="{{post}}" author="{{user}}" showShare="{{true}}">
+        </post-card>
+        <view class="cu-list menu-avatar comment solids-top">
+            <view class="cu-item solid-top" wx:for="{{comments}}" wx:key="id">
+                <view class="cu-avatar round" style="background-image:url({{students[item.uid].avatar}});"></view>
+                <view class="content">
+                    <view class="text-black justify-between">
+                        <view style="line-height: 1em;">
+                            <view><text space="ensp" class="text-bold text-sm">{{students[item.uid].name}}</text></view>
+                            <view><text class="text-gray text-xs">{{item.created_at}}</text></view>
+                        </view>
+                        <view>
+                            <text space="ensp">3 </text>
+                            <text class="cuIcon-appreciate text-gray"></text>
+                        </view>
+                    </view>
+                    <view class="text-black text-content text-df">
+                        {{item.content}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    </view>
+    <view class="padding" wx:if="{{comments.length == 0}}">
+        <view class="text-xl margin text-center text-gray">
+            第一个评论抢沙发~
+        </view>
+    </view>
+</view>
+<view class="cu-bar input solid-top" wx:if="{{post}}" style="width: 100%; position: fixed; bottom: 0">
+    <view class="cu-avatar round" style="background-image:url({{me.avatar}});" wx:if="{{me.avatar}}"></view>
+    <input class="solid-bottom" disabled="{{!me.sessionid}}" bindinput="onTextareaInput" value="{{inputArea}}"
+        maxlength="140" cursor-spacing="10" placeholder="{{me.sessionid?'评论一下...':'登录以后才可以发表评论'}}"></input>
+    <button class="cu-btn bg-green shadow-blur" wx:if="{{me.sessionid}}" bindtap="pubComment" disabled="{{!inputArea}}">发表</button>
+    <button class="cu-btn bg-green shadow-blur" wx:else bindtap="goLogin">去登录</button>
+</view>
+<view class="cu-modal {{modalName=='failed'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">发布失败</view>
+            <view class="action" bindtap="hideModal">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">请检查网络并确认已登录</view>
+    </view>
+</view>

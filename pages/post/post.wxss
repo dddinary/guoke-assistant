@@ -1,0 +1,4 @@
+/* pages/post.wxss */
+.cu-list.menu-avatar.comment>.cu-item {
+    padding: 20rpx 20rpx 20rpx 120rpx;
+}

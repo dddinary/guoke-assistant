@@ -1,0 +1,7 @@
+/* pages/news/news.wxss */
+/* .cu-card>.cu-item {
+    margin: 10rpx 20rpx;
+} */
+.cu-card>.cu-item {
+    margin: 5rpx 10rpx;
+}

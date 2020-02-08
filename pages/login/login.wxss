@@ -1,0 +1,16 @@
+#logo {
+    margin: 140rpx;
+    width: 460rpx;
+    height: 110rpx;
+}
+
+#cap {
+    width: 200rpx;
+}
+
+#pic {
+    margin-top: 7rpx;
+    margin-left: 40rpx;
+    width: 200rpx;
+    height: 70rpx;
+}

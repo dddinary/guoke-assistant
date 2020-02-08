@@ -1,0 +1,40 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">登录</view>
+</cu-custom>
+<view class='container bg-gray'>
+    <image id="logo" src="/image/ucas.png" />
+    <form bindsubmit="formSubmit">
+        <view class='cu-form-group margin-top'>
+            <view class="title">账号:</view>
+            <input type='text' name="username" value="{{accountInfo.username}}" />
+        </view>
+        <view class='cu-form-group'>
+            <view class="title">密码:</view>
+            <input password='true' name="pwd" value="{{accountInfo.pwd}}" />
+        </view>
+        <view class='cu-form-group'>
+            <view class="title">验证码:</view>
+            <input id="cap" name="code" />
+            <image id="pic" src="{{pic_url}}" bindtap="changePic" />
+        </view>
+        <view class='margin-lg'>
+            <button class="round bg-green" form-type="submit">登录</button>
+        </view>
+    </form>
+    <view class='cu-load load-modal' wx:if="{{modalName === 'loading'}}">
+        <view class='cuIcon-emojifill text-orange'></view>
+        <view class='gray-text'>加载中...</view>
+    </view>
+    <view class="cu-modal {{modalName=='failed'?'show':''}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content">加载失败</view>
+                <view class="action" bindtap="hideModal">
+                    <text class="cuIcon-close text-red"></text>
+                </view>
+            </view>
+            <view class="padding-xl">请检查网络并正确填写账号密码</view>
+        </view>
+    </view>
+</view>

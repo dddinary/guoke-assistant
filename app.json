@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/shedule/shedule",
+    "pages/lecture/lecture",
+    "pages/community/community",
+    "pages/me/me",
+    "pages/login/login",
+    "pages/publish/publish",
+    "pages/detail/detail",
+    "pages/post/post"
+  ],
+  "tabBar": {
+    "list": [
+      { "pagePath": "pages/shedule/shedule" },
+      { "pagePath": "pages/lecture/lecture" },
+      { "pagePath": "pages/community/community" },
+      { "pagePath": "pages/me/me" }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "果壳助手",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "custom-tab-bar": "/components/custom-tab-bar/custom-tab-bar",
+    "cu-custom": "/colorui/components/cu-custom",
+    "post-card": "/components/post-card/post-card"
+  },
+  "sitemapLocation": "sitemap.json"
+}
