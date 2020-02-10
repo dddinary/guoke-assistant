@@ -25,7 +25,7 @@ Page({
 
         bodyHeight: 0,
 
-        dayView: true,
+        dayView: false,
 
         curWeek: globalData.curWeek,
         dispWeek: globalData.curWeek,

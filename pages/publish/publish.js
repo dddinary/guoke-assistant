@@ -79,7 +79,7 @@ Page({
                 console.log('发布成功');
                 this.hideModal();
                 wx.switchTab({
-                  url: '/pages/news/news',
+                  url: '/pages/community/community',
                 });
             } else {
                 this.showModal("failed");
