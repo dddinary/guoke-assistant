@@ -20,6 +20,10 @@ Page({
     humanityEmpty: false,
     scienceEmpty: false,
     pullDown: false,
+
+    touchS: [0, 0],
+    touchE: [0, 0],
+
   },
 
   /**
@@ -132,6 +136,38 @@ Page({
       }).catch((err)=>{
         console.log('attach image err:', err);
       });
-  }
+  },
+
+  touchStart: function(e) {
+      let sx = e.touches[0].pageX
+      let sy = e.touches[0].pageY
+      this.data.touchS = [sx, sy]
+  },
+  touchMove: function(e) {
+      let sx = e.touches[0].pageX;
+      let sy = e.touches[0].pageY;
+      this.data.touchE = [sx, sy]
+  },
+  touchEnd: function(e) {
+      let start = this.data.touchS
+      let end = this.data.touchE
+      if (start[0] < end[0] - 50) {
+          console.log('右滑');
+          if (this.data.curTab == 1) {
+            this.setData({
+              curTab: 0
+            })
+          }
+      } else if (start[0] > end[0] + 50) {
+          console.log('左滑');
+          if (this.data.curTab == 0) {
+            this.setData({
+              curTab: 1
+            })
+          }
+      } else {
+          console.log('静止')
+      }
+  },
 
 })

@@ -59,7 +59,7 @@ Page({
                 console.log("login and get course: ", res);
                 let resData = res.data;
                 if ("courseDetail" in resData && "timeTable" in resData) {
-                    let sinfo = {name: resData.name, dpt: resData.dpt, avatar: resData.avatar, sessionid: resData.token};
+                    let sinfo = {name: resData.name, dpt: resData.dpt, avatar: resData.avatar, sessionid: resData.sessionid};
                     globalData.stuInfo = sinfo;
                     wx.setStorage({
                         key: "stuInfo",

@@ -60,6 +60,7 @@ Page({
 
     onshow: function() {
         this.updateDayCourse();
+        this.updateWeekCourse();
     },
 
     onReady: function() {
@@ -126,6 +127,7 @@ Page({
                 dispWeek: globalData.curWeek,
             });
             this.updateWeekDay();
+            this.updateWeekCourse();
         }
         if (this.data.dispDay != globalData.curDay) {
             this.setData({
