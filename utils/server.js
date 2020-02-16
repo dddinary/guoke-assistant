@@ -1,77 +1,188 @@
-const _fetch = require('./fetch');
-
-const URL = 'https://dinary.xin';
-// const URL = 'http://127.0.0.1:3000';
-const changePicURL = URL + "/getCaptcha";
-
-function fetch (path, params) {
-    return _fetch(URL, path, params);
-}
-
-/**
- * 使用一次性的code换取用户的openid
- * @param {String} code 
- */
-function codeToOpenid(code) {
-    return fetch("/wxLogin", { code });
-} 
+const HOST = 'https://ucas.dinary.xin';
+// const HOST = 'http://127.0.0.1:3000';
 
 /**
  * 登录教务系统获取课程详情和时间表
- * @param {String} openid 
- * @param {String} username 
- * @param {String} pwd 
- * @param {String} cap 
- * @param {*} needname 是否需要返回用户名字和单位
  */
-function loginAndGetCourse(openid, username, pwd, cap) {
-    return fetch("/loginCourse", { openid:openid, username, pwd, cap });
+function loginAndGetCourse(username, pwd, avatar) {
+    return new Promise((resolve, reject) => {
+        wx.request({
+          url: HOST + "/loginCourse",
+          data: { username, pwd, avatar },
+          method: "POST",
+          success: resolve,
+          fail: reject
+        })
+    })
 }
 
-/**
- * 由课程列表获取课程详细信息和时间表
- * @param {IntegerArray} courses 
- */
-function clistToMap(courses) {
-    return fetch("/clistToMap", { courses });
+var token = '';
+function updateToken(newToken) {
+    token = newToken;
 }
 
-/**
- * 获取最近讲座信息
- */
+function fetch(path, params) {
+    return new Promise((resolve, reject) => {
+        wx.request({
+          url: HOST + path,
+          data: Object.assign({"_t": token}, params),
+          success: resolve,
+          fail: reject
+        })
+    })
+}
+
 function getLecture() {
     return fetch("/getLecture");
 }
 
-/**
- * 发布动态
- */
-function publishPost(sessionid, pid, kind, content, image) {
-    return fetch("/publish", { sessionid, pid, kind, content, image });
-}
-
-/**
- * 获取post列表
- */
 function getNews(kind, order, page) {
     return fetch("/getNews", { kind, order, page });
 }
-
-/**
- * 获取post详情页
- */
 
 function getPost(pid) {
     return fetch("/getPost", { pid });
 }
 
+function getUserPost(uid, page){
+    return fetch("/getUserPost", { uid, page })
+}
+
+function getPostLikes(pid) {
+    return fetch("/getPostLikes", { pid })
+}
+
+function getPostComments(pid) {
+    return fetch("/getPostComments", { pid })
+}
+
+function getPostImages(pid) {
+    return fetch("/getPostImages", { pid })
+}
+
+function getStudentInfo(sid) {
+    return fetch("/getStudentInfo", { sid })
+}
+
+function getStudentsInfoList(sid) {
+    return fetch("/getStudentsInfoList", { sid })
+}
+
+function publishPost(kind, content, images) {
+    return fetch("/s/publish", { kind, content, images });
+}
+
+function commentPost(pid, content) {
+    return fetch("/s/commentPost", { pid, content })
+}
+
+function commentComment(pid, cid, content) {
+    return fetch("/s/commentComment", { pid, cid, content })
+}
+
+function getStarPost(page) {
+    return fetch("/s/getStarPost", { page })
+}
+
+function likePost(pid) {
+    return fetch("/s/likePost", { pid })
+}
+
+function unlikePost(pid) {
+    return fetch("/s/unlikePost", { pid })
+}
+
+function likeComment(cid) {
+    return fetch("/s/likeComment", { cid })
+}
+
+function unlikeComment(cid) {
+    return fetch("/s/unlikeComment", { cid })
+}
+
+function starPost(pid) {
+    return fetch("/s/starPost", { pid })
+}
+
+function unstarPost(pid) {
+    return fetch("/s/unstarPost", { pid })
+}
+
+function deletePost(pid) {
+    return fetch("/s/deletePost", { pid })
+}
+
+function deleteComment(cid) {
+    return fetch("/s/deleteComment", { cid })
+}
+
+function getUnreadMessageCount() {
+    return fetch("/s/messageCount")
+}
+
+function getUnreadMessage(page) {
+    return fetch("/s/getMessage", { page })
+}
+
+function readMessage(nid) {
+    return fetch("/s/readMessage", { nid })
+}
+
+function deleteMessage(nid) {
+    return fetch("/s/deleteMessage", { nid })
+}
+
+function adminDeletePost(pid) {
+    return fetch("/a/deletePost", { pid })
+}
+
+function adminDeleteComment(cid) {
+    return fetch("/a/deleteComment", { cid })
+}
+
+function adminBlockStudent(uid) {
+    return fetch("/a/blockStudent", { uid })
+}
+
+function adminUnblockStudent(uid) {
+    return fetch("/a/unblockStudent", { uid })
+}
+
+function adminNotify(uid, content) {
+    return fetch("/a/notify", { uid, content })
+}
+
 module.exports = {
-    changePicURL,
-    codeToOpenid,
+    updateToken,
     loginAndGetCourse,
-    clistToMap,
     getLecture,
-    publishPost,
     getNews,
     getPost,
+    getUserPost,
+    getPostLikes,
+    getPostComments,
+    getPostImages,
+    getStudentInfo,
+    getStudentsInfoList,
+    publishPost,
+    commentPost,
+    commentComment,
+    getStarPost,
+    likePost,
+    unlikePost,
+    likeComment,
+    unlikeComment,
+    starPost,
+    unstarPost,
+    deletePost,
+    deleteComment,
+    getUnreadMessageCount,
+    getUnreadMessage,
+    readMessage,
+    deleteMessage,
+    adminDeletePost,
+    adminDeleteComment,
+    adminBlockStudent,
+    adminUnblockStudent,
+    adminNotify
 }

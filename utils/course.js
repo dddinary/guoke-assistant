@@ -10,9 +10,9 @@ function getDayCourseList(weekNo, dayNo, courseData) {
     if (timeTable.length == 0) {
         return [];
     }
-    var cl = timeTable[weekNo][dayNo];
+    let cl = timeTable[weekNo][dayNo];
     cl.sort((a, b)=>{
-        var func = course => Number(course.jie.split("-")[0]);
+        let func = course => Number(course.jie.split("-")[0]);
         return func(a) - func(b);
     });
     return cl;
@@ -23,8 +23,8 @@ function getWeekCourseList(weekNo, courseData) {
     if (timeTable.length == 0) {
         return [];
     }
-    var cl = timeTable[weekNo];
-    var res = [];
+    let cl = timeTable[weekNo];
+    let res = [];
     for (let day of cl) {
         for (let c of day) {
             res.push(c);
@@ -38,11 +38,8 @@ function handleTimeTable(timeTable, courseDetail) {
         for (let day of week) {
             for (let c of day) {
                 c.name = getCourseDetail(c.cid, courseDetail).name;
-                var oldJie = c.jie;
-                var temp = convertCouseTime(oldJie);
-                c.jie = temp[0];
-                c.time = temp[1];
-                c.jieNo = convertCourseJie(oldJie);
+                let courseTimeDetail = convertCouseTime(c.jie);
+                Object.assign(c, courseTimeDetail);
             }
         }
     }
@@ -54,26 +51,24 @@ function handleTimeTable(timeTable, courseDetail) {
  * @param {Object} allCourseDetail 
  */
 function getCourseDetail(cid, allCourseDetail) {
-    var obj = allCourseDetail[cid];
+    let obj = allCourseDetail[cid];
     return JSON.parse(JSON.stringify(obj));;
 }
 
 /**
  * 将节数的字符串转化为第几节到第几节，以及开始时间到结束时间
- * @param {String} timeStr 教务系统里的代表节数的字符串如： 2,3,4
+ * @param {String} jieListStr 教务系统里的代表节数的字符串如： 2,3,4
  */
-function convertCouseTime(timeStr) {
-    var jieList = timeStr.split(",");
-    var first = jieList[0];
-    var last = jieList[jieList.length-1];
-    return [first+"-"+last, getJieTime(Number(first))[0]+"-"+getJieTime(Number(last))[1]];
-}
-
-function convertCourseJie(timeStr) {
-    var jieList = timeStr.split(",");
-    var first = Number(jieList[0]);
-    var last = Number(jieList[jieList.length-1]);
-    return [first, last, last-first+1]
+function convertCouseTime(jieListStr) {
+    let jieList = jieListStr.split(",");
+    let firstStr = jieList[0];
+    let first = Number(firstStr);
+    let lastStr = jieList[jieList.length-1];
+    let last = Number(lastStr);
+    let jieStr = firstStr + "-" + lastStr
+    let jieNum = last-first+1
+    let timeStr = getJieTime(first)[0]+"-"+getJieTime(last)[1]
+    return {jieStart, jieEnd, jieNum, jieStr, timeStr};
 }
 
 /**

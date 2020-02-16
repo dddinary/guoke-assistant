@@ -21,10 +21,12 @@
     <view class="bg-img {{isCard?'':'only-img'}}" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" wx:for="{{isCard?9:1}}" wx:key="{{index}}">
     </view>
     </view> -->
-    <view class="solid-top flex grid col-{{showShare?4:3}} text-center padding-sm">
-        <view><text class="cuIcon-appreciate margin-lr-xs lg"> </text><text>20</text></view>
-        <view><text class="cuIcon-message margin-lr-xs lg"> </text><text>{{post.comment}}</text></view>
-        <view><text class="cuIcon-like margin-lr-xs lg"></text></view>
+    <view class="solid-top flex grid col-3 text-center padding-sm">
+        <view wx:if="{{!showShare}}"><text class="cuIcon-appreciate{{post.liked?'fill':''}} margin-lr-xs lg "> </text><text>{{post.like}}</text></view>
+        <view wx:else><text class="margin-lr-xs lg ">点赞</text><text>{{post.like}}</text></view>
+        <view wx:if="{{!showShare}}"><text class="cuIcon-message margin-lr-xs lg"> </text><text>{{post.comment}}</text></view>
+        <view wx:else><text class="margin-lr-xs lg">评论</text><text>{{post.comment}}</text></view>
         <view wx:if="{{showShare}}"><text class="cuIcon-share margin-lr-xs lg"></text></view>
+        <view wx:else><text class="cuIcon-like{{post.stared?'fill':''}} margin-lr-xs lg"></text></view>
     </view>
 </view>

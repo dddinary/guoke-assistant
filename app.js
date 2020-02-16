@@ -1,6 +1,5 @@
 const date = require("utils/date.js");
 const wechat = require("utils/wechat.js");
-const server = require("utils/server.js");
 
 App({
   onLaunch: function() {
@@ -26,7 +25,7 @@ App({
       }
     })
     .catch((err)=>{
-      console.log("从缓存中获取courseData: ", err);
+      console.log("从缓存中获取courseData失败: ", err);
     });
     wechat.getStorage("stuInfo")
     .then((res)=>{
@@ -36,38 +35,18 @@ App({
       }
     })
     .catch((err)=>{
-      console.log("从缓存中获取stuInfo: ", err);
+      console.log("从缓存中获取stuInfo:失败", err);
     });
     wechat.getStorage("accountInfo")
     .then((res)=>{
-      console.log("从缓存中获取accountInfo: ", res);
+      console.log("从缓存中获取accountInfo:失败", res);
       if (res.data.username) {
         this.globalData.accountInfo = res.data;
       }
     })
     .catch((err)=>{
-      console.log("从缓存中获取accountInfo: ", err);
+      console.log("从缓存中获取accountInfo:失败", err);
     });
-    let openid = wx.getStorageSync('openid')||"";
-    console.log("从缓存中获取openid: ", openid);
-    if (openid === "" || openid.replace(' ', '') === "") {
-      wechat.login()
-        .then((res)=>{
-          console.log("login: ", res);
-          return server.codeToOpenid(res.code);
-        })
-        .then((res)=>{
-          console.log("get openid: ", res);
-          openid = ''
-          try {
-            openid = res.data.openid.replace(' ', '');
-          } catch (e) { }
-          this.globalData.openid = openid;
-          wx.setStorageSync('openid', openid);
-        });
-    } else {
-      this.globalData.openid = openid;
-    }
   },
 
   globalData: {

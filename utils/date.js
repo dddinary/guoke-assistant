@@ -31,10 +31,9 @@ function formatDate(source, format) {
  * @return {int}  1-20
  */
 function getWeekNo() {
-    return 16;
-    var today = new Date();
-    var firstDay = new Date(2019, 7, 26);
-    var result = Math.floor((today.valueOf()- firstDay.valueOf())/ (1000*60*60 * 24 * 7));
+    let today = new Date();
+    let firstDay = new Date(2020, 1, 3);
+    let result = Math.floor((today.valueOf()- firstDay.valueOf()) / 604800000); // (1000*60*60 * 24 * 7)
     return result+1;
 };
 
@@ -43,8 +42,7 @@ function getWeekNo() {
  * @return {int} 1-7
  */
 function getDayNo() {
-    return 4;
-    var res = new Date().getDay();
+    let res = new Date().getDay();
     if (res === 0) return 7;
     return res;
 }
@@ -55,8 +53,8 @@ function getDayNo() {
  * @returns {StringArray}  
  */
 function getWeekDay(weekNo) {
-    var res = []
-    var firstDay = new Date(2019, 7, 26);
+    let res = []
+    let firstDay = new Date(2020, 2, 10);
     firstDay.setDate(firstDay.getDate() + (weekNo - 1) * 7 - 1);
     for (let i = 0; i < 7; i++) {
         firstDay.setDate(firstDay.getDate()+1);

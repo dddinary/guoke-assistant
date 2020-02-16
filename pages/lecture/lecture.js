@@ -1,7 +1,6 @@
 // pages/lecture/lecture.js
 const server = require("../../utils/server.js");
 const dateUtils = require("../../utils/date.js");
-const fetch = require("../../utils/fetch.js");
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 Page({
