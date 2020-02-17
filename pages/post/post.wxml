@@ -39,7 +39,7 @@
                                 回复
                                 <text class="text-blue" bindtap="goProfile" data-sid="{{item.ruid}}">{{students[item.ruid].name}}</text>：
                             </view>
-                            <view class="flex-sub" bindtap="">{{item.content}}</view>
+                            <view class="flex-sub" bindtap="tapComment">{{item.content}}</view>
                         </view>
                     </view>
                 </view>
@@ -60,8 +60,8 @@
 </view>
 <view class="cu-bar input solid-top" wx:if="{{post}}" style="width: 100%; position: fixed; bottom: 0">
     <view class="cu-avatar round" style="background-image:url({{me.avatar}});" wx:if="{{me.avatar}}"></view>
-    <input class="solid-bottom" disabled="{{!me.token}}" bindinput="onTextareaInput" value="{{inputArea}}"
-        maxlength="140" cursor-spacing="10" placeholder="{{me.token?'评论一下...':'登录以后才可以发表评论'}}"></input>
+    <input class="solid-bottom" disabled="{{!me.token}}" bindinput="onTextareaInput" value="{{inputArea}}" adjust-position="{{false}}" focus="{{isFocus}}"
+        maxlength="140" cursor-spacing="10" placeholder="{{me.token?placeholderText:'登录以后才可以发表评论'}}"></input>
     <button class="cu-btn bg-green shadow-blur" wx:if="{{me.token}}" bindtap="pubComment" disabled="{{!inputArea}}">发表</button>
     <button class="cu-btn bg-green shadow-blur" wx:else bindtap="goLogin">去登录</button>
 </view>

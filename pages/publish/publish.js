@@ -8,6 +8,15 @@ Page({
       textareaValue: '',
       modalName: '',
       kind: 0,
+      kindIdx: 0,
+      kindList:[
+        {id: 0, name: "普通发布"},
+        {id: 2, name: "果壳问问"},
+        {id: 3, name: "匿名树洞"},
+        {id: 4, name: "约伴交友"},
+        {id: 5, name: "二手市场"},
+        {id: 6, name: "失物招领"},
+      ],
     },
 
     onLoad: function (options) {
@@ -27,8 +36,18 @@ Page({
       });
     },
 
+    pickerChange: function(e) {
+      console.log('picker发送选择改变，携带值为', e.detail.value)
+      let kindIdx = e.detail.value;
+      let kind = this.data.kindList[kindIdx].id;
+      this.setData({
+        kindIdx,
+        kind
+      })
+    },
+
     checkLogin: function() {
-      if (!globalData.stuInfo.sessionid) {
+      if (!globalData.stuInfo.token) {
         this.showModal("shouldLogin");
       }
     },
@@ -62,16 +81,10 @@ Page({
     },
 
     pubPost: function(e) {
-      var sessionid = globalData.stuInfo.sessionid;
-      if (sessionid == null || sessionid == '') {
-        this.showModal("failed");
-        return;
-      }
       this.showModal("loading");
       var kind = this.data.kind;
       var content = this.data.textareaValue;
-      console.log({ kind, content});
-      server.publishPost(sessionid, 0, kind, content, '')
+      server.publishPost(kind, content, '')
         .then((res)=>{
             console.log("publish post: ", res);
             let resData = res.data;

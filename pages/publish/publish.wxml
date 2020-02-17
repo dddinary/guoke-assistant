@@ -7,10 +7,14 @@
         <view class="cu-form-group margin-top">
             <textarea placeholder-style="font-size: 12px;" style="{{'height: ' + textHeight + 'px;'}}" disabled="{{modalName!=''}}" bindinput="onTextareaInput" placeholder="有什么新鲜事儿？或者有什么想问大家的？"></textarea>
         </view>
-        <view class="cu-form-group">
-		    <view class="title">匿名发布</view>
-		    <switch class="orange radius sm" checked="{{kind==1}}" bindchange="tapAnonymousSwitch"></switch>
-	    </view>
+        <view class="cu-form-group margin-top">
+            <view class="title">发布频道</view>
+            <picker bindchange="pickerChange" value="{{kindIdx}}" range="{{kindList}}" range-key="name">
+                <view class="picker">
+                    {{kindIdx > 0?'发布到 '+kindList[kindIdx].name:'普通发布'}}
+                </view>
+            </picker>
+        </view>
         <view class="padding-xl">
             <button class="cu-btn block bg-red shadow lg" form-type="submit">
                 <text class="cuIcon-upload"></text>

@@ -16,6 +16,8 @@ Page({
     },
     curTab: "comment",
 
+    placeholderText: "评论一下",
+    isFocus: false,
     inputArea: '',
     modalName: '',
   },
@@ -176,6 +178,14 @@ Page({
         this.showModal("failed");
         console.log("publish post: ", err);
       });
+  },
+
+  tapComment: function(e) {
+    console.log(e);
+    this.setData({
+      isFocus: true,
+      placeholderText: '回复评论',
+    })
   },
 
   goLogin: function() {
