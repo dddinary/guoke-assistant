@@ -10,6 +10,7 @@ Page({
     post: {},
     comments: {},
     students: {},
+    curTab: "comment",
 
     inputArea: '',
     modalName: '',
@@ -115,6 +116,22 @@ Page({
     wx.navigateTo({
       url: '/pages/login/login'
     });
+  },
+
+  switchToLikes: function() {
+    this.setData({
+      curTab: "like"
+    })
+  },
+
+  switchToComments: function() {
+    this.setData({
+      curTab: "comment"
+    })
+  },
+
+  goStudent: function(e) {
+
   },
   
   /**

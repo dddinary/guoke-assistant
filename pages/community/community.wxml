@@ -4,8 +4,15 @@
 </cu-custom>
 <view class="head flex solid-bottom padding-top-sm justify-between">
   <view class="padding-left">
-    <view class="cu-btn sm round {{kind==0?'bg':'lines'}}-green margin-lr-sm" data-kind='0' bindtap="changeKind">全部</view>
-    <view class="cu-btn sm round {{kind==1?'bg':'lines'}}-green margin-lr-sm" data-kind='1'  bindtap="changeKind">匿名</view>
+    <view class="flex-twice flex justify-end padding-bottom-sm">
+      <picker mode="selector" bindchange="changeKind" value="{{kind}}" range="{{kindList}}">
+          <view class="flex text-lg">
+              <text class="cuIcon-triangleupfill sm text-gray margin-top-xs"></text>
+              <view class="text-black text-bold">{{kindList[order]}}</view>
+              <text class="cuIcon-triangledownfill sm text-gray margin-top-xs"></text>
+          </view>
+      </picker>
+    </view>
   </view>
   <view class="padding-right">
     <view class="flex-twice flex justify-end padding-bottom-sm">
@@ -22,7 +29,8 @@
 <view class="container">
   <view class="cu-card dynamic">
     <post-card class="cu-item shadow" wx:for="{{posts}}" wx:key="index" bindtap="goPost" data-pid="{{item.id}}" 
-    post="{{item}}" author="{{students[item.uid]}}" showShare="{{false}}">
+    post="{{item}}" author="{{students[item.uid]}}" showShare="{{false}}" curTab="" 
+    bind:tapStar="starPost" bind:tapLike="likePost" bind:tapComment="goPost" bind:tapAuthor="goStudent">
     </post-card>
   </view>
 </view>

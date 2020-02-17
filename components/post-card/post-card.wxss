@@ -23,3 +23,7 @@
 .post-time {
     margin-left: 12rpx;
 }
+
+#bottom-bar view {
+    line-height: 100%;
+}

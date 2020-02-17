@@ -11,6 +11,7 @@ Page({
     kind: 0,
     order: 0,
 
+    kindList: ['全部', '通知活动', '果壳问问', '匿名树洞', '约伴交友', '二手市场', '失物招领'],
     orderList: ['最近发布', '七日高赞', '七日多评'],
   },
 
@@ -19,15 +20,15 @@ Page({
   },
 
   updateNewsFeed: function() {
-    var kind = this.data.kind;
-    var order = this.data.order;
+    let kind = this.data.kind;
+    let order = this.data.order;
     wx.showLoading({
       title: '快速加载中...'
     });
     server.getNews(kind, order, 0)
       .then((res)=>{
         console.log("get news info: ", res);
-        var resData = res.data;
+        let resData = res.data;
         if ("posts" in resData && "students" in resData) {
           for (let idx in resData.posts) {
             let post = resData.posts[idx];
@@ -51,11 +52,10 @@ Page({
   },
 
   changeKind: function(e) {
-    var kind = e.currentTarget.dataset.kind;
-    console.log('点击修改类型，携带值为', kind);
+    console.log('picker修改顺序，携带值为', e.detail.value);
     this.setData({
-        kind: kind,
-    })
+        kind: e.detail.value,
+    });
     this.updateNewsFeed();
   },
 
@@ -75,18 +75,47 @@ Page({
     });
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+  starPost: function(e) {
+    let pid = e.currentTarget.dataset.pid;
+    console.log('收藏post，携带值为', pid);
+    if (this.checkLogin()) {
+      server.starPost(pid)
+        .then((res)=>{
+          console.log(res);
+        })
+    } 
+  },
+
+  likePost: function(e){
+    let pid = e.currentTarget.dataset.pid;
+    console.log('点赞post，携带值为', pid);
+    if (this.checkLogin()) {
+      server.likePost(pid)
+        .then((res)=>{
+          if(res.data.status == 200) {
+
+          }
+        });
+    }
+  },
+
+  goStudent: function(e) {
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+  checkLogin: function() {
+    let hasLogin = 'token' in app.globalData.stuInfo;
+    if (hasLogin) {
+      return true;
+    } else {
+      this.goLogin();
+    }
+  },
 
+  goLogin: function() {
+    wx.navigateTo({
+      url: '/pages/login/login'
+    });
   },
 
   /**

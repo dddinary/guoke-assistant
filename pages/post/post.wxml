@@ -4,7 +4,8 @@
 <view class="body-container">
     <view class="cu-card dynamic no-card">
     <view class="cu-item shadow">
-        <post-card class="cu-item shadow" post="{{post}}" author="{{user}}" showShare="{{true}}">
+        <post-card class="cu-item shadow" post="{{post}}" author="{{user}}" showShare="{{true}}" curTab="{{curTab}}"
+            bind:tapLike="switchToLikes" bind:tapComment="switchToComments" bind:tapShare="sharePost" bind:tapAuthor="goStudent">
         </post-card>
         <view class="cu-list menu-avatar comment solids-top">
             <view class="cu-item solid-top" wx:for="{{comments}}" wx:key="id">
@@ -36,9 +37,9 @@
 </view>
 <view class="cu-bar input solid-top" wx:if="{{post}}" style="width: 100%; position: fixed; bottom: 0">
     <view class="cu-avatar round" style="background-image:url({{me.avatar}});" wx:if="{{me.avatar}}"></view>
-    <input class="solid-bottom" disabled="{{!me.sessionid}}" bindinput="onTextareaInput" value="{{inputArea}}"
-        maxlength="140" cursor-spacing="10" placeholder="{{me.sessionid?'评论一下...':'登录以后才可以发表评论'}}"></input>
-    <button class="cu-btn bg-green shadow-blur" wx:if="{{me.sessionid}}" bindtap="pubComment" disabled="{{!inputArea}}">发表</button>
+    <input class="solid-bottom" disabled="{{!me.token}}" bindinput="onTextareaInput" value="{{inputArea}}"
+        maxlength="140" cursor-spacing="10" placeholder="{{me.token?'评论一下...':'登录以后才可以发表评论'}}"></input>
+    <button class="cu-btn bg-green shadow-blur" wx:if="{{me.token}}" bindtap="pubComment" disabled="{{!inputArea}}">发表</button>
     <button class="cu-btn bg-green shadow-blur" wx:else bindtap="goLogin">去登录</button>
 </view>
 <view class="cu-modal {{modalName=='failed'?'show':''}}">

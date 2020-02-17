@@ -14,6 +14,10 @@ Component({
     showShare: {
       type: Boolean,
       value: false
+    },
+    curTab: {
+      type: String,
+      value: "comment"
     }
   },
   data: {
@@ -25,16 +29,24 @@ Component({
     * triggerEvent 用于触发事件
     */
     _likePost() {
-      this.triggerEvent("likePost");
+      console.log("post-card catch like post")
+      this.triggerEvent("tapLike");
     },
     _starPost() {
-      this.triggerEvent("starPost");
+      console.log("post-card catch star post")
+      this.triggerEvent("tapStar");
     },
-    _goPost() {
-      this.triggerEvent("goPost");
+    _sharePost() {
+      console.log("post-card catch share post")
+      this.triggerEvent("tapShare");
+    },
+    _commentPost() {
+      console.log("post-card catch comment post")
+      this.triggerEvent("tapComment");
     },
     _goAuthor() {
-      this.triggerEvent("goAuthor");
+      console.log("post-card catch go author")
+      this.triggerEvent("tapAuthor");
     }
   }
 })
