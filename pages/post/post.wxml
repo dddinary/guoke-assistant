@@ -5,7 +5,7 @@
     <view class="cu-card dynamic no-card">
     <view class="cu-item shadow">
         <post-card class="cu-item shadow" post="{{post}}" author="{{user}}" showShare="{{true}}" curTab="{{curTab}}"
-            bind:tapLike="switchToLikes" bind:tapComment="switchToComments" bind:tapShare="sharePost" bind:tapAuthor="goStudent">
+            bind:switchToLikes="switchToLikes" bind:switchToComments="switchToComments" bind:tapShare="sharePost" bind:tapAuthor="goStudent">
         </post-card>
         <view class="cu-list menu-avatar comment solids-top">
             <view class="cu-item solid-top" wx:for="{{comments}}" wx:key="id">

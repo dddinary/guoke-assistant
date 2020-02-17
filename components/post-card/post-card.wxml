@@ -24,11 +24,11 @@
     <view class="solid-top flex grid col-3 text-center" wx:if="{{!showShare}}">
         <view><button catchtap='_likePost'    class="cu-btn bg-white"> <text class="cuIcon-appreciate{{post.liked?'fill text-orange':''}} margin-lr-xs lg"> </text><text>{{post.like}}</text></button></view>
         <view><button catchtap='_commentPost' class="cu-btn bg-white"> <text class="cuIcon-message margin-lr-xs lg"> </text><text>{{post.comment}}</text></button></view>
-        <view><button catchtap='_starPost'    class="cu-btn bg-white"> <text class="cuIcon-like{{post.stared?'fill text-orange':''}} margin-lr-xs lg"></text></button></view>
+        <view><button catchtap='_starPost'    class="cu-btn bg-white"> <text class="cuIcon-favor{{post.stared?'fill text-orange':''}} margin-lr-xs lg"></text></button></view>
     </view>
     <view class="solid-top flex grid col-3 text-center" wx:else>
-        <view><button catchtap='_likePost'    class="cu-btn bg-white {{curTab=='like'?'text-orange':''}}">  <text class="margin-lr-xs lg ">点赞</text><text>{{post.like}}</text></button></view>
-        <view><button catchtap='_commentPost' class="cu-btn bg-white {{curTab=='comment'?'text-orange':''}}">   <text class="margin-lr-xs lg">评论</text><text>{{post.comment}}</text></button></view>
+        <view><button catchtap='_switchLikes'    class="cu-btn bg-white {{curTab=='like'?'text-orange':''}}">  <text class="margin-lr-xs lg ">点赞</text><text>{{post.like}}</text></button></view>
+        <view><button catchtap='_switchComments' class="cu-btn bg-white {{curTab=='comment'?'text-orange':''}}">   <text class="margin-lr-xs lg">评论</text><text>{{post.comment}}</text></button></view>
         <view><button catchtap='_sharePost'   class="cu-btn bg-white" open-type="share"> <text class="cuIcon-share margin-lr-xs lg"></text></button></view>
     </view>
 </view>

@@ -78,25 +78,11 @@ Page({
   starPost: function(e) {
     let pid = e.currentTarget.dataset.pid;
     console.log('收藏post，携带值为', pid);
-    if (this.checkLogin()) {
-      server.starPost(pid)
-        .then((res)=>{
-          console.log(res);
-        })
-    } 
   },
 
   likePost: function(e){
     let pid = e.currentTarget.dataset.pid;
     console.log('点赞post，携带值为', pid);
-    if (this.checkLogin()) {
-      server.likePost(pid)
-        .then((res)=>{
-          if(res.data.status == 200) {
-
-          }
-        });
-    }
   },
 
   goStudent: function(e) {

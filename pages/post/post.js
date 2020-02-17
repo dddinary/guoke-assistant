@@ -78,8 +78,7 @@ Page({
   },
 
   pubComment: function(e) {
-    var sessionid = globalData.stuInfo.sessionid;
-    if (sessionid == null || sessionid == '') {
+    if (!('token' in globalData.stuInfo)) {
       this.showModal("failed");
       return;
     }
@@ -89,7 +88,7 @@ Page({
     wx.showLoading({
       title: '发表中...'
     });
-    server.publishPost(sessionid, pid, 0, content, '')
+    server.commentPost(pid, content)
       .then((res)=>{
           console.log("publish post: ", res);
           let resData = res.data;

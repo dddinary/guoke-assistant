@@ -30,7 +30,7 @@
   <view class="cu-card dynamic">
     <post-card class="cu-item shadow" wx:for="{{posts}}" wx:key="index" bindtap="goPost" data-pid="{{item.id}}" 
     post="{{item}}" author="{{students[item.uid]}}" showShare="{{false}}" curTab="" 
-    bind:tapStar="starPost" bind:tapLike="likePost" bind:tapComment="goPost" bind:tapAuthor="goStudent">
+    bind:tapComment="goPost" bind:tapAuthor="goStudent" bind:goLogin="goLogin">
     </post-card>
   </view>
 </view>
