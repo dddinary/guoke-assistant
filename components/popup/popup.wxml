@@ -15,7 +15,7 @@
         <view class="con-item">
             上课时间:
             <view wx:for="{{course.time_place}}" wx:key="index" class="week-day">
-              <text class="course-attr">周{{weekDayText[item.weekday]}}:{{item.jie}}节@{{item.room}}</text>
+              <text class="course-attr">{{item.weekStr}}周 周{{weekDayText[item.weekday]}}:{{item.jieStr}}节@{{item.room}}</text>
             </view>
         </view>
     </view>

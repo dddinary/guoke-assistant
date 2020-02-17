@@ -32,7 +32,7 @@ function formatDate(source, format) {
  */
 function getWeekNo() {
     let today = new Date();
-    let firstDay = new Date(2020, 1, 3);
+    let firstDay = new Date(2020, 1, 17);
     let result = Math.floor((today.valueOf()- firstDay.valueOf()) / 604800000); // (1000*60*60 * 24 * 7)
     return result+1;
 };
@@ -54,7 +54,7 @@ function getDayNo() {
  */
 function getWeekDay(weekNo) {
     let res = []
-    let firstDay = new Date(2020, 2, 10);
+    let firstDay = new Date(2020, 1, 17);
     firstDay.setDate(firstDay.getDate() + (weekNo - 1) * 7 - 1);
     for (let i = 0; i < 7; i++) {
         firstDay.setDate(firstDay.getDate()+1);

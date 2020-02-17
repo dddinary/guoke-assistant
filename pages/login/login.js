@@ -6,37 +6,39 @@ var globalData = appInstance.globalData;
 
 Page({
     data: {
-        pic_url_orign: server.changePicURL,
-        pic_url: "",
-
-        openid: globalData.openid,
         accountInfo: globalData.accountInfo,
+        avatar: '',
     },
 
     onLoad: function() {
-        this.changePic();
-        appInstance.watch("openid", (val)=>{
-            this.setData({
-                openid: val,
-            });
-            this.changePic();
-        });
         appInstance.watch("accountInfo", (val)=>{
             this.setData({
                 accountInfo: val,
             });
-            this.changePic();
         });
+        wechat.getSetting()
+            .then((res)=>{
+                if (res.authSetting['scope.userInfo']) {
+                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+                    wechat.getUserInfo()
+                        .then((res)=>{
+                        console.log(res.userInfo)
+                        this.setData({avatar: res.userInfo.avatarUrl});
+                    })
+                } else if (!('token' in globalData.stuInfo)) {
+                    this.showModal('requestInfo')
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
     },
 
-    reLoad: function() {
-        this.changePic();
-    },
-
-    changePic: function() {
-        this.setData({
-            pic_url: this.data.pic_url_orign + "?openid=" + this.data.openid + "&r=" + Math.random(),
-        });
+    bindGetUserInfo (e) {
+        this.hideModal()
+        if ('userInfo' in e.detail) {
+            this.setData({avatar: e.detail.userInfo.avatarUrl});
+        }
     },
 
     showModal: function(name) {
@@ -54,12 +56,13 @@ Page({
     formSubmit: function(e) {
         this.showModal("loading");
         let data = e.detail.value;
-        server.loginAndGetCourse(this.data.openid, data.username, data.pwd, data.code)
+        server.loginAndGetCourse(data.username, data.pwd, this.data.avatar)
             .then((res)=>{
                 console.log("login and get course: ", res);
                 let resData = res.data;
                 if ("courseDetail" in resData && "timeTable" in resData) {
-                    let sinfo = {name: resData.name, dpt: resData.dpt, avatar: resData.avatar, sessionid: resData.sessionid};
+                    let sinfo = {name: resData.name, dpt: resData.dpt, avatar: resData.avatar, token: resData.token};
+                    server.updateToken(resData.token)
                     globalData.stuInfo = sinfo;
                     wx.setStorage({
                         key: "stuInfo",
@@ -92,12 +95,10 @@ Page({
                     });
                 } else {
                     this.showModal("failed");
-                    this.changePic();
                 }
             })
             .catch((err)=>{
                 this.showModal("failed");
-                this.changePic();
                 console.log("login and get course failed: ", err);
             });
     }

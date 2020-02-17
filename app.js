@@ -1,5 +1,6 @@
 const date = require("utils/date.js");
 const wechat = require("utils/wechat.js");
+const server = require("utils/server.js");
 
 App({
   onLaunch: function() {
@@ -30,8 +31,9 @@ App({
     wechat.getStorage("stuInfo")
     .then((res)=>{
       console.log("从缓存中获取stuInfo: ", res);
-      if (res.data.name) {
+      if (res.data.token) {
         this.globalData.stuInfo = res.data;
+        server.updateToken(res.data.token);
       }
     })
     .catch((err)=>{
@@ -39,7 +41,7 @@ App({
     });
     wechat.getStorage("accountInfo")
     .then((res)=>{
-      console.log("从缓存中获取accountInfo:失败", res);
+      console.log("从缓存中获取accountInfo:", res);
       if (res.data.username) {
         this.globalData.accountInfo = res.data;
       }

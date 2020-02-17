@@ -34,6 +34,12 @@ function getLocation (type) {
   })
 }
 
+function getSetting () {
+  return new Promise((resolve, reject) =>{
+    wx.getSetting({ success: resolve, fail: reject });
+  })
+}
+
 module.exports = {
   request,
   login,
@@ -41,5 +47,6 @@ module.exports = {
   setStorage,
   getStorage,
   getLocation,
+  getSetting,
   original: wx
 }

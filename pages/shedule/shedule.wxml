@@ -70,11 +70,11 @@
                     </view>
                     <view class="content margin-bottom-xs">
                         <text class="text-black" decode="{{true}}">节数:&nbsp;</text>
-                        <text class="text-green">{{item.jie}}</text>
+                        <text class="text-green">{{item.jieStr}}</text>
                     </view>
                     <view class="content">
                         <text class="text-black" decode="{{true}}">时间:&nbsp;</text>
-                        <text class="text-green">{{item.time}}</text>
+                        <text class="text-green">{{item.timeStr}}</text>
                     </view>
                 </view>
                 </view>
@@ -97,7 +97,7 @@
                         <!--课表-->
                         <view wx:for="{{weekCourse}}" wx:key="index">
                             <view bindtap="showPopup" data-cid="{{item.cid}}" class="flex-item kcb-item text-center"
-                            style="position: absolute;margin-left:{{(item.weekday-1)*100}}rpx;margin-top:{{(item.jieNo[0]-1)*100+5}}rpx;height:{{item.jieNo[2]*100-5}}rpx;background-color:{{colorArrays[index%9]}};}}">
+                            style="position: absolute;margin-left:{{(item.weekday-1)*100}}rpx;margin-top:{{(item.jieStart-1)*100+5}}rpx;height:{{item.jieNum*100-5}}rpx;background-color:{{colorArrays[index%9]}};}}">
                                 <view class="text-sm text-white" >{{item.name}}@{{item.room}}</view>
                             </view>
                         </view>

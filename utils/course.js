@@ -38,9 +38,16 @@ function handleTimeTable(timeTable, courseDetail) {
         for (let day of week) {
             for (let c of day) {
                 c.name = getCourseDetail(c.cid, courseDetail).name;
-                let courseTimeDetail = convertCouseTime(c.jie);
+                let courseTimeDetail = convertCouseTime(c.jie, c.weekno);
                 Object.assign(c, courseTimeDetail);
             }
+        }
+    }
+    for (let cid in courseDetail) {
+        let course = courseDetail[cid];
+        for (let c of course.time_place) {
+            let courseTimeDetail = convertCouseTime(c.jie, c.weekno);
+            Object.assign(c, courseTimeDetail);
         }
     }
 }
@@ -59,16 +66,18 @@ function getCourseDetail(cid, allCourseDetail) {
  * 将节数的字符串转化为第几节到第几节，以及开始时间到结束时间
  * @param {String} jieListStr 教务系统里的代表节数的字符串如： 2,3,4
  */
-function convertCouseTime(jieListStr) {
+function convertCouseTime(jieListStr, weekListStr) {
+    let weekList = weekListStr.split(",");
+    let weekStr = weekList[0] + "-" + weekList[weekList.length-1];
     let jieList = jieListStr.split(",");
-    let firstStr = jieList[0];
-    let first = Number(firstStr);
-    let lastStr = jieList[jieList.length-1];
-    let last = Number(lastStr);
-    let jieStr = firstStr + "-" + lastStr
-    let jieNum = last-first+1
-    let timeStr = getJieTime(first)[0]+"-"+getJieTime(last)[1]
-    return {jieStart, jieEnd, jieNum, jieStr, timeStr};
+    let jieStartStr = jieList[0];
+    let jieStart = Number(jieStartStr);
+    let jieEndStr = jieList[jieList.length-1];
+    let jieEnd = Number(jieEndStr);
+    let jieStr = jieStartStr + "-" + jieEndStr
+    let jieNum = jieEnd-jieStart+1
+    let timeStr = getJieTime(jieStart)[0]+"-"+getJieTime(jieEnd)[1]
+    return {jieStart, jieEnd, jieNum, jieStr, timeStr, weekStr};
 }
 
 /**

@@ -9,6 +9,7 @@ function loginAndGetCourse(username, pwd, avatar) {
         wx.request({
           url: HOST + "/loginCourse",
           data: { username, pwd, avatar },
+          header: {"content-type": "application/x-www-form-urlencoded"},
           method: "POST",
           success: resolve,
           fail: reject
@@ -18,6 +19,7 @@ function loginAndGetCourse(username, pwd, avatar) {
 
 var token = '';
 function updateToken(newToken) {
+    console.log("update token: ", newToken)
     token = newToken;
 }
 

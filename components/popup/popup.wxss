@@ -55,5 +55,5 @@
   border-radius: 88rpx;
 }
 .week-day text{
-  margin-left: 65rpx;
+  margin-left: 25rpx;
 }

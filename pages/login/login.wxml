@@ -13,16 +13,27 @@
             <view class="title">密码:</view>
             <input password='true' name="pwd" value="{{accountInfo.pwd}}" />
         </view>
-        <view class='cu-form-group'>
-            <view class="title">验证码:</view>
-            <input id="cap" name="code" />
-            <image id="pic" src="{{pic_url}}" bindtap="changePic" />
-        </view>
         <view class='margin-lg'>
             <button class="round bg-green" form-type="submit">登录</button>
         </view>
     </form>
-    <view class='cu-load load-modal' wx:if="{{modalName === 'loading'}}">
+    <view class="cu-modal {{modalName=='requestInfo'?'show':''}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content">权限请求</view>
+            </view>
+            <view class="padding-xl">
+                登录之前需要获取您的头像信息用以标识身份,如果不授权则会为您分配随机头像
+            </view>
+            <view class="cu-bar bg-white justify-center">
+                <view class="action">
+                <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+                <button class="cu-btn bg-green margin-left" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-load load-modal" wx:if="{{modalName=='loading'}}">
         <view class='cuIcon-emojifill text-orange'></view>
         <view class='gray-text'>加载中...</view>
     </view>
