@@ -96,8 +96,9 @@ Component({
       this.triggerEvent("tapComment");
     },
     _goAuthor() {
-      console.log("post-card catch go author")
-      this.triggerEvent("tapAuthor");
+      wx.navigateTo({
+        url: "/pages/profile/profile?sid=" + this.properties.post.uid,
+      });
     }
   }
 })

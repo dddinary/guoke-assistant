@@ -85,10 +85,6 @@ Page({
     console.log('点赞post，携带值为', pid);
   },
 
-  goStudent: function(e) {
-
-  },
-
   checkLogin: function() {
     let hasLogin = 'token' in app.globalData.stuInfo;
     if (hasLogin) {

@@ -9,7 +9,11 @@ Page({
     user: {},
     post: {},
     comments: {},
-    students: {},
+    commentIdList: [],
+    likedUidList: [],
+    students: {
+      0: {name: '匿名', dpt: '中国科学院大学', avatar: 'http://ww1.sinaimg.cn/small/006m0GqOly1ga8zvcs4wwj30go0go75a.jpg'},
+    },
     curTab: "comment",
 
     inputArea: '',
@@ -24,6 +28,7 @@ Page({
       pid: pid,
     });
     this.updatePost();
+    this.updateComments();
   },
 
   updatePost: function() {
@@ -33,21 +38,15 @@ Page({
     server.getPost(this.data.pid)
       .then((res)=>{
         let resData = res.data;
-        if ("post" in res.data && "comments" in res.data && "students" in res.data) {
-          console.log(res);
+        if ("post" in resData && "student" in resData) {
           let d = new Date(resData.post.created_at);
           resData.post.created_at = d.getFullYear() + date.formatDate(d, '-MM-dd HH:mm');
-          for (let idx in resData.comments) {
-            let comment = resData.comments[idx];
-            let d = new Date(comment.created_at);
-            comment.created_at = d.getFullYear() + date.formatDate(d, '-MM-dd HH:mm');
+          if(resData.post.uid == 0) {
+            resData.student = this.data.students[0];
           }
-          resData.students[0] = {name: '匿名', dpt: '中国科学院大学', avatar: 'http://ww1.sinaimg.cn/small/006m0GqOly1ga8zvcs4wwj30go0go75a.jpg'}
           this.setData({
             post: resData.post,
-            comments: resData.comments,
-            students: resData.students,
-            user: resData.students[resData.post.uid],
+            user: resData.student,
           });
         } else {
           console.log("get post info failed: ", res);
@@ -55,6 +54,74 @@ Page({
         wx.hideLoading();
       }).catch((err)=>{
         wx.hideLoading();
+        console.log("get post info failed: ", err);
+      });
+  },
+
+  updateComments: function() {
+    server.getPostComments(this.data.pid)
+      .then((res)=>{
+        console.log(res)
+        let resData = res.data;
+        let post = this.data.post;
+        let comments = {};
+        let commentIdList = [];
+        let students = this.data.students;
+        if ("comments" in resData && "students" in resData) {
+          Object.assign(students, resData.students);
+          for (let comment of resData.comments) {
+            let d = new Date(comment.created_at);
+            comment.created_at = d.getFullYear() + date.formatDate(d, '-MM-dd HH:mm');
+            if(comment.cid == 0) {
+              commentIdList.push(comment.id);
+              comment.children = [];
+              comments[comment.id] = comment;
+            }
+          }
+          for (let comment of resData.comments) {
+            if(comment.cid != 0) {
+              comments[comment.cid].children.push(comment);
+            }
+          }
+          commentIdList.sort((a, b)=>{
+            comments[b].like - comments[a].like;
+          });
+          post.comment = commentIdList.length;
+          this.setData({
+            post,
+            students,
+            comments,
+            commentIdList
+          });
+        }
+      }).catch((err)=>{
+        console.log("get post info failed: ", err);
+      });
+  },
+
+  updateLikes: function() {
+    server.getPostLikes(this.data.pid)
+      .then((res)=>{
+        console.log(res)
+        let resData = res.data;
+        let post = this.data.post;
+        let students = this.data.students;
+        let likedUidList = this.data.likedUidList;
+        if (resData) {
+          Object.assign(students, resData);
+          for (let x in resData) {
+            if (likedUidList.indexOf(x) == -1) {
+              likedUidList.push(x);
+            }
+          }
+          post.like = likedUidList.length;
+          this.setData({
+            post,
+            students,
+            likedUidList
+          });
+        }
+      }).catch((err)=>{
         console.log("get post info failed: ", err);
       });
   },
@@ -118,19 +185,24 @@ Page({
   },
 
   switchToLikes: function() {
+    this.updateLikes();
     this.setData({
       curTab: "like"
     })
   },
 
   switchToComments: function() {
+    this.updateComments();
     this.setData({
       curTab: "comment"
     })
   },
 
-  goStudent: function(e) {
-
+  goProfile: function(e) {
+    let sid = e.currentTarget.dataset.sid;
+    wx.navigateTo({
+      url: "/pages/profile/profile?sid=" + sid,
+    });
   },
   
   /**

@@ -7,7 +7,8 @@
     "pages/login/login",
     "pages/publish/publish",
     "pages/detail/detail",
-    "pages/post/post"
+    "pages/post/post",
+    "pages/profile/profile"
   ],
   "tabBar": {
     "list": [
@@ -27,7 +28,8 @@
   "usingComponents": {
     "custom-tab-bar": "/components/custom-tab-bar/custom-tab-bar",
     "cu-custom": "/colorui/components/cu-custom",
-    "post-card": "/components/post-card/post-card"
+    "post-card": "/components/post-card/post-card",
+    "wux-timeago": "/components/wux/timeago/index"
   },
   "sitemapLocation": "sitemap.json"
 }

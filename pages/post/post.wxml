@@ -3,35 +3,58 @@
 </cu-custom>
 <view class="body-container">
     <view class="cu-card dynamic no-card">
-    <view class="cu-item shadow">
-        <post-card class="cu-item shadow" post="{{post}}" author="{{user}}" showShare="{{true}}" curTab="{{curTab}}"
-            bind:switchToLikes="switchToLikes" bind:switchToComments="switchToComments" bind:tapShare="sharePost" bind:tapAuthor="goStudent">
-        </post-card>
-        <view class="cu-list menu-avatar comment solids-top">
-            <view class="cu-item solid-top" wx:for="{{comments}}" wx:key="id">
-                <view class="cu-avatar round" style="background-image:url({{students[item.uid].avatar}});"></view>
+        <view class="cu-item shadow">
+            <post-card class="cu-item shadow" post="{{post}}" author="{{user}}" showShare="{{true}}" curTab="{{curTab}}"
+                bind:switchToLikes="switchToLikes" bind:switchToComments="switchToComments">
+            </post-card>
+        </view>
+    </view>
+    <view wx:if="{{curTab=='comment'}}">
+        <view class="padding" wx:if="{{commentIdList.length == 0}}">
+            <view class="text-xl margin text-center text-gray">
+                第一个评论抢沙发~
+            </view>
+        </view>
+        <view class="cu-list menu-avatar comment solids-top" wx:else>
+            <view class="cu-item solid-top" wx:for="{{commentIdList}}" wx:key="id">
+                <view class="cu-avatar round" style="background-image:url({{students[comments[item].uid].avatar}});" bindtap="goProfile" data-sid="{{comments[item].uid}}"></view>
                 <view class="content">
                     <view class="text-black justify-between">
                         <view style="line-height: 1em;">
-                            <view><text space="ensp" class="text-bold text-sm">{{students[item.uid].name}}</text></view>
-                            <view><text class="text-gray text-xs">{{item.created_at}}</text></view>
+                            <view><text space="ensp" class="text-bold text-sm" bindtap="goProfile" data-sid="{{comments[item].uid}}">{{students[comments[item].uid].name}}</text></view>
+                            <view class="text-sm text-gray"><wux-timeago to="{{ comments[item].created_at }}"/></view>
                         </view>
                         <view>
-                            <text space="ensp">3 </text>
+                            <text space="ensp">{{comments[item].like}}</text>
                             <text class="cuIcon-appreciate text-gray"></text>
                         </view>
                     </view>
                     <view class="text-black text-content text-df">
-                        {{item.content}}
+                        {{comments[item].content}}
+                    </view>
+                    <view class="bg-gray padding-xs radius text-sm">
+                        <view class="flex" wx:for="{{comments[item].children}}" wx:key="id">
+                            <view>
+                                <text class="text-blue" bindtap="goProfile" data-sid="{{item.uid}}">{{students[item.uid].name}}</text> 
+                                回复
+                                <text class="text-blue" bindtap="goProfile" data-sid="{{item.ruid}}">{{students[item.ruid].name}}</text>：
+                            </view>
+                            <view class="flex-sub" bindtap="">{{item.content}}</view>
+                        </view>
                     </view>
                 </view>
             </view>
         </view>
     </view>
-    </view>
-    <view class="padding" wx:if="{{comments.length == 0}}">
-        <view class="text-xl margin text-center text-gray">
-            第一个评论抢沙发~
+    <view wx:else>
+        <view class="padding" wx:if="{{likes.length == 0}}">
+            <view class="text-xl margin text-center text-gray">
+                求赞~
+            </view>
+        </view>
+        <view class="bg-white solid-top padding-sm" wx:else>
+                <view class="cu-avatar round" style="background-image:url({{students[item].avatar}});"
+                    wx:for="{{likedUidList}}" wx:key="id" bindtap="goProfile" data-sid="{{students[item].id}}"></view>
         </view>
     </view>
 </view>

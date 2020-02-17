@@ -14,6 +14,9 @@
       </picker>
     </view>
   </view>
+  <view>
+    <button class="cu-btn round">重新加载</button>  
+  </view>
   <view class="padding-right">
     <view class="flex-twice flex justify-end padding-bottom-sm">
       <picker mode="selector" bindchange="changeOrder" value="{{order}}" range="{{orderList}}">
@@ -30,7 +33,7 @@
   <view class="cu-card dynamic">
     <post-card class="cu-item shadow" wx:for="{{posts}}" wx:key="index" bindtap="goPost" data-pid="{{item.id}}" 
     post="{{item}}" author="{{students[item.uid]}}" showShare="{{false}}" curTab="" 
-    bind:tapComment="goPost" bind:tapAuthor="goStudent" bind:goLogin="goLogin">
+    bind:tapComment="goPost" bind:goLogin="goLogin">
     </post-card>
   </view>
 </view>

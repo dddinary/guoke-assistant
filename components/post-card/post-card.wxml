@@ -5,11 +5,11 @@
             <view class="content flex-sub">
                 <view>
                     <text space="ensp" catchtap='_goAuthor' class="text-bold"> {{author.name}} </text>
-                    <text class="cuIcon-crownfill text-orange " wx:if="{{post.uid == 2}}"></text>
+                    <view class="cu-tag round bg-orange sm" wx:if="{{post.uid == 2}}">管理员</view>
                     <text class="cuIcon-cardboardfill text-gray" wx:if="{{post.uid == 0}}"></text>
                 </view>
                 <view class="text-gray text-sm flex justify-between post-time">
-                    {{post.created_at}}
+                    <wux-timeago to="{{ post.created_at }}" />
                 </view>
             </view>
         </view>
