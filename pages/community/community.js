@@ -11,7 +11,7 @@ Page({
     kind: 0,
     order: 0,
 
-    orderList: ['按发布时间', '按评论时间', '按热度'],
+    orderList: ['最近发布', '七日高赞', '七日多评'],
   },
 
   onLoad: function (options) {

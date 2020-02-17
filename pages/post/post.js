@@ -115,5 +115,12 @@ Page({
     wx.navigateTo({
       url: '/pages/login/login'
     });
+  },
+  
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })

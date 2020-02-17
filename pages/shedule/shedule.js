@@ -175,5 +175,12 @@ Page({
 
     getJieTime: function(jieNo) {
         return course.getJieTime(jieNo);
+    },
+
+    /**
+    * 用户点击右上角分享
+    */
+    onShareAppMessage: function () {
+
     }
 })
