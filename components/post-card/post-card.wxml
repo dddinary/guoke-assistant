@@ -5,7 +5,7 @@
             <view class="content flex-sub">
                 <view>
                     <text space="ensp" catchtap='_goAuthor' class="text-bold"> {{author.name}} </text>
-                    <view class="cu-tag round bg-orange sm" wx:if="{{post.uid == 2}}">管理员</view>
+                    <view class="cu-tag round bg-red sm" wx:if="{{post.uid == 2}}">管理员</view>
                     <text class="cuIcon-cardboardfill text-gray" wx:if="{{post.uid == 0}}"></text>
                 </view>
                 <view class="text-gray text-sm flex justify-between post-time">

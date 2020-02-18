@@ -8,15 +8,23 @@ Page({
     posts: [],
     students: {},
 
-    kind: 0,
     order: 0,
-
-    kindList: ['全部', '通知活动', '果壳问问', '匿名树洞', '约伴交友', '二手市场', '失物招领'],
     orderList: ['最近发布', '七日高赞', '七日多评'],
+
+    kind: 0,
+    kindList: ['全部', '通知活动', '果壳问问', '匿名树洞', '约伴交友', '二手市场', '失物招领'],
+    scrollLeft: 0,
   },
 
   onLoad: function (options) {
     this.updateNewsFeed();
+  },
+
+  onShow: function() {
+    if (app.globalData.communityShouldUpdate) {
+      app.globalData.communityShouldUpdate = false;
+      this.updateNewsFeed();
+    }
   },
 
   updateNewsFeed: function() {
@@ -51,11 +59,13 @@ Page({
     });
   },
 
-  changeKind: function(e) {
-    console.log('picker修改顺序，携带值为', e.detail.value);
+  tabSelect(e) {
+    let kind = e.currentTarget.dataset.id;
+    let scrollLeft = (kind - 1) * 60;
     this.setData({
-        kind: e.detail.value,
-    });
+      kind,
+      scrollLeft
+    })
     this.updateNewsFeed();
   },
 

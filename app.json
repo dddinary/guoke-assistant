@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/community/community",
     "pages/shedule/shedule",
     "pages/lecture/lecture",
-    "pages/community/community",
+    
     "pages/me/me",
     "pages/login/login",
     "pages/publish/publish",

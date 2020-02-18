@@ -2,31 +2,20 @@
 <cu-custom bgColor="bg-gradual-blue">
     <view slot="content">新鲜事</view>
 </cu-custom>
-<view class="head flex solid-bottom padding-top-sm justify-between">
-  <view class="padding-left">
-    <view class="flex-twice flex justify-end padding-bottom-sm">
-      <picker mode="selector" bindchange="changeKind" value="{{kind}}" range="{{kindList}}">
-          <view class="flex text-lg">
-              <text class="cuIcon-triangleupfill sm text-gray margin-top-xs"></text>
-              <view class="text-black text-bold">{{kindList[order]}}</view>
-              <text class="cuIcon-triangledownfill sm text-gray margin-top-xs"></text>
-          </view>
-      </picker>
+<view class="head flex solid-bottom justify-between">
+  <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}" style="width:77%;">
+    <view class="cu-item {{index==kind?'text-green cur':''}} solid-right" wx:for="{{kindList}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+      {{item}}
     </view>
-  </view>
-  <view>
-    <button class="cu-btn round">重新加载</button>  
-  </view>
-  <view class="padding-right">
-    <view class="flex-twice flex justify-end padding-bottom-sm">
-      <picker mode="selector" bindchange="changeOrder" value="{{order}}" range="{{orderList}}">
-          <view class="flex text-lg">
-              <text class="cuIcon-triangleupfill sm text-gray margin-top-xs"></text>
-              <view class="text-black text-bold">{{orderList[order]}}</view>
-              <text class="cuIcon-triangledownfill sm text-gray margin-top-xs"></text>
-          </view>
-      </picker>
-    </view>
+  </scroll-view>
+  <view class="flex justify-end padding-bottom-sm padding-top-sm bg-white solids-left" style="width:23%;">
+    <picker mode="selector" bindchange="changeOrder" value="{{order}}" range="{{orderList}}">
+        <view class="flex text-lg">
+            <text class="cuIcon-triangleupfill sm text-gray margin-top-xs"></text>
+            <view class="text-purple text-sm margin-top-xs">{{orderList[order]}}</view>
+            <text class="cuIcon-triangledownfill sm text-gray margin-top-xs"></text>
+        </view>
+    </picker>
   </view>
 </view>
 <view class="container">

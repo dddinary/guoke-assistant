@@ -146,6 +146,24 @@ Page({
     });
   },
 
+  likeComment: function(e) {
+    let cid = e.currentTarget.dataset.cid;
+    let comments = this.data.comments;
+    if (comments[cid].liked) {
+      return;
+    }
+    server.likeComment(cid)
+      .then((res)=>{
+        if (res.data.status == 200) {
+          comments[cid].like++;
+          comments[cid].liked = true;
+          this.setData({
+            comments
+          })
+        }
+      })
+  },
+
   pubComment: function(e) {
     if (!('token' in globalData.stuInfo)) {
       this.showModal("failed");
@@ -167,7 +185,7 @@ Page({
                 inputArea: '',
               })
               this.hideModal();
-              this.updatePost();
+              this.updateComments();
           } else {
               this.showModal("failed");
           }

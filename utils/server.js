@@ -78,8 +78,8 @@ function commentPost(pid, content) {
     return fetch("/s/commentPost", { pid, content })
 }
 
-function commentComment(pid, cid, content) {
-    return fetch("/s/commentComment", { pid, cid, content })
+function commentComment(pid, cid, ruid, content) {
+    return fetch("/s/commentComment", { pid, cid, ruid, content })
 }
 
 function getStarPost(page) {

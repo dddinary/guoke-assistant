@@ -24,15 +24,15 @@
                             <view><text space="ensp" class="text-bold text-sm" bindtap="goProfile" data-sid="{{comments[item].uid}}">{{students[comments[item].uid].name}}</text></view>
                             <view class="text-sm text-gray"><wux-timeago to="{{ comments[item].created_at }}"/></view>
                         </view>
-                        <view>
-                            <text space="ensp">{{comments[item].like}}</text>
-                            <text class="cuIcon-appreciate text-gray"></text>
+                        <view bindtap="likeComment" data-cid="{{comments[item].id}}">
+                            <text space="ensp">{{comments[item].like}} </text>
+                            <text class="cuIcon-appreciate{{comments[item].liked?'fill text-red':''}} text-gray"></text>
                         </view>
                     </view>
                     <view class="text-black text-content text-df">
                         {{comments[item].content}}
                     </view>
-                    <view class="bg-gray padding-xs radius text-sm">
+                    <view class="bg-gray padding-xs radius text-sm" wx:if="{{comments[item].children.length > 0}}">
                         <view class="flex" wx:for="{{comments[item].children}}" wx:key="id">
                             <view>
                                 <text class="text-blue" bindtap="goProfile" data-sid="{{item.uid}}">{{students[item.uid].name}}</text> 
@@ -47,9 +47,9 @@
         </view>
     </view>
     <view wx:else>
-        <view class="padding" wx:if="{{likes.length == 0}}">
+        <view class="padding" wx:if="{{likedUidList.length == 0}}">
             <view class="text-xl margin text-center text-gray">
-                求赞~
+                <text>求赞~</text>
             </view>
         </view>
         <view class="bg-white solid-top padding-sm" wx:else>
