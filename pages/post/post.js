@@ -16,9 +16,14 @@ Page({
     },
     curTab: "comment",
 
-    placeholderText: "评论一下",
+    placeholderText: "发表评论:",
     isFocus: false,
+    inputBottom: 0,
     inputArea: '',
+
+    cidToComment: 0,
+    ruidToComment: 0,
+
     modalName: '',
   },
 
@@ -49,6 +54,7 @@ Page({
           this.setData({
             post: resData.post,
             user: resData.student,
+            ruidToComment: resData.post.uid,
           });
         } else {
           console.log("get post info failed: ", res);
@@ -56,6 +62,7 @@ Page({
         wx.hideLoading();
       }).catch((err)=>{
         wx.hideLoading();
+        this.showModal("empty");
         console.log("get post info failed: ", err);
       });
   },
@@ -85,6 +92,7 @@ Page({
               comments[comment.cid].children.push(comment);
             }
           }
+          // 这里需要对二级评论按照时间排序
           commentIdList.sort((a, b)=>{
             comments[b].like - comments[a].like;
           });
@@ -169,40 +177,70 @@ Page({
       this.showModal("failed");
       return;
     }
-    var pid = this.data.pid;
-    var content = this.data.inputArea;
-    console.log({ pid, content});
     wx.showLoading({
       title: '发表中...'
     });
-    server.commentPost(pid, content)
-      .then((res)=>{
-          console.log("publish post: ", res);
-          let resData = res.data;
-          if (resData.status == '200') {
-              console.log('发表成功');
-              this.setData({
-                inputArea: '',
-              })
-              this.hideModal();
-              this.updateComments();
-          } else {
-              this.showModal("failed");
-          }
-          wx.hideLoading();
-      })
-      .catch((err)=>{
-        wx.hideLoading();
-        this.showModal("failed");
-        console.log("publish post: ", err);
-      });
+    let pid = this.data.pid;
+    let content = this.data.inputArea;
+    let cidToComment = this.data.cidToComment;
+    let ruidToComment = this.data.ruidToComment;
+    let commentPromise;
+    if (cidToComment == 0) {
+      commentPromise = server.commentPost(pid, content)
+    } else {
+      commentPromise = server.commentComment(pid, cidToComment, ruidToComment, content)
+    }
+    commentPromise.then((res)=>{
+      console.log("publish post: ", res);
+      let resData = res.data;
+      if (resData.status == '200') {
+          console.log('发表成功');
+          this.setData({
+            inputArea: '',
+          })
+          this.hideModal();
+          this.updateComments();
+      } else {
+          this.showModal("failed");
+      }
+      wx.hideLoading();
+    })
+    .catch((err)=>{
+      wx.hideLoading();
+      this.showModal("failed");
+      console.log("publish post: ", err);
+    });
   },
 
   tapComment: function(e) {
     console.log(e);
+    let dataset = e.currentTarget.dataset;
+    let cidToComment = dataset.cid;
+    let ruidToComment = dataset.ruid;
+    let rname = dataset.rname;
     this.setData({
+      cidToComment,
+      ruidToComment,
       isFocus: true,
-      placeholderText: '回复评论',
+      placeholderText: '回复@' + rname + "的评论:",
+    })
+  },
+
+  inputFocus(e) {
+    this.setData({
+      inputBottom: e.detail.height
+    })
+  },
+
+  inputBlur(e) {
+    let cidToComment = 0;
+    let ruidToComment = this.data.post.uid;
+    let placeholderText = "发表评论";
+    this.setData({
+      cidToComment,
+      ruidToComment,
+      placeholderText,
+      inputBottom: 0
     })
   },
 

@@ -18,13 +18,13 @@
         <view class="cu-list menu-avatar comment solids-top" wx:else>
             <view class="cu-item solid-top" wx:for="{{commentIdList}}" wx:key="id">
                 <view class="cu-avatar round" style="background-image:url({{students[comments[item].uid].avatar}});" bindtap="goProfile" data-sid="{{comments[item].uid}}"></view>
-                <view class="content">
-                    <view class="text-black justify-between">
+                <view class="content" bindtap="tapComment" data-cid="{{item}}" data-ruid="{{comments[item].uid}}" data-rname="{{students[comments[item].uid].name}}">
+                    <view class="text-black justify-between" capturetap="goProfile" data-sid="{{comments[item].uid}}">
                         <view style="line-height: 1em;">
-                            <view><text space="ensp" class="text-bold text-sm" bindtap="goProfile" data-sid="{{comments[item].uid}}">{{students[comments[item].uid].name}}</text></view>
+                            <view><text space="ensp" class="text-bold text-sm">{{students[comments[item].uid].name}}</text></view>
                             <view class="text-sm text-gray"><wux-timeago to="{{ comments[item].created_at }}"/></view>
                         </view>
-                        <view bindtap="likeComment" data-cid="{{comments[item].id}}">
+                        <view capturetap="likeComment" data-cid="{{item}}">
                             <text space="ensp">{{comments[item].like}} </text>
                             <text class="cuIcon-appreciate{{comments[item].liked?'fill text-red':''}} text-gray"></text>
                         </view>
@@ -33,13 +33,13 @@
                         {{comments[item].content}}
                     </view>
                     <view class="bg-gray padding-xs radius text-sm" wx:if="{{comments[item].children.length > 0}}">
-                        <view class="flex" wx:for="{{comments[item].children}}" wx:key="id">
-                            <view>
-                                <text class="text-blue" bindtap="goProfile" data-sid="{{item.uid}}">{{students[item.uid].name}}</text> 
+                        <view class="flex" wx:for="{{comments[item].children}}" wx:for-item="subItem" wx:key="id">
+                            <view capturetap="tapComment" data-cid="{{subItem.id}}" data-ruid="{{subItem.uid}}" data-rname="{{students[subItem.uid].name}}">
+                                <text class="text-blue" capturetap="goProfile" data-sid="{{subItem.uid}}">{{students[subItem.uid].name}}</text> 
                                 回复
-                                <text class="text-blue" bindtap="goProfile" data-sid="{{item.ruid}}">{{students[item.ruid].name}}</text>：
+                                <text class="text-blue" capturetap="goProfile" data-sid="{{subItem.ruid}}">{{students[subItem.ruid].name}}</text>：
                             </view>
-                            <view class="flex-sub" bindtap="tapComment">{{item.content}}</view>
+                            <view class="flex-sub">{{subItem.content}}</view>
                         </view>
                     </view>
                 </view>
@@ -58,13 +58,23 @@
         </view>
     </view>
 </view>
-<view class="cu-bar input solid-top" wx:if="{{post}}" style="width: 100%; position: fixed; bottom: 0">
+
+<!-- <view class="cu-bar input solid-top" wx:if="{{post}}" style="width: 100%; position: fixed; bottom: 0">
     <view class="cu-avatar round" style="background-image:url({{me.avatar}});" wx:if="{{me.avatar}}"></view>
     <input class="solid-bottom" disabled="{{!me.token}}" bindinput="onTextareaInput" value="{{inputArea}}" adjust-position="{{false}}" focus="{{isFocus}}"
         maxlength="140" cursor-spacing="10" placeholder="{{me.token?placeholderText:'登录以后才可以发表评论'}}"></input>
     <button class="cu-btn bg-green shadow-blur" wx:if="{{me.token}}" bindtap="pubComment" disabled="{{!inputArea}}">发表</button>
     <button class="cu-btn bg-green shadow-blur" wx:else bindtap="goLogin">去登录</button>
+</view> -->
+<view class="cu-bar foot input {{inputBottom!=0?'cur':''}}" style="bottom:{{inputBottom}}px">
+  <view class="cu-avatar round" style="background-image:url({{me.avatar}});" wx:if="{{me.avatar}}"></view>
+  <input class="solid-bottom" bindfocus="inputFocus" bindblur="inputBlur" disabled="{{!me.token}}" bindinput="onTextareaInput" value="{{inputArea}}"
+    adjust-position="{{false}}" focus="{{isFocus}}" maxlength="200" cursor-spacing="10" placeholder="{{me.token?placeholderText:'登录以后才可以发表评论'}}">
+  </input>
+  <button class="cu-btn bg-green shadow-blur" wx:if="{{me.token}}" bindtap="pubComment" disabled="{{!inputArea}}">{{cidToComment==0? '发表':'回复'}}</button>
+  <button class="cu-btn bg-green shadow-blur" wx:else bindtap="goLogin">去登录</button>
 </view>
+
 <view class="cu-modal {{modalName=='failed'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
@@ -74,5 +84,17 @@
             </view>
         </view>
         <view class="padding-xl">请检查网络并确认已登录</view>
+    </view>
+</view>
+
+<view class="cu-modal {{modalName=='empty'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">错误</view>
+            <view class="action" bindtap="hideModal">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">文章不存在或已删除</view>
     </view>
 </view>

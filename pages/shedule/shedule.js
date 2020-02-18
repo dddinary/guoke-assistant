@@ -25,20 +25,14 @@ Page({
 
         bodyHeight: 0,
 
-        dayView: false,
-
         curWeek: globalData.curWeek,
         dispWeek: globalData.curWeek,
-
-        curDay: globalData.curDay,
-        dispDay: globalData.curDay,
 
         weekDay: [],
 
         courseData: globalData.couseData,
 
         weekCourse: [],
-        dayCourse: [],
         courseCount: 0,
 
         selectedCourse: {},
@@ -49,17 +43,14 @@ Page({
             this.setData({
                 courseData: val,
             });
-            this.updateDayCourse();
             this.updateWeekCourse();
         });
         this.updateWeekDay();
-        this.updateDayCourse();
         this.updateWeekCourse();
         this.updatebodyHeight();
     },
 
     onshow: function() {
-        this.updateDayCourse();
         this.updateWeekCourse();
     },
 
@@ -75,15 +66,6 @@ Page({
             bodyHeight: this.data.SafeArea.height - this.data.CustomBar - rect[0].height - 20,
           });
         });
-    },
-
-    updateDayCourse: function() {
-        var dayCourseList = course.getDayCourseList(this.data.dispWeek, this.data.dispDay, this.data.courseData);
-        this.setData({
-            dayCourse: dayCourseList,
-            courseCount: dayCourseList.length,
-        });
-        console.log("update day course:", this.data.dayCourse);
     },
 
     updateWeekCourse: function() {
@@ -108,20 +90,10 @@ Page({
             dispWeek: e.detail.value,
         });
         this.updateWeekDay();
-        this.updateDayCourse();
         this.updateWeekCourse();
     },
 
-    changeDayNo: function (e) {
-        var dayIdx = e.currentTarget.dataset.index;
-        console.log('点击修改日子，携带值为', dayIdx);
-        this.setData({
-            dispDay: dayIdx,
-        })
-        this.updateDayCourse();
-    },
-
-    backCurDay: function () {
+    backCurWeek: function () {
         if (this.data.dispWeek != globalData.curWeek) {
             this.setData({
                 dispWeek: globalData.curWeek,
@@ -129,12 +101,6 @@ Page({
             this.updateWeekDay();
             this.updateWeekCourse();
         }
-        if (this.data.dispDay != globalData.curDay) {
-            this.setData({
-                dispDay: globalData.curDay,
-            });
-        }
-        this.updateDayCourse();
     },
 
     skipToLogin: function() {
@@ -167,14 +133,15 @@ Page({
         this.popup.hidePopup();
     },
 
-    changeView: function() {
-        this.setData({
-            dayView: !this.data.dayView,
-        });
-    },
-
     getJieTime: function(jieNo) {
         return course.getJieTime(jieNo);
+    },
+
+    showCalendarImage: function() {
+        wx.previewImage({
+            urls: ['http://ww1.sinaimg.cn/large/006m0GqOly1gc0kql90mwj30nb0nw7a4.jpg'],
+            current: 'http://ww1.sinaimg.cn/large/006m0GqOly1gc0kql90mwj30nb0nw7a4.jpg' // 当前显示图片的http链接      
+          })
     },
 
     /**

@@ -96,8 +96,12 @@ Component({
       this.triggerEvent("tapComment");
     },
     _goAuthor() {
+      let uid = this.properties.post.uid;
+      if (uid == 0) {
+        return;
+      }
       wx.navigateTo({
-        url: "/pages/profile/profile?sid=" + this.properties.post.uid,
+        url: "/pages/profile/profile?sid=" + uid,
       });
     }
   }
