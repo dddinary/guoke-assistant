@@ -5,11 +5,6 @@ const globalData = appInstance.globalData;
 
 Page({
     data: {
-        SafeArea: globalData.SysInfo.safeArea,
-        WindowHeight: globalData.SysInfo.windowHeight,
-        StatusBar: globalData.SysInfo.statusBarHeight,
-        Custom: globalData.Custom,
-        CustomBar: globalData.CustomBar,
         PlaceHolderHeight: globalData.PlaceHolderHeight,
 
         colorArrays: [ "#85B8CF", "#90C652", "#D8AA5A", "#FC9F9D", "#0A9A84", "#61BC69", "#12AEF3", "#E29AAD"],
@@ -22,8 +17,6 @@ Page({
         
         jieStartTime: ["", "08:30", "09:20", "10:30", "11:20", "13:30", "14:20", "15:30", "16:20", "19:00", "19:50", "20:50", "21:50"],
         jieEndTime: ["", "09:20", "10:10", "11:20", "12:10", "14:20", "15:10", "16:20", "17:10", "19:50", "20:40", "21:40", "22:40"],
-
-        bodyHeight: 0,
 
         curWeek: globalData.curWeek,
         dispWeek: globalData.curWeek,
@@ -47,7 +40,6 @@ Page({
         });
         this.updateWeekDay();
         this.updateWeekCourse();
-        this.updatebodyHeight();
     },
 
     onshow: function() {
@@ -56,16 +48,6 @@ Page({
 
     onReady: function() {
         this.popup = this.selectComponent("#popup");
-    },
-
-    updatebodyHeight: function() {
-        var query = wx.createSelectorQuery();
-        query.select(".head-container").boundingClientRect();
-        query.exec((rect)=>{
-          this.setData({
-            bodyHeight: this.data.SafeArea.height - this.data.CustomBar - rect[0].height - 20,
-          });
-        });
     },
 
     updateWeekCourse: function() {

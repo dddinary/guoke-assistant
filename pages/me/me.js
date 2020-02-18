@@ -22,6 +22,18 @@ Page({
     });
   },
 
+  skipToMyPost: function() {
+    wx.navigateTo({
+      url: "/pages/profile/profile?sid=" + this.data.stuInfo.id,
+    });
+  },
+
+  skipToMyStar: function() {
+    wx.navigateTo({
+      url: '/pages/stared/stared'
+    });
+  },
+
   clearPwd: function() {
     globalData.accountInfo = {};
     wx.removeStorage({key: "accountInfo",

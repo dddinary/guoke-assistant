@@ -7,7 +7,7 @@
         <view class="margin-top-xs text-xl text-bold">
             <text>{{stuInfo.name}}</text>
         </view>
-        <view class="flex justify-end margin-top-sm" style="width:720rpx;">
+        <view class="flex justify-start margin-top-sm" style="width:720rpx;">
         <view class="flex-item text-lg" bindtap="whetherLogout">
             <view class="cuIcon-exit lg text-black">退出</view>
         </view>
@@ -16,16 +16,22 @@
 </view>
 
 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+<view class="cu-item arrow" wx:if="{{stuInfo.token}}">
+    <view class="content" bindtap="skipToMyPost">
+    <text class="cuIcon-discover text-cyan"></text>
+    <text class="text-grey">我的发布</text>
+    </view>
+</view>
+<view class="cu-item arrow" wx:if="{{stuInfo.token}}">
+    <view class="content" bindtap="skipToMyStar">
+    <text class="cuIcon-favor text-mauve"></text>
+    <text class="text-grey">我的收藏</text>
+    </view>
+</view>
 <view class="cu-item arrow">
     <view class="content" bindtap="skipToLogin">
     <text class="cuIcon-refresh text-red"></text>
     <text class="text-grey">更新课表</text>
-    </view>
-</view>
-<view class="cu-item arrow">
-    <view class="content" bindtap="clearPwdBtn">
-    <text class="cuIcon-deletefill text-yellow"></text>
-    <text class="text-grey">清除用户名密码</text>
     </view>
 </view>
 <view class="cu-item arrow">

@@ -1,15 +1,17 @@
 .UCenter-bg {
-    /* background-image: url(https://image.weilanwl.com/color2.0/index.jpg); */
-    background-size: cover;
-    height: 550rpx;
-    display: flex;
-    justify-content: center;
-    padding-top: 80rpx;
-    overflow: hidden;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-    color: #222;
+  /*http://ww1.sinaimg.cn/large/006m0GqOly1gc0r9s3qcbj30hg0aqk06.jpg*/
+  /*http://ww1.sinaimg.cn/large/006m0GqOly1gc0rda4q9mj309205swfx.jpg*/
+  background-image: url(http://ww1.sinaimg.cn/large/006m0GqOly1gc0rda4q9mj309205swfx.jpg);
+  background-size: cover;
+  height: 550rpx;
+  display: flex;
+  justify-content: center;
+  padding-top: 80rpx;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  color: #222;
   }
   
 #stu-avatar {

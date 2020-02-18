@@ -61,7 +61,7 @@ Page({
                 console.log("login and get course: ", res);
                 let resData = res.data;
                 if ("courseDetail" in resData && "timeTable" in resData) {
-                    let sinfo = {name: resData.name, dpt: resData.dpt, avatar: resData.avatar, token: resData.token};
+                    let sinfo = {id: resData.id, name: resData.name, dpt: resData.dpt, avatar: resData.avatar, token: resData.token};
                     server.updateToken(resData.token)
                     globalData.stuInfo = sinfo;
                     wx.setStorage({

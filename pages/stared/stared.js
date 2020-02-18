@@ -10,10 +10,8 @@ Page({
     CustomBar: globalData.CustomBar,
     bodyHeight: 400,
 
-    sid: 0,
     postIdList: [],
     posts: {},
-    user:{},
     students: {},
 
     triggered: false,
@@ -23,39 +21,21 @@ Page({
     page: 0,
   },
 
-  onLoad: function (options) {
-    //console.log(options);
-    let sid = options.sid;
+  onLoad: function () {
     this.setData({
       me: globalData.stuInfo,
-      sid: sid,
     });
     this.updateBodyHeight();
-    this.updateStuInfo();
-    this.updateStuPost();
+    this.updateStaredPost();
   },
 
   updateBodyHeight: function() {
-    var query = wx.createSelectorQuery();
-    query.select(".head-container").boundingClientRect();
-    query.exec((rect)=>{
-      console.log(rect)
-      this.setData({
-        bodyHeight: this.data.SafeArea.height - this.data.CustomBar - rect[0].height,
-      });
+    this.setData({
+      bodyHeight: this.data.SafeArea.height - this.data.CustomBar,
     });
   },
 
-  updateStuInfo: function() {
-    server.getStudentInfo(this.data.sid)
-      .then((res)=>{
-        this.setData({
-          user: res.data,
-        })
-      })
-  },
-
-  updateStuPost: function() {
+  updateStaredPost: function() {
     this.data.page = 0;
     this.data.postIdList = [];
     this.data.posts = {};
@@ -72,9 +52,8 @@ Page({
     let postIdList = this.data.postIdList;
     let posts = this.data.posts;
     let students = this.data.students;
-    let sid = this.data.sid;
     let page = this.data.page;
-    server.getUserPost(sid, page)
+    server.getStarPost(page)
       .then((res)=>{
         let resData = res.data;
         if ('students' in resData && 'posts' in resData) {
@@ -155,11 +134,4 @@ Page({
       url: '/pages/login/login'
     });
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
