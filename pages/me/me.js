@@ -5,6 +5,7 @@ var globalData = appInstance.globalData;
 Page({
 
   data: {
+    closeCommunity: globalData.closeCommunity,
     stuInfo: globalData.stuInfo,
   },
 

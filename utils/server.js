@@ -1,5 +1,5 @@
-// const HOST = 'https://ucas.dinary.xin';
-const HOST = 'http://127.0.0.1:3000';
+const HOST = 'https://ucas.dinary.xin';
+// const HOST = 'http://127.0.0.1:3000';
 
 /**
  * 登录教务系统获取课程详情和时间表

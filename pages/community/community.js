@@ -3,6 +3,7 @@ const date = require("../../utils/date.js");
 const app = getApp();
 Page({
   data: {
+    closeCommunity: app.globalData.closeCommunity,
     CustomBar: app.globalData.CustomBar,
     PlaceHolderHeight: app.globalData.PlaceHolderHeight,
     posts: [],

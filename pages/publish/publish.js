@@ -4,6 +4,7 @@ const globalData = appInstance.globalData;
 
 Page({
     data: {
+      closeCommunity: globalData.closeCommunity,
       textHeight: 100,
       textareaValue: '',
       modalName: '',
