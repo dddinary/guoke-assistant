@@ -15,7 +15,6 @@ App({
         let customBar = custom.bottom + custom.top - e.statusBarHeight;
         this.globalData.CustomBar = customBar
         this.globalData.StatusBar = e.statusBarHeight;
-        this.globalData.PlaceHolderHeight = customBar;
       }
     });
     wechat.getStorage("courseData")

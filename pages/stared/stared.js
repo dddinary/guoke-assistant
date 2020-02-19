@@ -1,5 +1,4 @@
 const server = require("../../utils/server.js");
-const date = require("../../utils/date.js");
 const globalData = getApp().globalData;
 Page({
   data: {
@@ -31,7 +30,7 @@ Page({
 
   updateBodyHeight: function() {
     this.setData({
-      bodyHeight: this.data.SafeArea.height - this.data.CustomBar,
+      bodyHeight: this.data.SafeArea.bottom - this.data.CustomBar,
     });
   },
 
@@ -57,6 +56,7 @@ Page({
       .then((res)=>{
         let resData = res.data;
         if ('students' in resData && 'posts' in resData) {
+          resData.students[0] = {id: 0, name: '匿名', dpt: '中国科学院大学', avatar: 'http://ww1.sinaimg.cn/small/006m0GqOly1ga8zvcs4wwj30go0go75a.jpg'}
           if (resData.posts.length == 0) {
             this.data.noMore = true;
             this.setData({
@@ -93,6 +93,7 @@ Page({
   },
 
   onPulling(e) {
+    console.log("pulling")
   },
 
   onRefresh() {

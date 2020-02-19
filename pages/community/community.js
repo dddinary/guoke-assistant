@@ -1,13 +1,26 @@
 const server = require("../../utils/server.js");
 const date = require("../../utils/date.js");
-const app = getApp();
+const globalData = getApp().globalData;
 Page({
   data: {
-    closeCommunity: app.globalData.closeCommunity,
-    CustomBar: app.globalData.CustomBar,
-    PlaceHolderHeight: app.globalData.PlaceHolderHeight,
-    posts: [],
+    closeCommunity: globalData.closeCommunity,
+
+    SafeArea: globalData.SysInfo.safeArea,
+    WindowHeight: globalData.SysInfo.windowHeight,
+    StatusBar: globalData.SysInfo.statusBarHeight,
+    Custom: globalData.Custom,
+    CustomBar: globalData.CustomBar,
+    
+    bodyHeight: 400,
+    postIdList: [],
+    posts: {},
     students: {},
+
+    triggered: false,
+    freshing: false,
+    loadingData: false,
+    noMore: false,
+    page: 0,
 
     order: 0,
     orderList: ['最近发布', '七日高赞', '七日多评'],
@@ -18,46 +31,115 @@ Page({
   },
 
   onLoad: function (options) {
+    this.updateBodyHeight();
     this.updateNewsFeed();
   },
 
   onShow: function() {
-    if (app.globalData.communityShouldUpdate) {
-      app.globalData.communityShouldUpdate = false;
+    if (globalData.communityShouldUpdate) {
+      globalData.communityShouldUpdate = false;
       this.updateNewsFeed();
     }
   },
 
+  updateBodyHeight: function() {
+    let query = wx.createSelectorQuery();
+    query.select(".head-container").boundingClientRect();
+    query.select(".foot-container").boundingClientRect();
+    query.exec((rect)=>{
+      this.setData({
+        bodyHeight: this.data.SafeArea.bottom - this.data.CustomBar - rect[0].height - rect[1].height,
+      });
+    });
+  },
+
   updateNewsFeed: function() {
-    let kind = this.data.kind;
-    let order = this.data.order;
+    this.data.page = 0;
+    this.data.postIdList = [];
+    this.data.posts = {};
+    this.data.students = {};
+    this.loadMorePost();
+  },
+
+  loadMorePost: function() {
     wx.showLoading({
       title: '快速加载中...'
     });
-    server.getNews(kind, order, 0)
+    if (this.data.loadingData) return;
+    this.data.loadingData = true;
+    let postIdList = this.data.postIdList;
+    let posts = this.data.posts;
+    let students = this.data.students;
+    let kind = this.data.kind;
+    let order = this.data.order;
+    let page = this.data.page;
+    server.getNews(kind, order, page)
       .then((res)=>{
-        console.log("get news info: ", res);
+        console.log("load more data: ", res)
         let resData = res.data;
-        if ("posts" in resData && "students" in resData) {
-          for (let idx in resData.posts) {
-            let post = resData.posts[idx];
-            let d = new Date(post.created_at);
-            post.created_at = d.getFullYear() + date.formatDate(d, '-MM-dd HH:mm');
+        if ('students' in resData && 'posts' in resData) {
+          resData.students[0] = {id: 0, name: '匿名', dpt: '中国科学院大学', avatar: 'http://ww1.sinaimg.cn/small/006m0GqOly1ga8zvcs4wwj30go0go75a.jpg'}
+          if (resData.posts.length == 0) {
+            this.data.noMore = true;
+            this.setData({
+              noMore: true,
+            })
           }
-          resData.students[0] = {name: '匿名', dpt: '中国科学院大学', avatar: 'http://ww1.sinaimg.cn/small/006m0GqOly1ga8zvcs4wwj30go0go75a.jpg'}
-          this.setData({
-            posts: res.data.posts,
-            students: res.data.students,
-          });
-          wx.hideLoading();
-        } else {
-          wx.hideLoading();
-          console.log("get news info failed: ", res);
+          Object.assign(students, resData.students);
+          for (let post of resData.posts) {
+            if (postIdList.indexOf(post.id) == -1) {
+              postIdList.push(post.id);
+            }
+            posts[post.id] = post;
+          }
         }
-      }).catch((err)=>{
+        this.setData({
+          postIdList,
+          posts,
+          students,
+          triggered: false,
+        })
+        this.data.freshing = false;
+        this.data.loadingData = false;
         wx.hideLoading();
-        console.log("get news info failed: ", err);
-    });
+      })
+      .catch((err)=>{
+        this.setData({
+          triggered: false,
+        })
+        this.data.freshing = false;
+        this.data.loadingData = false;
+        wx.hideLoading();
+        console.log(err);
+      })
+  },
+
+  onPulling(e) {
+  },
+
+  onRefresh() {
+    if (this.data.freshing) return
+    this.data.freshing = true
+    this.updateNewsFeed();
+  },
+
+  onRestore(e) {
+  },
+
+  onAbort(e) {
+  },
+
+  onReachBottom() {
+    this.data.page++;
+    this.loadMorePost();
+  },
+
+  onScroll() {
+    if(this.data.noMore) {
+      this.setData({
+        noMore: false,
+      })
+    }
   },
 
   tabSelect(e) {
@@ -97,7 +179,7 @@ Page({
   },
 
   checkLogin: function() {
-    let hasLogin = 'token' in app.globalData.stuInfo;
+    let hasLogin = globalData.stuInfo.token;
     if (hasLogin) {
       return true;
     } else {

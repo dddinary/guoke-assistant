@@ -3,7 +3,6 @@
     <view slot="backText">返回</view>
     <view slot="content">我的收藏</view>
 </cu-custom>
-
 <scroll-view
   scroll-y style="width: 100%; height: {{bodyHeight}}px;"
   enable-back-to-top="{{true}}"

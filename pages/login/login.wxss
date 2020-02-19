@@ -1,5 +1,5 @@
 #logo {
-    margin: 160rpx 140rpx 100rpx 140rpx;
+    margin: 200rpx 140rpx 100rpx 140rpx;
     width: 460rpx;
     height: 110rpx;
 }

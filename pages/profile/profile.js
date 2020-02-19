@@ -1,5 +1,4 @@
 const server = require("../../utils/server.js");
-const date = require("../../utils/date.js");
 const globalData = getApp().globalData;
 Page({
   data: {
@@ -39,7 +38,6 @@ Page({
     var query = wx.createSelectorQuery();
     query.select(".head-container").boundingClientRect();
     query.exec((rect)=>{
-      console.log(rect)
       this.setData({
         bodyHeight: this.data.SafeArea.height - this.data.CustomBar - rect[0].height,
       });
@@ -78,6 +76,7 @@ Page({
       .then((res)=>{
         let resData = res.data;
         if ('students' in resData && 'posts' in resData) {
+          resData.students[0] = {id: 0, name: '匿名', dpt: '中国科学院大学', avatar: 'http://ww1.sinaimg.cn/small/006m0GqOly1ga8zvcs4wwj30go0go75a.jpg'}
           if (resData.posts.length == 0) {
             this.data.noMore = true;
             this.setData({
