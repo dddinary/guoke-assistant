@@ -233,15 +233,19 @@ Page({
   },
 
   inputBlur(e) {
-    let cidToComment = 0;
-    let ruidToComment = this.data.post.uid;
-    let placeholderText = "发表评论";
     this.setData({
-      cidToComment,
-      ruidToComment,
-      placeholderText,
       inputBottom: 0
     })
+    if (this.data.inputArea === '') {
+      let cidToComment = 0;
+      let ruidToComment = this.data.post.uid;
+      let placeholderText = "发表评论";
+      this.setData({
+        cidToComment,
+        ruidToComment,
+        placeholderText,
+      })
+    }
   },
 
   goLogin: function() {

@@ -9,8 +9,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    CustomBar: globalData.CustomBar,
-    PlaceHolderHeight: globalData.PlaceHolderHeight,
     curTab: 0,
     tabText: ['科学类', '人文类'],
     humanity: [],

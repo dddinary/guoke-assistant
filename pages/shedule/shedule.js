@@ -5,8 +5,6 @@ const globalData = appInstance.globalData;
 
 Page({
     data: {
-        PlaceHolderHeight: globalData.PlaceHolderHeight,
-
         colorArrays: [ "#85B8CF", "#90C652", "#D8AA5A", "#FC9F9D", "#0A9A84", "#61BC69", "#12AEF3", "#E29AAD"],
 
         weekText: ['点击选择周数', '第一周', '第二周', '第三周', '第四周', '第五周', '第六周', '第七周',

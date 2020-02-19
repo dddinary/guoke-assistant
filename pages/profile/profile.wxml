@@ -11,7 +11,7 @@
   scroll-y style="width: 100%; height: {{bodyHeight}}px;"
   enable-back-to-top="{{true}}"
   refresher-enabled="{{true}}"
-  refresher-threshold="{{60}}"
+  refresher-threshold="{{100}}"
   refresher-default-style="white"
   refresher-background="grey"
   refresher-triggered="{{triggered}}"

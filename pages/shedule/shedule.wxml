@@ -1,4 +1,4 @@
-<view class="main-wrapper" style="min-height:100%;padding-bottom:{{PlaceHolderHeight}}rpx;">
+<view class="main-wrapper">
   <cu-custom bgColor="bg-gradual-blue">
       <view slot="content">课程表</view>
   </cu-custom>
@@ -34,31 +34,29 @@
           </view>
       </view>
   </view>
-  <view class="body-container bg-gray" style="{{'height: ' + bodyHeight + 'px;'}}">
+  <view class="body-container bg-gray">
       <!-- 当天课程 -->
       <view class="margin-xs course-container" wx:if="{{courseData.hasData}}">
-            <scroll-view scroll-y style="{{'height: ' + bodyHeight + 'px;'}}">
-                <view style="height:1200rpx;width:750rpx;display:flex;background:url('http://ww1.sinaimg.cn/large/006m0GqOly1gbr4gvh59nj309i0e8dg4.jpg') right top;">
-                    <view>
-                        <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index" class="left solid">
-                            <view><text>{{item}}</text></view>
-                            <view><text class="text-black text-xs">{{jieStartTime[item]}}</text></view>
-                            <view><text class="text-black text-xs">{{jieEndTime[item]}}</text></view>
-                        </view>
-                    </view>
-                    <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index">
-                        <view style="width:750rpx;margin-top:{{(index+1)*100}}rpx;position: absolute;border-bottom:1rpx solid {{(index==3 || index==6)?'red':'lightgray'}};"></view>
-                    </view>
-
-                    <!--课表-->
-                    <view wx:for="{{weekCourse}}" wx:key="index">
-                        <view bindtap="showPopup" data-cid="{{item.cid}}" class="flex-item kcb-item text-center"
-                        style="position: absolute;margin-left:{{(item.weekday-1)*100}}rpx;margin-top:{{(item.jieStart-1)*100+5}}rpx;height:{{item.jieNum*100-5}}rpx;background-color:{{colorArrays[index%8]}};}}">
-                            <view class="text-sm text-white" >{{item.name}}@{{item.room}}</view>
-                        </view>
+            <view style="height:1200rpx;width:750rpx;display:flex;background:url('http://ww1.sinaimg.cn/large/006m0GqOly1gbr4gvh59nj309i0e8dg4.jpg') right top;">
+                <view>
+                    <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index" class="left solid">
+                        <view><text>{{item}}</text></view>
+                        <view><text class="text-black text-xs">{{jieStartTime[item]}}</text></view>
+                        <view><text class="text-black text-xs">{{jieEndTime[item]}}</text></view>
                     </view>
                 </view>
-            </scroll-view>
+                <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index">
+                    <view style="width:750rpx;margin-top:{{(index+1)*100}}rpx;position: absolute;border-bottom:1rpx solid {{(index==3 || index==6)?'red':'lightgray'}};"></view>
+                </view>
+
+                <!--课表-->
+                <view wx:for="{{weekCourse}}" wx:key="index">
+                    <view bindtap="showPopup" data-cid="{{item.cid}}" class="flex-item kcb-item text-center"
+                    style="position: absolute;margin-left:{{(item.weekday-1)*100}}rpx;margin-top:{{(item.jieStart-1)*100+5}}rpx;height:{{item.jieNum*100-5}}rpx;background-color:{{colorArrays[index%8]}};}}">
+                        <view class="text-sm text-white" >{{item.name}}@{{item.room}}</view>
+                    </view>
+                </view>
+            </view>
       </view>
       <!-- 提醒更新课表 -->
       <view class="margin-xs text-center padding-top-xl" wx:if="{{!courseData.hasData}}">
@@ -70,4 +68,5 @@
   </view>
 </view>
 <popup id="popup" course="{{selectedCourse}}" bind:tapok="popupTapok"></popup>
+<view class="cu-bar bg-gray" style="z-index: 1;"></view>
 <custom-tab-bar PageCur='shedule'></custom-tab-bar>

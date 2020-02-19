@@ -52,7 +52,7 @@ App({
   },
 
   globalData: {
-    closeCommunity: true,
+    closeCommunity: false,
     curWeek: date.getWeekNo(),
     curDay: date.getDayNo(),
     lectures: [],

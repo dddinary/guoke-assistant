@@ -1,7 +1,7 @@
 <view class="card-wrapper">
     <view class="cu-list menu-avatar">
         <view class="cu-item">
-            <view class="cu-avatar radius" style="background-image:url({{author.avatar}});" catchtap='_goAuthor'></view>
+            <view class="cu-avatar radius" style="background-image:url({{author.id===0?'http://ww1.sinaimg.cn/small/006m0GqOly1ga8zvcs4wwj30go0go75a.jpg':author.avatar}});" catchtap='_goAuthor'></view>
             <view class="content flex-sub">
                 <view>
                     <text space="ensp" catchtap='_goAuthor' class="text-bold"> {{author.name}} </text>
@@ -14,7 +14,7 @@
             </view>
         </view>
     </view>
-    <view class="text-content padding-top-sm padding-bottom-sm">
+    <view class="text-content padding-top-sm padding-bottom-sm text-lg">
         {{post.content}}
     </view>
     <!-- <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">

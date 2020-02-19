@@ -1,4 +1,4 @@
-<view class="main-wrapper" style="min-height:100%;padding-bottom:{{PlaceHolderHeight}}rpx;">
+<view class="main-wrapper">
 <cu-custom bgColor="bg-gradual-pink">
     <view slot="content">讲座预告</view>
 </cu-custom>
@@ -15,7 +15,7 @@
             <view class="title"><view class="text-cut">{{item.name}}</view></view>
             <view class="content">
                 <!-- https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg -->
-                <image src="{{item.imageUrl?item.imageUrl:'https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg'}}" mode="aspectFill"></image>
+                <image src="{{item.imageUrl?item.imageUrl:'https://tva2.sinaimg.cn/small/9bd9b167gy1g2rlydoqqmj21hc0u04m3.jpg'}}" mode="aspectFill"></image>
                 <view class="desc">
                     <view class="text-content">{{item.desc}}</view>
                     <view>
@@ -30,7 +30,7 @@
         <view id="{{item.lid}}" class="cu-item shadow" wx:for="{{science}}" wx:key="lid" bindtap="showLectureDetail">
             <view class="title"><view class="text-cut">{{item.name}}</view></view>
             <view class="content">
-                <image src="{{item.imageUrl?item.imageUrl:'https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg'}}" mode="aspectFill"></image>
+                <image src="{{item.imageUrl?item.imageUrl:'https://tva2.sinaimg.cn/small/9bd9b167gy1g2rlydoqqmj21hc0u04m3.jpg'}}" mode="aspectFill"></image>
                 <view class="desc">
                     <view class="text-content">{{item.desc}}</view>
                     <view>
@@ -49,4 +49,5 @@
     </view>
 </view>
 </view>
+<view class="cu-bar bg-gray" style="z-index: 1;"></view>
 <custom-tab-bar  PageCur='lecture'></custom-tab-bar>
