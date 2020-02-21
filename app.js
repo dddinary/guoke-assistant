@@ -68,6 +68,7 @@ App({
       }, 
       stuInfo: {},
       accountInfo: {},
+      messageCount: 0,
       },
     
     // 存放属性的监听回调函数

@@ -15,6 +15,10 @@ Component({
       type: String,
       default: ''
     }, 
+    isMessage: {
+      type: [Boolean, String],
+      default: false
+    },
     isCustom: {
       type: [Boolean, String],
       default: false
@@ -27,6 +31,10 @@ Component({
       type: String,
       default: ''
     },
+    messageCount: {
+      type: Number,
+      default: 0
+    }
   },
   /**
    * 组件的初始数据
@@ -49,6 +57,9 @@ Component({
       wx.reLaunch({
         url: '/pages/index/index',
       })
+    },
+    toMessage(){
+      console.log("go to notification page");
     }
   }
 })

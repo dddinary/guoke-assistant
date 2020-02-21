@@ -26,7 +26,7 @@
                         </view>
                         <view catchtap="likeComment" data-cid="{{item}}">
                             <text space="ensp">{{comments[item].like}} </text>
-                            <text class="cuIcon-appreciate{{comments[item].liked?'fill text-red':''}} text-gray"></text>
+                            <text class="cuIcon-appreciate{{comments[item].liked?'fill text-red':''}}"></text>
                         </view>
                     </view>
                     <view class="text-black text-content text-df">

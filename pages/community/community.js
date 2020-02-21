@@ -1,5 +1,6 @@
 const server = require("../../utils/server.js");
 const date = require("../../utils/date.js");
+const appInstance = getApp();
 const globalData = getApp().globalData;
 Page({
   data: {
@@ -10,6 +11,8 @@ Page({
     StatusBar: globalData.SysInfo.statusBarHeight,
     Custom: globalData.Custom,
     CustomBar: globalData.CustomBar,
+
+    messageCount: globalData.messageCount,
     
     bodyHeight: 400,
     postIdList: [],
@@ -31,6 +34,11 @@ Page({
   },
 
   onLoad: function (options) {
+    appInstance.watch("messageCount", (val)=>{
+      this.setData({
+        messageCount: val,
+      });
+    });
     this.updateBodyHeight();
     this.updateNewsFeed();
   },

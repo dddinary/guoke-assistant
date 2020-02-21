@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-gradual-blue">
+<cu-custom bgColor="bg-gradual-blue" isMessage="{{true}}" messageCount="{{messageCount}}">
     <view slot="content">新鲜事</view>
 </cu-custom>
 <view wx:if="{{closeCommunity}}" class="text-center">社区论坛类小程序由于需要微信审核，当前页面暂不可用，正着手准备提交审核材料，请先使用其他功能</view>

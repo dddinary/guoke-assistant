@@ -8,6 +8,13 @@
       <text class="cuIcon-back" bindtap="BackPage"></text>
       <text class="cuIcon-homefill" bindtap="toHome"></text>
     </view>
+    <view class="actioin" bindtap="toMessage" wx:if="{{isMessage}}" style="position:relative;">
+      <view class="cuIcon-mail text-xsl text-white margin-left">
+        <view class="cu-tag badge" wx:if="{{messageCount!=0}}">
+          <block wx:if="{{messageCount!=1}}">{{messageCount>99?"99+":messageCount}}</block>
+        </view>
+      </view>
+    </view>
     <view class="content" style="top:{{StatusBar}}px">
       <slot name="content"></slot>
     </view>
