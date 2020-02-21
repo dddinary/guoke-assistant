@@ -34,7 +34,7 @@
                     </view>
                     <view class="bg-gray padding-xs radius text-sm" wx:if="{{comments[item].children.length > 0}}">
                         <view class="flex" wx:for="{{comments[item].children}}" wx:for-item="subItem" wx:key="id">
-                            <view catchtap="tapComment" data-cid="{{subItem.id}}" data-ruid="{{subItem.uid}}" data-rname="{{students[subItem.uid].name}}">
+                            <view catchtap="tapComment" data-cid="{{item}}" data-ruid="{{subItem.uid}}" data-rname="{{students[subItem.uid].name}}">
                                 <text class="text-blue" catchtap="goProfile" data-sid="{{subItem.uid}}">{{students[subItem.uid].name}}</text> 
                                 回复
                                 <text class="text-blue" catchtap="goProfile" data-sid="{{subItem.ruid}}">{{students[subItem.ruid].name}}</text>：
