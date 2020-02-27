@@ -18,6 +18,7 @@ Page({
 
         curWeek: globalData.curWeek,
         dispWeek: globalData.curWeek,
+        curDay: globalData.curDay,
 
         weekDay: [],
 

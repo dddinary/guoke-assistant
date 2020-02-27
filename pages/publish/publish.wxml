@@ -5,8 +5,29 @@
 <view wx:if="{{closeCommunity}}" class="text-center">社区论坛类小程序由于需要微信审核，当前页面暂不可用，正着手准备提交审核材料，请先使用其他功能</view>
 <view class="margin-left margin-right" wx:else>
     <form bindsubmit="pubPost">
-        <view class="cu-form-group margin-top">
-            <textarea placeholder-style="font-size: 12px;" style="{{'height: ' + textHeight + 'px;'}}" disabled="{{modalName!=''}}" bindinput="onTextareaInput" placeholder="有什么新鲜事儿？或者有什么想问大家的？"></textarea>
+        <view class="cu-form-group margin-top text-lg">
+            <textarea placeholder-style="font-size: 15px;" style="{{'height: ' + textHeight + 'rpx;'}}" disabled="{{modalName!=''}}" bindinput="onTextareaInput" placeholder="有什么新鲜事儿？或者有什么想问大家的？"></textarea>
+        </view>
+        <view class="cu-bar bg-white margin-top">
+            <view class="action">
+                配图
+            </view>
+            <view class="action">
+                {{imgList.length}}/9
+            </view>
+        </view>
+        <view class="cu-form-group">
+            <view class="grid col-3 grid-square flex-sub">
+                <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
+                    <image src='{{imgList[index]}}' mode='aspectFill'></image>
+                    <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                        <text class="cuIcon-close"></text>
+                    </view>
+                </view>
+                <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<9}}">
+                    <text class="cuIcon-cameraadd"></text>
+                </view>
+            </view>
         </view>
         <view class="cu-form-group margin-top">
             <view class="title">发布频道</view>
@@ -36,7 +57,18 @@
                     <text class="cuIcon-close text-red"></text>
                 </view>
             </view>
-            <view class="padding-xl">请检查网络并确认已登录</view>
+            <view class="padding-xl">请检查网络并确认已登录，若确认无误请尝试退出后再次登录</view>
+        </view>
+    </view>
+    <view class="cu-modal {{modalName=='expired'?'show':''}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content">身份过期</view>
+                <view class="action" bindtap="hideModal">
+                    <text class="cuIcon-close text-red"></text>
+                </view>
+            </view>
+            <view class="padding-xl">身份信息已过期，请尝试退出后再次登录</view>
         </view>
     </view>
     <view class="cu-modal {{modalName=='shouldLogin'?'show':''}}">

@@ -48,6 +48,7 @@ Page({
       globalData.communityShouldUpdate = false;
       this.updateNewsFeed();
     }
+    this.getNewMessage();
   },
 
   updateBodyHeight: function() {
@@ -67,6 +68,18 @@ Page({
     this.data.posts = {};
     this.data.students = {};
     this.loadMorePost();
+  },
+
+  getNewMessage: function() {
+    server.getUnreadMessageCount()
+      .then((res)=>{
+        if (res.data.count) {
+          globalData.messageCount = res.data.count;
+        }
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
   },
 
   loadMorePost: function() {
@@ -155,7 +168,8 @@ Page({
     let scrollLeft = (kind - 1) * 60;
     this.setData({
       kind,
-      scrollLeft
+      scrollLeft,
+      order: 0
     })
     this.updateNewsFeed();
   },
@@ -184,6 +198,19 @@ Page({
   likePost: function(e){
     let pid = e.currentTarget.dataset.pid;
     console.log('点赞post，携带值为', pid);
+  },
+
+  delPost: function(e) {
+    let pid = e.currentTarget.dataset.pid;
+    console.log('删除post，携带值为', pid);
+    let postIdList = this.data.postIdList;
+    let i = postIdList.indexOf(pid);
+    if (i >= 0) {
+      postIdList.splice(i,1);
+      this.setData({
+        postIdList
+      });
+    }
   },
 
   checkLogin: function() {

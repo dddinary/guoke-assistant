@@ -1,5 +1,5 @@
-const HOST = 'https://ucas.dinary.xin';
-// const HOST = 'http://127.0.0.1:3000';
+//const HOST = 'https://ucas.dinary.xin';
+const HOST = 'http://127.0.0.1:3000';
 
 /**
  * 登录教务系统获取课程详情和时间表
@@ -68,6 +68,10 @@ function getStudentInfo(sid) {
 
 function getStudentsInfoList(sid) {
     return fetch("/getStudentsInfoList", { sid })
+}
+
+function tempCredential() {
+    return fetch("/s/tempCredential");
 }
 
 function publishPost(kind, content, images) {
@@ -166,6 +170,7 @@ module.exports = {
     getPostImages,
     getStudentInfo,
     getStudentsInfoList,
+    tempCredential,
     publishPost,
     commentPost,
     commentComment,

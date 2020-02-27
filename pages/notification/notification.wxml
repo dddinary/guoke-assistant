@@ -1,0 +1,45 @@
+<view class="main-wrapper">
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">我的消息</view>
+</cu-custom>
+<scroll-view
+  scroll-y style="width: 100%; height: {{bodyHeight}}px;"
+  enable-back-to-top="{{true}}"
+  refresher-enabled="{{true}}"
+  refresher-threshold="{{100}}"
+  refresher-default-style="white"
+  refresher-background="grey"
+  refresher-triggered="{{triggered}}"
+  bindrefresherpulling="onPulling"
+  bindrefresherrefresh="onRefresh"
+  bindrefresherrestore="onRestore"
+  bindrefresherabort="onAbort"
+  bindscrolltolower="onReachBottom"
+  bindscroll="onScroll"
+>
+  <view class="cu-list menu-avatar">
+    <view class="cu-item {{modalNid==item?'move-cur':''}}" wx:for="{{notiIdList}}" wx:key="index" data-nid="{{item}}" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd">
+      <view class="cu-avatar round lg" style="{{'background-image:url(' + students[notis[item].notifier].avatar + ');'}}" catchtap="goProfile" data-uid="{{notis[item].notifier}}"></view>
+      <view class="content" bindtap="goPost" data-pid="{{notis[item].pid}}" data-nid="{{item}}">
+        <view class=""><text class="margin-right-xs text-blue" catchtap="goProfile" data-uid="{{notis[item].notifier}}">{{students[notis[item].notifier].name}}</text><text>{{notiKind[notis[item].kind]}}</text><view class="cu-tag round bg-orange sm" wx:if="{{notis[item].status==0}}">未读</view></view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text> {{ notis[item].content }} </text> 
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="action text-grey text-xs">
+          <wux-timeago to="{{ notis[item].created_at }}" />
+        </view>
+      </view>
+       <view class="move">
+        <view class="bg-grey" bindtap="readNoti" data-nid="{{item}}">已读</view>
+        <view class="bg-red" bindtap="deleteNoti" data-nid="{{item}}">删除</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+</view>
+<i-divider wx:if="{{noMore}}" content="加载已经完成,没有其他数据"></i-divider>

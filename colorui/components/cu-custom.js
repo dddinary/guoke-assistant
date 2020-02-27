@@ -59,7 +59,9 @@ Component({
       })
     },
     toMessage(){
-      console.log("go to notification page");
+      wx.navigateTo({
+        url: "/pages/notification/notification",
+      });
     }
   }
 })

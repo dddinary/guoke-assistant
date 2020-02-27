@@ -6,10 +6,12 @@
     "pages/me/me",
     "pages/login/login",
     "pages/publish/publish",
-    "pages/detail/detail",
     "pages/profile/profile",
     "pages/post/post",
-    "pages/stared/stared"
+    "pages/stared/stared",
+    "pages/notification/notification",
+    "pages/detail/detail"
+    
   ],
   "tabBar": {
     "list": [
@@ -32,7 +34,11 @@
     "post-card": "/components/post-card/post-card",
     "wux-timeago": "/components/wux/timeago/index",
     "wux-virtual-list": "/components/wux/virtual-list/index",
-    "wux-virtual-item": "/components/wux/virtual-item/index"
+    "wux-virtual-item": "/components/wux/virtual-item/index",
+    "wux-row": "/components/wux/row/index",
+    "wux-col": "/components/wux/col/index",
+    "wux-image": "/components/wux/image/index",
+    "i-divider": "/components/iview/divider/index"
   },
   "sitemapLocation": "sitemap.json"
 }

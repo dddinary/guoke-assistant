@@ -29,6 +29,11 @@ Page({
       me: globalData.stuInfo,
       sid: sid,
     });
+    appInstance.watch("stuInfo", (val)=>{
+      this.setData({
+        me: val,
+      });
+    });
     this.updateBodyHeight();
     this.updateStuInfo();
     this.updateStuPost();
@@ -149,6 +154,18 @@ Page({
     });
   },
 
+  delPost: function(e) {
+    let pid = e.currentTarget.dataset.pid;
+    console.log('删除post，携带值为', pid);
+    let postIdList = this.data.postIdList;
+    let i = postIdList.indexOf(pid);
+    if (i >= 0) {
+      postIdList.splice(i,1);
+      this.setData({
+        postIdList
+      });
+    }
+  },
   goLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login'

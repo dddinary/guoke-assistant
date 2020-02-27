@@ -125,8 +125,8 @@ Page({
 
   showQrcode() {
     wx.previewImage({
-      urls: ['https://ws1.sinaimg.cn/large/006m0GqOly1g70ezvj28fj30im0m60w5.jpg'],
-      current: 'https://ws1.sinaimg.cn/large/006m0GqOly1g70ezvj28fj30im0m60w5.jpg' // 当前显示图片的http链接      
+      urls: ['http://ww1.sinaimg.cn/large/006m0GqOly1gc44vihydzj30iy0i676p.jpg'],
+      current: 'http://ww1.sinaimg.cn/large/006m0GqOly1gc44vihydzj30iy0i676p.jpg' // 当前显示图片的http链接      
     })
   },
 

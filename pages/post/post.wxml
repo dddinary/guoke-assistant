@@ -22,7 +22,7 @@
                     <view class="text-black justify-between" catchtap="goProfile" data-sid="{{comments[item].uid}}">
                         <view style="line-height: 1em;">
                             <view><text space="ensp" class="text-bold text-sm">{{students[comments[item].uid].name}}</text></view>
-                            <view class="text-sm text-gray"><wux-timeago to="{{ comments[item].created_at }}"/></view>
+                            <view class="text-sm text-gray flex"><wux-timeago class="margin-right" to="{{ comments[item].created_at }}"/> <view hover-class="bg-grey text-blue"><text class="text-blue" catchtap="delComment" data-cid="{{item}}">删除</text></view></view>
                         </view>
                         <view catchtap="likeComment" data-cid="{{item}}">
                             <text space="ensp">{{comments[item].like}} </text>
@@ -34,11 +34,12 @@
                     </view>
                     <view class="bg-gray padding-xs radius text-sm" wx:if="{{comments[item].children.length > 0}}">
                         <view class="flex" wx:for="{{comments[item].children}}" wx:for-item="subItem" wx:key="id">
-                            <view catchtap="tapComment" data-cid="{{item}}" data-ruid="{{subItem.uid}}" data-rname="{{students[subItem.uid].name}}">
+                            <view catchtap="tapComment" data-cid="{{item}}" data-ruid="{{subItem.uid}}" data-rname="{{students[subItem.uid].name}}" style="width:100%;" hover-class="bg-grey text-blue">
                                 <text class="text-blue" catchtap="goProfile" data-sid="{{subItem.uid}}">{{students[subItem.uid].name}}</text> 
                                 回复
                                 <text class="text-blue" catchtap="goProfile" data-sid="{{subItem.ruid}}">{{students[subItem.ruid].name}}</text>：
-                                {{subItem.content}}
+                                <text class="margin-right">{{subItem.content}} </text>
+                                <text class="text-blue fr" catchtap="delComment" data-cid="{{subItem.id}}">删除</text>
                             </view>
                         </view>
                     </view>
@@ -52,9 +53,11 @@
                 <text>求赞~</text>
             </view>
         </view>
-        <view class="bg-white solid-top padding-sm" wx:else>
-                <view class="cu-avatar round" style="background-image:url({{students[item].avatar}});"
-                    wx:for="{{likedUidList}}" wx:key="id" bindtap="goProfile" data-sid="{{students[item].id}}"></view>
+        <view class="bg-white solids-top padding-sm" wx:else>
+            <view class="cu-list flex align-center solid-top" wx:for="{{likedUidList}}" wx:key="id" bindtap="goProfile" data-sid="{{students[item].id}}">
+                <view class="cu-avatar round margin-right" style="background-image:url({{students[item].avatar}});"></view>
+                <view>{{students[item].name}}</view>
+            </view>
         </view>
     </view>
 </view>

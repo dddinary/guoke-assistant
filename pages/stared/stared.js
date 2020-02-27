@@ -9,6 +9,7 @@ Page({
     CustomBar: globalData.CustomBar,
     bodyHeight: 400,
 
+    me: {},
     postIdList: [],
     posts: {},
     students: {},
@@ -21,8 +22,10 @@ Page({
   },
 
   onLoad: function () {
-    this.setData({
-      me: globalData.stuInfo,
+    appInstance.watch("stuInfo", (val)=>{
+      this.setData({
+        me: val,
+      });
     });
     this.updateBodyHeight();
     this.updateStaredPost();
@@ -93,17 +96,15 @@ Page({
   },
 
   onPulling(e) {
-    console.log("pulling")
   },
 
   onRefresh() {
     if (this.data.freshing) return
     this.data.freshing = true
-    this.updateStuPost();
+    this.updateStaredPost();
   },
 
   onRestore(e) {
-    console.log('onRestore:', e)
   },
 
   onAbort(e) {
@@ -128,6 +129,19 @@ Page({
     wx.navigateTo({
       url: "/pages/post/post?pid=" + pid,
     });
+  },
+
+  delPost: function(e) {
+    let pid = e.currentTarget.dataset.pid;
+    console.log('删除post，携带值为', pid);
+    let postIdList = this.data.postIdList;
+    let i = postIdList.indexOf(pid);
+    if (i >= 0) {
+      postIdList.splice(i,1);
+      this.setData({
+        postIdList
+      });
+    }
   },
 
   goLogin: function() {

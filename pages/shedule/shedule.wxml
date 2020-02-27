@@ -27,7 +27,7 @@
       <view class="bg-gray text-center flex">
           <view class="flex-sub flex padding-left-xs"><text>日时</text></view>
           <view class="flex-twice" wx:for="{{dayText}}" wx:key="index">
-              <view style="line-height:40rpx;">
+              <view style="line-height:40rpx;" class="{{curWeek==dispWeek&&curDay-1==index?'text-green':''}}">
                   <view><text>{{weekDay[index]}}</text></view>
                   <view><text>{{item}}</text></view>
               </view>

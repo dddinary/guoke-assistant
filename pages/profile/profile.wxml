@@ -25,9 +25,9 @@
   <view class="cu-card dynamic">
     <post-card class="cu-item shadow" wx:for="{{postIdList}}" wx:key="index" bindtap="goPost" data-pid="{{item}}" 
         post="{{posts[item]}}" author="{{students[posts[item].uid]}}" showShare="{{false}}" curTab="" 
-        bind:tapComment="goPost" bind:goLogin="goLogin">
+        bind:tapComment="goPost" bind:goLogin="goLogin" bind:delPost="delPost">
     </post-card>
   </view>
 </scroll-view>
 </view>
-<view class="solids-top text-center" wx:if="{{noMore}}">没有更多了</view>
+<i-divider wx:if="{{noMore}}" content="加载已经完成,没有其他数据"></i-divider>

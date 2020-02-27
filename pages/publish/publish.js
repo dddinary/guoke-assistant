@@ -1,11 +1,13 @@
 const server = require("../../utils/server.js");
+const date = require("../../utils/date.js");
+var COS = require('../../utils/cos-wx-sdk-v5.js')
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 
 Page({
     data: {
       closeCommunity: globalData.closeCommunity,
-      textHeight: 100,
+      textHeight: 230,
       textareaValue: '',
       modalName: '',
       kind: 0,
@@ -18,10 +20,13 @@ Page({
         {id: 5, name: "二手市场"},
         {id: 6, name: "失物招领"},
       ],
+      cos: null,
+      imgList: [],
     },
 
     onLoad: function (options) {
       this.updateTextHeight();
+      this.updateCosClient();
     },
 
     onShow: function() {
@@ -35,6 +40,29 @@ Page({
       this.setData({
         bodyHeight: winHeight * 0.3,
       });
+    },
+
+    updateCosClient: function() {
+      this.data.cos = new COS({
+        getAuthorization: function (options, callback) {
+          server.tempCredential()
+          .then((res)=>{
+            if ('sessionToken' in res.data) {
+              callback({
+                TmpSecretId: res.data.tempSecretId,
+                TmpSecretKey: res.data.tempSecretKey,
+                XCosSecurityToken: res.data.sessionToken,
+                ExpiredTime: res.data.expiredTime,
+              })
+            } else {
+              this.showModal("expired");
+            }
+          })
+          .catch((err)=>{
+            this.showModal("failed");
+          })
+        }
+      })
     },
 
     pickerChange: function(e) {
@@ -83,9 +111,10 @@ Page({
 
     pubPost: function(e) {
       this.showModal("loading");
-      var kind = this.data.kind;
-      var content = this.data.textareaValue;
-      server.publishPost(kind, content, '')
+      let kind = this.data.kind;
+      let content = this.data.textareaValue;
+      let imgListStr = this.data.imgList.join(",")
+      server.publishPost(kind, content, imgListStr)
         .then((res)=>{
             console.log("publish post: ", res);
             let resData = res.data;
@@ -104,6 +133,58 @@ Page({
             this.showModal("failed");
             console.log("publish post: ", err);
         });
+    },
+
+    ChooseImage() {
+      wx.chooseImage({
+        count: 9,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: (res) => {
+          let namePrefix = new Date().getTime() + "-";
+          let count = res.tempFiles.length
+          for (let i = 0; i < count; i++) {
+            let filePath = res.tempFiles[i].path;
+            let filename = namePrefix + i + filePath.substr(filePath.lastIndexOf('.'));;
+            this.data.cos.postObject({
+              Bucket: 'guoke-1257582698',
+              Region: 'ap-beijing',
+              Key: 'user/' + globalData.stuInfo.id + '/' + filename,
+              FilePath: filePath,
+              onProgress: function (info) {
+                  console.log(JSON.stringify(info));
+              }
+            },  (err, data)=> {
+                console.log(err || data);
+                this.setData({
+                  imgList: this.data.imgList.concat("https://"+data.Location)
+                })
+            });
+          }
+        }
+      });
+    },
+    ViewImage(e) {
+      wx.previewImage({
+        urls: this.data.imgList,
+        current: e.currentTarget.dataset.url
+      });
+    },
+    DelImg(e) {
+      wx.showModal({
+        title: '删除图片',
+        content: '确定要删除这张图片吗？',
+        cancelText: '取消',
+        confirmText: '确认',
+        success: res => {
+          if (res.confirm) {
+            this.data.imgList.splice(e.currentTarget.dataset.index, 1);
+            this.setData({
+              imgList: this.data.imgList
+            })
+          }
+        }
+      })
     },
 
     cancelLogin: function() {

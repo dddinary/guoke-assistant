@@ -34,6 +34,11 @@ Page({
       me: globalData.stuInfo,
       pid: pid,
     });
+    appInstance.watch("stuInfo", (val)=>{
+      this.setData({
+        me: val,
+      });
+    });
     this.updatePost();
     this.updateComments();
   },
@@ -79,23 +84,26 @@ Page({
         if ("comments" in resData && "students" in resData) {
           Object.assign(students, resData.students);
           for (let comment of resData.comments) {
-            let d = new Date(comment.created_at);
-            comment.created_at = d.getFullYear() + date.formatDate(d, '-MM-dd HH:mm');
+            comments[comment.id] = comment;
             if(comment.cid == 0) {
               commentIdList.push(comment.id);
               comment.children = [];
-              comments[comment.id] = comment;
             }
           }
           for (let comment of resData.comments) {
-            if(comment.cid != 0) {
+            if(comment.cid != 0 && comment.cid in comments) {
               comments[comment.cid].children.push(comment);
             }
           }
           // 这里需要对二级评论按照时间排序
-          commentIdList.sort((a, b)=>{
-            comments[b].like - comments[a].like;
+          commentIdList = commentIdList.sort((a, b)=>{
+            return comments[b].like - comments[a].like;
           });
+          for (let cid of commentIdList) {
+            comments[cid].children = comments[cid].children.sort((a, b)=>{
+              return a.id - b.id;
+            });
+          }
           post.comment = commentIdList.length;
           this.setData({
             post,
@@ -172,6 +180,52 @@ Page({
       })
   },
 
+  delComment: function(e) {
+    let cid = e.currentTarget.dataset.cid;
+    let comment = this.data.comments[cid];
+    if (comment.uid != this.data.me.id && this.data.me.id != 1) {
+      return;
+    } 
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该条评论吗？',
+      success: (res)=> {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          this._deleteComment(comment);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  _deleteComment: function(comment) {
+    let delPromise = null;
+    if(comment.uid == this.data.me.id) {
+      delPromise = server.deleteComment(comment.id);
+    } else if (this.data.me.id == 1) {
+      delPromise = server.adminDeleteComment(comment.id);
+    } else {
+      return;
+    }
+    delPromise
+      .then((res)=>{
+        if (res.data.status == 200) {
+          wx.showModal({
+            title: '提示',
+            content: '删除成功',
+          });
+          this.updateComments();
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '删除失败，请确认登录状态未失效',
+          })
+        }
+      })
+  },
+
   pubComment: function(e) {
     if (!('token' in globalData.stuInfo)) {
       this.showModal("failed");
@@ -213,7 +267,6 @@ Page({
   },
 
   tapComment: function(e) {
-    console.log(e);
     let dataset = e.currentTarget.dataset;
     let cidToComment = dataset.cid;
     let ruidToComment = dataset.ruid;
