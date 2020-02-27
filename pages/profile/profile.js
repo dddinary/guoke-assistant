@@ -1,4 +1,5 @@
 const server = require("../../utils/server.js");
+const appInstance = getApp();
 const globalData = getApp().globalData;
 Page({
   data: {
@@ -144,6 +145,60 @@ Page({
         noMore: false,
       })
     }
+  },
+
+  clickBlock: function(e) {
+    wx.showModal({
+      title: '提示',
+      content: '确定要封禁该用户吗？',
+      success: (res)=> {
+        if (res.confirm) {
+          this.BRStudent('block');
+        } else if (res.cancel) {}
+      }
+    })
+  },
+
+  clickUnblock: function(e) {
+    wx.showModal({
+      title: '提示',
+      content: '确定要解封该用户吗？',
+      success: (res)=> {
+        if (res.confirm) {
+          this.BRStudent('unblock');
+        } else if (res.cancel) {}
+      }
+    })
+  },
+
+  BRStudent: function(op) {
+    let uid = this.data.user.id;
+    let opPromise = null;
+    if (op == 'block') {
+      opPromise = server.adminBlockStudent(uid)
+    } else if (op == 'unblock') {
+      opPromise = server.adminUnblockStudent(uid)
+    } else {
+      return;
+    }
+    opPromise
+      .then((res)=>{
+        if (res.data.status == 200) {
+          wx.showModal({
+            title: '提示',
+            content: '操作成功',
+          });
+          this.updateStuInfo();
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '操作失败，请确认登录状态未失效',
+          })
+        }
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
   },
 
   goPost: function(e) {

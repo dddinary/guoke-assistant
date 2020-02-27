@@ -3,8 +3,11 @@
     <view slot="backText">返回</view>
     <view slot="content">{{user.name}}</view>
 </cu-custom>
-<view class="head-container bg-gradual-green flex justify-center padding-bottom-xs">
+<view class="head-container bg-gradual-green flex justify-center padding-bottom-xs align-center">
     <view class="text-lg">{{user.dpt}}</view>
+    <view class="margin-left" wx:if="{{me.id==1}}">{{user.status==1?'已封禁':'未封禁'}}</view>
+    <view class="margin-left border bg-blue" catchtap="clickBlock" wx:if="{{me.id==1 && user.status==0}}">封禁</view>
+    <view class="margin-left border bg-blue" catchtap="clickUnblock" wx:if="{{me.id==1 && user.status==1}}">解封</view>
 </view>
 
 <scroll-view

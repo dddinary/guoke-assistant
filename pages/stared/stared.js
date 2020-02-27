@@ -1,4 +1,5 @@
 const server = require("../../utils/server.js");
+const appInstance = getApp();
 const globalData = getApp().globalData;
 Page({
   data: {
