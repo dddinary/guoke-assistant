@@ -137,7 +137,7 @@ Page({
 
     ChooseImage() {
       wx.chooseImage({
-        count: 9,
+        count: 1,
         sizeType: ['original', 'compressed'],
         sourceType: ['album', 'camera'],
         success: (res) => {
@@ -145,7 +145,7 @@ Page({
           let count = res.tempFiles.length
           for (let i = 0; i < count; i++) {
             let filePath = res.tempFiles[i].path;
-            let filename = namePrefix + i + filePath.substr(filePath.lastIndexOf('.'));;
+            let filename = namePrefix + i + filePath.substr(filePath.lastIndexOf('.'));
             this.data.cos.postObject({
               Bucket: 'guoke-1257582698',
               Region: 'ap-beijing',

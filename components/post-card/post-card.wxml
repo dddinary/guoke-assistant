@@ -18,20 +18,19 @@
     <view class="text-content padding-top-sm padding-bottom-sm text-lg">
         {{post.content}}
     </view>
-    <view class="bg-white padding" wx:if="{{post.imgCount > 0}}">
+    <view class="bg-white padding-left padding-bottom padding-right" wx:if="{{post.imgCount > 0}}">
         <view wx:if="{{post.imgCount == 4}}">
             <view class="grid col-3 grid-square">
-                <view class="bg-img" style="background-image:url({{post.images[0]}});" catchtap="_viewImage" data-imgIdx="{{0}}"></view>
-                <view class="bg-img" style="background-image:url({{post.images[1]}});" catchtap="_viewImage" data-imgIdx="{{1}}"></view>
-            </view>
-            <view class="grid col-3 grid-square">
-                <view class="bg-img" style="background-image:url({{post.images[3]}});" catchtap="_viewImage" data-imgIdx="{{3}}"></view>
-                <view class="bg-img" style="background-image:url({{post.images[4]}});" catchtap="_viewImage" data-imgIdx="{{4}}"></view>
+                <view class="bg-img" style="background-image:url({{post.images[0]}});" catchtap="_viewImage" data-idx="{{0}}"></view>
+                <view class="bg-img" style="background-image:url({{post.images[1]}});" catchtap="_viewImage" data-idx="{{1}}"></view>
+                <view></view>
+                <view class="bg-img" style="background-image:url({{post.images[2]}});" catchtap="_viewImage" data-idx="{{3}}"></view>
+                <view class="bg-img" style="background-image:url({{post.images[3]}});" catchtap="_viewImage" data-idx="{{4}}"></view>
             </view>
         </view>
         <view wx:else>
             <view class="grid col-3 grid-square">
-                <view class="bg-img" wx:for="{{post.imgCount}}" wx:key="index" style="background-image:url({{post.images[index]}});" catchtap="_viewImage" data-imgIdx="{{index}}"></view>
+                <view class="bg-img" wx:for="{{post.imgCount}}" wx:key="index" style="background-image:url({{post.images[index]}});" catchtap="_viewImage" data-idx="{{index}}"></view>
             </view>
         </view>
     </view>

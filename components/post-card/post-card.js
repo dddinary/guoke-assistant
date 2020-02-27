@@ -43,11 +43,11 @@ Component({
     */
 
    _viewImage(e) {
-    console.log(e);
-    let imgIdx = e.currentTarget.dataset.imgIdx;
+    console.log(e)
+    let idx = e.currentTarget.dataset.idx;
     wx.previewImage({
       urls: this.data.post.images,
-      current: this.data.post.images[imgIdx],
+      current: this.data.post.images[idx],
     });
    },
 

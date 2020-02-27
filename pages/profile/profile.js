@@ -41,12 +41,8 @@ Page({
   },
 
   updateBodyHeight: function() {
-    var query = wx.createSelectorQuery();
-    query.select(".head-container").boundingClientRect();
-    query.exec((rect)=>{
-      this.setData({
-        bodyHeight: this.data.SafeArea.height - this.data.CustomBar - rect[0].height,
-      });
+    this.setData({
+      bodyHeight: this.data.SafeArea.height - this.data.CustomBar,
     });
   },
 

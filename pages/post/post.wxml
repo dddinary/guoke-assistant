@@ -22,24 +22,24 @@
                     <view class="text-black justify-between" catchtap="goProfile" data-sid="{{comments[item].uid}}">
                         <view style="line-height: 1em;">
                             <view><text space="ensp" class="text-bold text-sm">{{students[comments[item].uid].name}}</text></view>
-                            <view class="text-sm text-gray flex"><wux-timeago class="margin-right" to="{{ comments[item].created_at }}"/> <view hover-class="bg-grey text-blue"><text class="text-blue" catchtap="delComment" data-cid="{{item}}">删除</text></view></view>
+                            <view class="text-sm text-gray flex"><wux-timeago class="margin-right" to="{{ comments[item].created_at }}"/> <view hover-class="bg-grey text-blue"><text class="text-blue" wx:if="{{me.id==1||me.id==comments[item].uid}}" catchtap="delComment" data-cid="{{item}}">删除</text></view></view>
                         </view>
                         <view catchtap="likeComment" data-cid="{{item}}">
                             <text space="ensp">{{comments[item].like}} </text>
                             <text class="cuIcon-appreciate{{comments[item].liked?'fill text-red':''}}"></text>
                         </view>
                     </view>
-                    <view class="text-black text-content text-df">
+                    <view class="text-black text-content text-df" hover-class="bg-grey text-black text-content text-df">
                         {{comments[item].content}}
                     </view>
                     <view class="bg-gray padding-xs radius text-sm" wx:if="{{comments[item].children.length > 0}}">
                         <view class="flex" wx:for="{{comments[item].children}}" wx:for-item="subItem" wx:key="id">
-                            <view catchtap="tapComment" data-cid="{{item}}" data-ruid="{{subItem.uid}}" data-rname="{{students[subItem.uid].name}}" style="width:100%;" hover-class="bg-grey text-blue">
+                            <view catchtap="tapComment" data-cid="{{item}}" data-ruid="{{subItem.uid}}" data-rname="{{students[subItem.uid].name}}" style="width:100%;" hover-class="bg-grey">
                                 <text class="text-blue" catchtap="goProfile" data-sid="{{subItem.uid}}">{{students[subItem.uid].name}}</text> 
                                 回复
                                 <text class="text-blue" catchtap="goProfile" data-sid="{{subItem.ruid}}">{{students[subItem.ruid].name}}</text>：
                                 <text class="margin-right">{{subItem.content}} </text>
-                                <text class="text-blue fr" catchtap="delComment" data-cid="{{subItem.id}}">删除</text>
+                                <text class="text-blue fr" catchtap="delComment" data-cid="{{subItem.id}}" wx:if="{{me.id==1||me.id==subItem.uid}}">删除</text>
                             </view>
                         </view>
                     </view>
