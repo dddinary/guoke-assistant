@@ -146,6 +146,9 @@ Page({
           for (let i = 0; i < count; i++) {
             let filePath = res.tempFiles[i].path;
             let filename = namePrefix + i + filePath.substr(filePath.lastIndexOf('.'));
+            wx.showLoading({
+              title: '上传中',
+            })
             this.data.cos.postObject({
               Bucket: 'guoke-1257582698',
               Region: 'ap-beijing',
@@ -159,6 +162,7 @@ Page({
                 this.setData({
                   imgList: this.data.imgList.concat("https://"+data.Location)
                 })
+                wx.hideLoading();
             });
           }
         }

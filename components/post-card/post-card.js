@@ -24,6 +24,10 @@ Component({
   },
   data: {
     me: appInstance.globalData.stuInfo,
+    goldWidth: appInstance.globalData.SysInfo.windowWidth * 0.59,
+    fullHeight: appInstance.globalData.RpxToPx * 500,
+    oneWidth: "0px",
+    oneMode: "aspectFit",
   },
   lifetimes: {
     attached: function() {
@@ -41,9 +45,27 @@ Component({
     * 内部私有方法建议以下划线开头
     * triggerEvent 用于触发事件
     */
+   loadImage(e) {
+    let width = e.detail.width;
+    let height = e.detail.height;
+    let oneWidth = this.data.oneWidth;
+    if (width <= this.data.goldWidth && height <= this.data.goldWidth) {
+      oneWidth = width + "px";
+    } else if (width < height) {
+      oneWidth = Math.min(this.data.fullHeight, height) / height * width + "px";
+    } else if (width >= height) {
+      if (width/height >= 2) {
+        oneWidth = "100%";
+      } else {
+        oneWidth = this.data.goldWidth + "px";
+      }
+    } 
+    this.setData({
+      oneWidth,
+    })
+   },
 
    _viewImage(e) {
-    console.log(e)
     let idx = e.currentTarget.dataset.idx;
     wx.previewImage({
       urls: this.data.post.images,

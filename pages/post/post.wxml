@@ -54,7 +54,7 @@
             </view>
         </view>
         <view class="bg-white solids-top padding-sm" wx:else>
-            <view class="cu-list flex align-center solid-top" wx:for="{{likedUidList}}" wx:key="id" bindtap="goProfile" data-sid="{{students[item].id}}">
+            <view class="solid-top flex align-center padding-xs" wx:for="{{likedUidList}}" wx:key="id" bindtap="goProfile" data-sid="{{students[item].id}}">
                 <view class="cu-avatar round margin-right" style="background-image:url({{students[item].avatar}});"></view>
                 <view>{{students[item].name}}</view>
             </view>

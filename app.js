@@ -10,6 +10,7 @@ App({
     wx.getSystemInfo({
       success: e => {
         this.globalData.SysInfo = e
+        this.globalData.RpxToPx = e.windowWidth/750;
         let custom = wx.getMenuButtonBoundingClientRect();
         this.globalData.Custom = custom;
         let customBar = custom.bottom + custom.top - e.statusBarHeight;
