@@ -24,7 +24,6 @@ Page({
   },
 
   onLoad: function (options) {
-    //console.log(options);
     let sid = options.sid;
     this.setData({
       me: globalData.stuInfo,
@@ -42,7 +41,7 @@ Page({
 
   updateBodyHeight: function() {
     this.setData({
-      bodyHeight: this.data.SafeArea.height - this.data.CustomBar,
+      bodyHeight: this.data.SafeArea.height - globalData.RpxToPx * 200 + this.data.StatusBar,
     });
   },
 
@@ -220,6 +219,12 @@ Page({
   goLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login'
+    });
+  },
+
+  clickBack: function() {
+    wx.navigateBack({
+      delta: 1
     });
   },
 

@@ -6,7 +6,7 @@
 <scroll-view
   scroll-y style="width: 100%; height: {{bodyHeight}}px;"
   enable-back-to-top="{{true}}"
-  refresher-enabled="{{true}}"
+  refresher-enabled="{{false}}"
   refresher-threshold="{{100}}"
   refresher-default-style="white"
   refresher-background="grey"
@@ -26,4 +26,4 @@
   </view>
 </scroll-view>
 </view>
-<i-divider wx:if="{{noMore}}" content="加载已经完成,没有其他数据"></i-divider>
+<!-- <i-divider wx:if="{{noMore}}" content="加载已经完成,没有其他数据"></i-divider> -->

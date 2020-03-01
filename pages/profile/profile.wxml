@@ -1,19 +1,32 @@
 <view class="main-wrapper">
-<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
-    <view slot="backText">返回</view>
-    <view slot="content">{{user.name}}</view>
-</cu-custom>
-<view class="head-container bg-gradual-green flex justify-center padding-bottom-xs align-center">
-    <view class="text-lg">{{user.dpt}}</view>
-    <view class="margin-left" wx:if="{{me.id==1}}">{{user.status==1?'已封禁':'未封禁'}}</view>
-    <view class="margin-left border bg-blue" catchtap="clickBlock" wx:if="{{me.id==1 && user.status==0}}">封禁</view>
-    <view class="margin-left border bg-blue" catchtap="clickUnblock" wx:if="{{me.id==1 && user.status==1}}">解封</view>
+<view class="bg-img bg-mask" style="background-image: url('{{user.avatar}}');height:200rpx;filter:blur(20rpx);">
+</view>
+<view class="flex" style="position:absolute;height:200rpx;z-index:101;top:0;width:100%;">
+  <view style="position:absolute;bottom:40rpx;width:70rpx;height:70rpx;padding:20rpx;" catchtap="clickBack">
+    <view class="cuIcon-back xl text-white"></view>
+  </view>
+  <view class="flex" style="position:absolute;bottom:15rpx;left:100rpx;">
+    <view class="cu-avatar round lg" style="background-image:url({{user.avatar}});"></view>
+    <view class="text-white margin-left">
+      <view class="text-xl">
+        {{user.name}}
+      </view>
+      <view class="padding-xs">
+        {{user.dpt}}
+      </view>
+    </view>
+    <view class="padding-top-sm">
+      <view class="margin-left margin-bottom-xs text-white" wx:if="{{me.id==1}}">{{user.status==1?'已封禁':'未封禁'}}</view>
+      <view class="margin-left bg-blue" catchtap="clickBlock" wx:if="{{me.id==1 && user.status==0}}">封禁</view>
+      <view class="margin-left bg-blue" catchtap="clickUnblock" wx:if="{{me.id==1 && user.status==1}}">解封</view>
+    </view>
+  </view>
 </view>
 
 <scroll-view
   scroll-y style="width: 100%; height: {{bodyHeight}}px;"
   enable-back-to-top="{{true}}"
-  refresher-enabled="{{true}}"
+  refresher-enabled="{{false}}"
   refresher-threshold="{{100}}"
   refresher-default-style="white"
   refresher-background="grey"
@@ -27,10 +40,10 @@
 >
   <view class="cu-card dynamic">
     <post-card class="cu-item shadow" wx:for="{{postIdList}}" wx:key="index" bindtap="goPost" data-pid="{{item}}" 
-        post="{{posts[item]}}" author="{{students[posts[item].uid]}}" showShare="{{false}}" curTab="" 
+        post="{{posts[item]}}" author="{{students[posts[item].uid]}}" showShare="{{false}}" inProfile="{{true}}" curTab="" 
         bind:tapComment="goPost" bind:goLogin="goLogin" bind:delPost="delPost">
     </post-card>
   </view>
 </scroll-view>
 </view>
-<i-divider wx:if="{{noMore}}" content="加载已经完成,没有其他数据"></i-divider>
+<!-- <i-divider wx:if="{{noMore}}" content="加载已经完成,没有其他数据"></i-divider> -->

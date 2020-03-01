@@ -17,6 +17,10 @@ Component({
       type: Boolean,
       value: false
     },
+    inProfile: {
+      type: Boolean,
+      value: false
+    },
     curTab: {
       type: String,
       value: "comment"
@@ -183,6 +187,9 @@ Component({
       this.triggerEvent("tapComment");
     },
     _goAuthor() {
+      if (this.data.inProfile) {
+        return;
+      }
       let uid = this.properties.post.uid;
       if (uid == 0) {
         return;
