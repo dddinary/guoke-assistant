@@ -56,6 +56,7 @@ App({
     curWeek: date.getWeekNo(),
     curDay: date.getDayNo(),
     lectures: [],
+    communityShouldUpdate: -1,
     
     // 存放需要监听改变事件的值，防止赋值死循环
     _data:{ 

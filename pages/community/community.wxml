@@ -22,6 +22,7 @@
   <view class="container">
     <scroll-view
       scroll-y style="width: 100%; height: {{bodyHeight}}px;"
+      scroll-top="{{scrollTop}}"
       enable-back-to-top="{{true}}"
       refresher-enabled="{{true}}"
       refresher-threshold="{{100}}"

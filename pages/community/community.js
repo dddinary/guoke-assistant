@@ -44,8 +44,13 @@ Page({
   },
 
   onShow: function() {
-    if (globalData.communityShouldUpdate) {
-      globalData.communityShouldUpdate = false;
+    let toKind = globalData.communityShouldUpdate;
+    if (toKind >= 0) {
+      this.setData({
+        kind: toKind,
+        scrollLeft: (toKind - 1) * 60
+      })
+      globalData.communityShouldUpdate = -1;
       this.updateNewsFeed();
     }
     this.getNewMessage();
@@ -68,6 +73,9 @@ Page({
     this.data.posts = {};
     this.data.students = {};
     this.loadMorePost();
+    this.setData({
+      scrollTop: 0,
+    })
   },
 
   getNewMessage: function() {

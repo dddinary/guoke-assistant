@@ -121,7 +121,7 @@ Page({
             if (resData.status == '200') {
                 console.log('发布成功');
                 this.hideModal();
-                globalData.communityShouldUpdate = true;
+                globalData.communityShouldUpdate = kind;
                 wx.switchTab({
                   url: '/pages/community/community',
                 });
