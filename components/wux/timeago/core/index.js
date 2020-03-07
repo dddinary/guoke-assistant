@@ -1,4 +1,4 @@
-
+const date = require('../../../../utils/date.js')
 /**
  * 解析时间
  */
@@ -45,7 +45,7 @@ export const diff = (date, nowDate, unit) => {
  * default language
  */
 const defaults = {
-    second: ['刚刚', '片刻后'],
+    second: ['刚刚', '刚刚'], // '片刻后'
     seconds: ['%d 秒前', '%d 秒后'],
     minute: ['大约 1 分钟前', '大约 1 分钟后'],
     minutes: ['%d 分钟前', '%d 分钟后'],
@@ -65,7 +65,7 @@ const defaults = {
  * @param    {Object} opts 配置参数
  * @return   {String}      文本内容
  */
-export const format = (diff, opts) => {
+export const format = (diff, opts, to=null) => {
     const options = Object.assign({}, defaults, opts)
     const agoin = diff < 0 ? 1 : 0 // timein or timeago
     const seconds = Math.abs(diff) / 1000
@@ -79,11 +79,19 @@ export const format = (diff, opts) => {
 		seconds < 90 && substitute(options.minute[agoin], 1) ||
 		minutes < 45 && substitute(options.minutes[agoin], parseInt(minutes)) ||
 		minutes < 90 && substitute(options.hour[agoin], 1) ||
-		hours < 24 && substitute(options.hours[agoin], parseInt(hours)) ||
-		hours < 42 && substitute(options.day[agoin], 1) ||
-		days < 30 && substitute(options.days[agoin], parseInt(days)) ||
-		days < 45 && substitute(options.month[agoin], 1) ||
-		days < 365 && substitute(options.months[agoin], parseInt(days / 30)) ||
-		years < 1.5 && substitute(options.year[agoin], 1) ||
-		substitute(options.years[agoin], parseInt(years))
+        hours < 24 && substitute(options.hours[agoin], parseInt(hours)) ||
+        hours < 42 && substitute(options.day[agoin], 1) + date.formatDate(to, ' HH:mm:ss') ||
+        date.formatDate(to, 'MM-dd HH:mm:ss');
+    // return seconds < 10 && substitute(options.second[agoin], parseInt(seconds)) ||
+	// 	seconds < 45 && substitute(options.seconds[agoin], parseInt(seconds)) ||
+	// 	seconds < 90 && substitute(options.minute[agoin], 1) ||
+	// 	minutes < 45 && substitute(options.minutes[agoin], parseInt(minutes)) ||
+	// 	minutes < 90 && substitute(options.hour[agoin], 1) ||
+	// 	hours < 24 && substitute(options.hours[agoin], parseInt(hours)) ||
+	// 	hours < 42 && substitute(options.day[agoin], 1) ||
+	// 	days < 30 && substitute(options.days[agoin], parseInt(days)) ||
+	// 	days < 45 && substitute(options.month[agoin], 1) ||
+	// 	days < 365 && substitute(options.months[agoin], parseInt(days / 30)) ||
+	// 	years < 1.5 && substitute(options.year[agoin], 1) ||
+	// 	substitute(options.years[agoin], parseInt(years))
 }

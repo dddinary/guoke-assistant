@@ -62,7 +62,7 @@ baseComponent({
             // check datetime
             if (currentTo !== this.data.currentTo || currentFrom !== this.data.currentFrom || isForce) {
                 const diffTime = diff(currentTo, currentFrom)
-                const timeago = format(diffTime, locales[lang])
+                const timeago = format(diffTime, locales[lang], new Date(currentTo))
                 this.setData({ currentTo, currentFrom, timeago }, () => {
                     // check refreshable
                     if (this.data.refreshable && !this.data.from) {

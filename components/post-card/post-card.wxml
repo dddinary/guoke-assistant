@@ -10,9 +10,9 @@
                 </view>
                 <view class="text-gray text-sm flex justify-start post-time">
                     <wux-timeago to="{{ post.created_at }}" class="margin-right"/>
-                    <view hover-class="bg-grey text-blue"><text class="text-blue" catchtap="_clickDelete" wx:if="{{!showShare&&(me.id==1 || me.id==post.uid)}}">删除</text></view>
                 </view>
             </view>
+            <view hover-class="bg-grey text-blue"><text class="text-blue" catchtap="_clickDelete" wx:if="{{!showShare&&(me.id==1 || me.id==post.uid)}}">删除</text></view>
         </view>
     </view>
     <view class="text-content padding-top-sm padding-bottom-sm text-lg">
