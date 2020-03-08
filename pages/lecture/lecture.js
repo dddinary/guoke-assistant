@@ -147,25 +147,28 @@ Page({
       this.data.touchE = [sx, sy]
   },
   touchEnd: function(e) {
-      let start = this.data.touchS
-      let end = this.data.touchE
+    let start = this.data.touchS
+    let end = this.data.touchE
+    if (end[0] == 0 && end[1] == 0) {
+      return;
+    }
     if ((start[0] < end[0] - 50) && (Math.abs(end[1] - start[1]) < Math.abs(end[0] - start[0]))) {
-          console.log('右滑');
-          if (this.data.curTab == 1) {
-            this.setData({
-              curTab: 0
-            })
-          }
-    } else if ((start[0] > end[0] + 50) && (Math.abs(end[1] - start[1]) < Math.abs(end[0] - start[0]))) {
-          console.log('左滑');
-          if (this.data.curTab == 0) {
-            this.setData({
-              curTab: 1
-            })
-          }
-      } else {
-          console.log('静止')
+      console.log('右滑');
+      if (this.data.curTab == 1) {
+        this.setData({
+          curTab: 0
+        })
       }
+    } else if ((start[0] > end[0] + 50) && (Math.abs(end[1] - start[1]) < Math.abs(end[0] - start[0]))) {
+      console.log('左滑');
+      if (this.data.curTab == 0) {
+        this.setData({
+          curTab: 1
+        })
+      }
+    } else {
+        console.log('静止')
+    }
   },
 
   /**

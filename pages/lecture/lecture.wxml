@@ -11,7 +11,7 @@
 </scroll-view>
 <view class='body-container' bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
     <view class="cu-card article" wx:if="{{curTab == 1}}">
-        <view id="{{item.lid}}" class="cu-item shadow" wx:for="{{humanity}}" wx:key="lid" bindtap="showLectureDetail">
+        <view id="{{item.lid}}" class="cu-item shadow" wx:for="{{humanity}}" wx:key="lid" catchtap="showLectureDetail">
             <view class="title"><view class="text-cut">{{item.name}}</view></view>
             <view class="content">
                 <!-- https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg -->
