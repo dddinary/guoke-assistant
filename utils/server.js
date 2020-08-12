@@ -42,6 +42,10 @@ function getNews(kind, order, page) {
     return fetch("/getNews", { kind, order, page });
 }
 
+function searchPost(words, page) {
+    return fetch("/searchPost", { words, page });
+}
+
 function getPost(pid) {
     return fetch("/getPost", { pid });
 }
@@ -163,6 +167,7 @@ module.exports = {
     loginAndGetCourse,
     getLecture,
     getNews,
+    searchPost,
     getPost,
     getUserPost,
     getPostLikes,

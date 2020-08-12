@@ -1,10 +1,24 @@
 <cu-custom bgColor="bg-gradual-blue" isMessage="{{true}}" messageCount="{{messageCount}}">
     <view slot="content">新鲜事</view>
 </cu-custom>
-<view wx:if="{{closeCommunity}}" class="text-center">社区论坛类小程序由于需要微信审核，当前页面暂不可用，正着手准备提交审核材料，请先使用其他功能</view>
+<view wx:if="{{closeCommunity}}" class="text-center">校园论坛正在整改，当前页面暂不可用，请先使用其他功能</view>
 <view class="main-wrapper" wx:else>
-  <view class="head-container flex solid-bottom justify-between">
-    <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}" style="width:77%;">
+  <view wx:if="{{searchBar}}" class="head-container cu-bar search bg-white">
+    <view class="action"  bindtap="closeSearch"><text class="cuIcon-close"></text></view>
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="有事儿没事儿，先搜一搜" confirm-type="search" bindinput="onSearchInput"></input>
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green round" bindtap="goSearch">搜索</button>
+    </view>
+  </view>
+
+  <view wx:else class="head-container flex solid-bottom justify-between">
+    <view class="flex justify-begin padding-bottom-sm padding-top padding-left-sm bg-white" style="width:7%;" bindtap="openSearch">
+      <text class="cuIcon-search text-orange"></text>
+    </view>
+    <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}" style="width:70%;">
       <view class="cu-item {{index==kind?'text-green cur':''}}" wx:for="{{kindList}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
         {{item}}
       </view>

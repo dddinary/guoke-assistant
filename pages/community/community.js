@@ -19,6 +19,10 @@ Page({
     posts: {},
     students: {},
 
+    searchBar: false,
+    searchWordsBuf : '',
+    searchWords: '',
+
     triggered: false,
     freshing: false,
     loadingData: false,
@@ -90,6 +94,33 @@ Page({
       });
   },
 
+  openSearch: function() {
+    this.data.searchBar = true;
+    this.setData({
+      searchBar: true,
+    });
+  },
+
+  closeSearch: function() {
+    this.data.searchBar = false;
+    this.data.searchWords = '';
+    this.setData({
+      searchBar: false,
+    });
+    this.updateNewsFeed();
+  },
+
+  onSearchInput: function(e) {
+    this.setData({
+      searchWordsBuf: e.detail.value,
+    })
+  },
+
+  goSearch: function() {
+    this.data.searchWords = this.data.searchWordsBuf;
+    this.updateNewsFeed();
+  },
+
   loadMorePost: function() {
     wx.showLoading({
       title: '快速加载中...'
@@ -102,8 +133,14 @@ Page({
     let kind = this.data.kind;
     let order = this.data.order;
     let page = this.data.page;
-    server.getNews(kind, order, page)
-      .then((res)=>{
+    let searchWords = this.data.searchWords;
+    let prom = null;
+    if (this.data.searchBar && searchWords) {
+      prom = server.searchPost(searchWords, page)
+    } else {
+      prom = server.getNews(kind, order, page)
+    }
+      prom.then((res)=>{
         console.log("load more data: ", res)
         let resData = res.data;
         if ('students' in resData && 'posts' in resData) {
