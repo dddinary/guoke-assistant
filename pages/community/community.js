@@ -276,7 +276,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    return {
+      title: '果壳助手-校闻',
+      path: '/page/community/community',
+    }
+  },
+  onShareTimeline: function() {
+    return {
+      title: '果壳助手-校闻',
+      path: '/page/community/community',
+    }
   }
 })

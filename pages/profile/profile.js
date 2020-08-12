@@ -232,6 +232,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '果壳助手-' + this.data.user.name,
+      path: '/page/profile/profile?sid=' + this.data.sid,
+    }
   }
 })

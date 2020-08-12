@@ -43,7 +43,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.curLecture.name,
+      path: '/page/detail/detail?lid=' + this.data.curLecture.lid,
+    }
+  },
+  onShareTimeline: function() {
+    return {
+      title: this.data.curLecture.name,
+      path: '/page/detail/detail?lid=' + this.data.curLecture.lid,
+    }
   }
 })

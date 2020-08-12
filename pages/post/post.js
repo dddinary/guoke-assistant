@@ -331,7 +331,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    return {
+      title: '果壳助手小程序',
+      path: '/page/post/post?lid=' + this.data.pid,
+    }
+  },
+  onShareTimeline: function() {
+    return {
+      title: '果壳助手小程序',
+      path: '/page/post/post?lid=' + this.data.pid,
+    }
   }
 })
