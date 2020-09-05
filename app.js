@@ -7,17 +7,25 @@ App({
     this.checkUpdate();
     this.monitorGlobalData();
     // 获取系统状态栏信息
-    wx.getSystemInfo({
-      success: e => {
-        this.globalData.SysInfo = e
-        this.globalData.RpxToPx = e.windowWidth/750;
-        let custom = wx.getMenuButtonBoundingClientRect();
-        this.globalData.Custom = custom;
-        let customBar = custom.bottom + custom.top - e.statusBarHeight;
-        this.globalData.CustomBar = customBar
-        this.globalData.StatusBar = e.statusBarHeight;
-      }
-    });
+    const e = wx.getSystemInfoSync();
+    this.globalData.SysInfo = e;
+    this.globalData.RpxToPx = e.windowWidth/750;
+    let custom = wx.getMenuButtonBoundingClientRect();
+    this.globalData.Custom = custom;
+    let customBar = custom.bottom + custom.top - e.statusBarHeight;
+    this.globalData.CustomBar = customBar;
+    this.globalData.StatusBar = e.statusBarHeight;
+    // wx.getSystemInfo({
+    //   success: e => {
+    //     this.globalData.SysInfo = e;
+    //     this.globalData.RpxToPx = e.windowWidth/750;
+    //     let custom = wx.getMenuButtonBoundingClientRect();
+    //     this.globalData.Custom = custom;
+    //     let customBar = custom.bottom + custom.top - e.statusBarHeight;
+    //     this.globalData.CustomBar = customBar;
+    //     this.globalData.StatusBar = e.statusBarHeight;
+    //   }
+    // });
     wechat.getStorage("courseData")
     .then((res)=>{
       console.log("从缓存中获取courseData: ", res);

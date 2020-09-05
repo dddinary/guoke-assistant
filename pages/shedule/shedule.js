@@ -7,7 +7,7 @@ Page({
     data: {
         colorArrays: [ "#85B8CF", "#90C652", "#D8AA5A", "#FC9F9D", "#0A9A84", "#61BC69", "#12AEF3", "#E29AAD"],
 
-        weekText: ['点击选择周数', '第一周', '第二周', '第三周', '第四周', '第五周', '第六周', '第七周',
+        weekText: ['返校周', '第一周', '第二周', '第三周', '第四周', '第五周', '第六周', '第七周',
             '第八周', '第九周', '第十周', '第十一周', '第十二周', '第十三周', '第十四周',
             '第十五周', '第十六周', '第十七周', '第十八周', '第十九周', '第二十周'],
 
@@ -120,8 +120,8 @@ Page({
 
     showCalendarImage: function() {
         wx.previewImage({
-            urls: ['http://ww1.sinaimg.cn/large/006m0GqOly1gc0kql90mwj30nb0nw7a4.jpg'],
-            current: 'http://ww1.sinaimg.cn/large/006m0GqOly1gc0kql90mwj30nb0nw7a4.jpg' // 当前显示图片的http链接      
+            urls: ['http://ww1.sinaimg.cn/large/006m0GqOly1gidf30w11wj30ng0o2k5f.jpg'],
+            current: 'http://ww1.sinaimg.cn/large/006m0GqOly1gidf30w11wj30ng0o2k5f.jpg' // 当前显示图片的http链接      
           })
     },
 
