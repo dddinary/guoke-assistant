@@ -234,7 +234,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '果壳助手-' + this.data.user.name,
-      path: '/page/profile/profile?sid=' + this.data.sid,
+      path: '/pages/profile/profile?sid=' + this.data.sid,
     }
   }
 })

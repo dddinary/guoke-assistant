@@ -279,13 +279,13 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: '果壳助手-校闻',
-      path: '/page/community/community',
+      path: '/pages/community/community',
     }
   },
   onShareTimeline: function() {
     return {
       title: '果壳助手-校闻',
-      path: '/page/community/community',
+      path: '/pages/community/community',
     }
   }
 })

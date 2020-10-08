@@ -35,7 +35,7 @@
     "packNpmRelationList": []
   },
   "compileType": "miniprogram",
-  "libVersion": "2.10.1",
+  "libVersion": "2.10.3",
   "appid": "wx4a1b09ecac618f16",
   "projectname": "guoke-assistant",
   "debugOptions": {

@@ -35,8 +35,8 @@ Page({
   },
 
   tapBack: function() {
-    wx.navigateBack({
-      delta: 1
+    wx.switchTab({
+      url:'/pages/lecture/lecture',
     });
   },
 
@@ -46,13 +46,13 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: this.data.curLecture.name,
-      path: '/page/detail/detail?lid=' + this.data.curLecture.lid,
+      path: '/pages/detail/detail?lid=' + this.data.curLecture.lid,
     }
   },
   onShareTimeline: function() {
     return {
       title: this.data.curLecture.name,
-      path: '/page/detail/detail?lid=' + this.data.curLecture.lid,
+      path: '/pages/detail/detail?lid=' + this.data.curLecture.lid,
     }
   }
 })
