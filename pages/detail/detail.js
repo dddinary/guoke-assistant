@@ -1,4 +1,5 @@
-// pages/detail.js
+const server = require("../../utils/server");
+
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 Page({
@@ -15,7 +16,17 @@ Page({
    */
   onLoad: function (options) {
     console.log(options.lid);
-    var lecture = globalData.lectures[options.lid];
+    var lid = options.lid;
+    var lecture = null;
+    if (globalData.lectures == null || globalData.lectures == undefined) {
+      server.getLecture(lid).then((res)=>this.updateLecture(res.data));
+    } else {
+      lecture = globalData.lectures[lid];
+      this.updateLecture(lecture)
+    }
+  },
+
+  updateLecture: function(lecture) {
     console.log(lecture);
     if (lecture.category == 1) {
       lecture.category = '科技类';

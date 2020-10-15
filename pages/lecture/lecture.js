@@ -67,7 +67,7 @@ Page({
     wx.showLoading({
       title: '快速加载中...'
     });
-    server.getLecture()
+    server.getLectures()
       .then((res)=>{
         console.log("get lecture info: ", res);
         var humanityArray = res.data.humanity;

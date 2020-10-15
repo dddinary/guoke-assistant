@@ -34,8 +34,12 @@ function fetch(path, params) {
     })
 }
 
-function getLecture() {
-    return fetch("/getLecture");
+function getLectures() {
+    return fetch("/getLectures");
+}
+
+function getLecture(lid) {
+    return fetch("/getLecture", {lid});
 }
 
 function getNews(kind, order, page) {
@@ -165,6 +169,7 @@ function adminNotify(uid, content) {
 module.exports = {
     updateToken,
     loginAndGetCourse,
+    getLectures,
     getLecture,
     getNews,
     searchPost,
