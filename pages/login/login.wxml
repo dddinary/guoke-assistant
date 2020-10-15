@@ -25,7 +25,7 @@
         <text>用户须知</text>
     </view>
     <view class="cu-list text-xs">
-        <view class="cu-item">1. 服务器端不会保存用户的密码，密码只会保存在小程序本地</view>
+        <view class="cu-item">1. 请使用教务系统的账号密码登录，服务器端不会保存用户的密码，只会保存在小程序本地</view>
         <view class="cu-item">2. 平台会多处备份用户发布的内容，请勿在该平台发布任何违反法律的内容</view>
         <view class="cu-item">3. 请勿对该平台进行任何形式的网络攻击，平台保留追究法律责任的权力</view>
     </view>

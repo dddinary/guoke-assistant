@@ -177,13 +177,13 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: '果壳助手-讲座预告',
-      path: '/page/lecture/lecture',
+      path: '/pages/lecture/lecture',
     }
   },
   onShareTimeline: function() {
     return {
       title: '果壳助手-讲座预告',
-      path: '/page/lecture/lecture',
+      path: '/pages/lecture/lecture',
     }
   }
 })
