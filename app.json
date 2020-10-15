@@ -1,26 +1,18 @@
 {
   "pages": [
-    "pages/shedule/shedule",
-    "pages/lecture/lecture",
-    "pages/community/community",
-    "pages/me/me",
-    "pages/login/login",
-    "pages/publish/publish",
-    "pages/profile/profile",
-    "pages/post/post",
-    "pages/stared/stared",
-    "pages/notification/notification",
-    "pages/detail/detail"
-    
+    "pages/index/index",
+    "pages/shedule/home/home",
+    "pages/community/home/home",
+    "pages/community/notification/notification",
+    "pages/community/post/post",
+    "pages/community/profile/profile",
+    "pages/community/publish/publish",
+    "pages/lecture/home/home",
+    "pages/lecture/detail/detail",
+    "pages/me/home/home",
+    "pages/me/login/login",
+    "pages/me/stared/stared"
   ],
-  "tabBar": {
-    "list": [
-      { "pagePath": "pages/shedule/shedule" },
-      { "pagePath": "pages/lecture/lecture" },
-      { "pagePath": "pages/community/community" },
-      { "pagePath": "pages/me/me" }
-    ]
-  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -29,7 +21,6 @@
     "navigationBarTextStyle": "white"
   },
   "usingComponents": {
-    "custom-tab-bar": "/components/custom-tab-bar/custom-tab-bar",
     "cu-custom": "/colorui/components/cu-custom",
     "post-card": "/components/post-card/post-card",
     "wux-timeago": "/components/wux/timeago/index",

@@ -1,9 +1,11 @@
-const wechat = require("../../utils/wechat.js");
+const wechat = require("../../../utils/wechat.js");
 var appInstance = getApp();
 var globalData = appInstance.globalData;
 
-Page({
-
+Component({
+  options: {
+      addGlobalClass: true,
+  },
   data: {
     closeCommunity: globalData.closeCommunity,
     stuInfo: globalData.stuInfo,

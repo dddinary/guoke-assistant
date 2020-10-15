@@ -2,17 +2,10 @@
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     curLecture: {},
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     console.log(options.lid);
     var lecture = globalData.lectures[options.lid];
@@ -35,24 +28,24 @@ Page({
   },
 
   tapBack: function() {
-    wx.switchTab({
-      url:'/pages/lecture/lecture',
+    wx.navigateTo({
+      url:'/pages/index/index?page=lecture',
     });
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function () {
     return {
       title: this.data.curLecture.name,
-      path: '/pages/detail/detail?lid=' + this.data.curLecture.lid,
+      path: '/pages/lecture/detail/detail?lid=' + this.data.curLecture.lid,
     }
   },
   onShareTimeline: function() {
     return {
       title: this.data.curLecture.name,
-      path: '/pages/detail/detail?lid=' + this.data.curLecture.lid,
+      path: '/pages/lecture/detail/detail?lid=' + this.data.curLecture.lid,
     }
   }
 })

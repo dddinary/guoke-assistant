@@ -1,0 +1,25 @@
+<shedule wx:if="{{PageCur=='shedule'}}"></shedule>
+<lecture wx:if="{{PageCur=='lecture'}}"></lecture>
+<community wx:if="{{PageCur=='community'}}"></community>
+<me wx:if="{{PageCur=='me'}}"></me>
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="shedule">
+    <view class="cuIcon-home{{PageCur=='shedule'?'fill':''}}"></view>
+    <view class="{{PageCur=='shedule'?'text-green':'text-gray'}}">课表</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="lecture">
+    <view class="cuIcon-new{{PageCur=='lecture'?'fill':''}}"></view>
+    <view class="{{PageCur=='lecture'?'text-green':'text-gray'}}">讲座</view>
+  </view>
+  <view class="action text-gray add-action">
+    <button class="cu-btn cuIcon-add bg-green shadow" bindtap='toPublish'></button> 发布
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="community">
+    <view class="cuIcon-community{{PageCur=='community'?'fill':''}}"></view>
+    <view class="{{PageCur=='community'?'text-green':'text-gray'}}">校闻</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="me">
+    <view class="cuIcon-my{{PageCur=='me'?'fill':''}}"></view>
+    <view class="{{PageCur=='me'?'text-green':'text-gray'}}">我的</view>
+  </view>
+</view>

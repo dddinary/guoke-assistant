@@ -50,4 +50,3 @@
 </view>
 </view>
 <view class="cu-bar bg-gray" style="z-index: 1;"></view>
-<custom-tab-bar  PageCur='lecture'></custom-tab-bar>

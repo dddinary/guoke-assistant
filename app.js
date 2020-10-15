@@ -15,17 +15,6 @@ App({
     let customBar = custom.bottom + custom.top - e.statusBarHeight;
     this.globalData.CustomBar = customBar;
     this.globalData.StatusBar = e.statusBarHeight;
-    // wx.getSystemInfo({
-    //   success: e => {
-    //     this.globalData.SysInfo = e;
-    //     this.globalData.RpxToPx = e.windowWidth/750;
-    //     let custom = wx.getMenuButtonBoundingClientRect();
-    //     this.globalData.Custom = custom;
-    //     let customBar = custom.bottom + custom.top - e.statusBarHeight;
-    //     this.globalData.CustomBar = customBar;
-    //     this.globalData.StatusBar = e.statusBarHeight;
-    //   }
-    // });
     wechat.getStorage("courseData")
     .then((res)=>{
       console.log("从缓存中获取courseData: ", res);
@@ -129,7 +118,7 @@ App({
     data._listener[key].push(cb);
   },
 
-  checkUpdate() {
+  checkUpdate: function() {
     const updateManager = wx.getUpdateManager();
     updateManager.onUpdateReady(function () {
       wx.showModal({

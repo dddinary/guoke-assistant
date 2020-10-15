@@ -1,6 +1,6 @@
-const server = require("../../utils/server.js");
-const date = require("../../utils/date.js");
-var COS = require('../../utils/cos-wx-sdk-v5.js')
+const server = require("../../../utils/server.js");
+const date = require("../../../utils/date.js");
+var COS = require('../../../utils/cos-wx-sdk-v5.js')
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 
