@@ -1,8 +1,10 @@
 <view class="UCenter-bg bg-gradual-green">
     <button class="cu-btn round lg bg-white" wx:if="{{!stuInfo.name}}" bindtap="skipToLogin">点击登录</button>
     <view wx:else class="text-center">
-        <image wx:if="{{!stuInfo.avatar}}" id="stu-avatar" class="png" mode="widthFix" src="http://api.btstu.cn/sjtx/api.php?lx=c3&format=images"></image>
-        <image wx:else id="stu-avatar" class="png" mode="widthFix" src="{{stuInfo.avatar}}"></image>
+        <view class="cu-avatar round stu-avatar" style="{{'background-image:url('+ stuInfo.avatar +');'}}"></view>
+        <!-- <image id="stu-avatar" mode="widthFix" src="{{stuInfo.avatar}}"></image> -->
+        <!-- <image wx:if="{{!stuInfo.avatar}}" id="stu-avatar" mode="widthFix" src="http://api.btstu.cn/sjtx/api.php?lx=c3&format=images"></image>
+        <image wx:else id="stu-avatar" mode="widthFix" src="{{stuInfo.avatar}}"></image> -->
         <view class="text-lg">{{stuInfo.dpt}}</view>
         <view class="margin-top-xs text-xl text-bold">
             <text>{{stuInfo.name}}</text>
@@ -53,4 +55,3 @@
     </button>
 </view>
 </view>
-<custom-tab-bar  PageCur='me'></custom-tab-bar>

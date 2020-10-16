@@ -1,6 +1,6 @@
-const server = require("../../../utils/server.js");
-const wechat = require("../../../utils/wechat.js");
-const course = require("../../../utils/course.js")
+const server = require("../../utils/server.js");
+const wechat = require("../../utils/wechat.js");
+const course = require("../../utils/course.js")
 var appInstance = getApp();
 var globalData = appInstance.globalData;
 

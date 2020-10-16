@@ -1,24 +1,30 @@
-<shedule wx:if="{{PageCur=='shedule'}}"></shedule>
+<!-- <shedule wx:if="{{PageCur=='shedule'}}"></shedule>
 <lecture wx:if="{{PageCur=='lecture'}}"></lecture>
 <community wx:if="{{PageCur=='community'}}"></community>
-<me wx:if="{{PageCur=='me'}}"></me>
+<me wx:if="{{PageCur=='me'}}"></me> -->
+
+<!-- 此处使用 dispaly 属性，而非 wx:if 主要是为了防止tab切换导致组件销毁重建 -->
+<shedule style="display:{{PageCur=='shedule'?'':'none'}}"></shedule>
+<lecture style="display:{{PageCur=='lecture'?'':'none'}}"></lecture>
+<community style="display:{{PageCur=='community'?'':'none'}}"></community>
+<me style="display:{{PageCur=='me'?'':'none'}}"></me>
 <view class="cu-bar tabbar bg-white shadow foot">
-  <view class="action" bindtap="NavChange" data-cur="shedule">
+  <view class="action" bindtap="navChange" data-cur="shedule">
     <view class="cuIcon-home{{PageCur=='shedule'?'fill':''}}"></view>
     <view class="{{PageCur=='shedule'?'text-green':'text-gray'}}">课表</view>
   </view>
-  <view class="action" bindtap="NavChange" data-cur="lecture">
+  <view class="action" bindtap="navChange" data-cur="lecture">
     <view class="cuIcon-new{{PageCur=='lecture'?'fill':''}}"></view>
     <view class="{{PageCur=='lecture'?'text-green':'text-gray'}}">讲座</view>
   </view>
   <view class="action text-gray add-action">
     <button class="cu-btn cuIcon-add bg-green shadow" bindtap='toPublish'></button> 发布
   </view>
-  <view class="action" bindtap="NavChange" data-cur="community">
+  <view class="action" bindtap="navChange" data-cur="community">
     <view class="cuIcon-community{{PageCur=='community'?'fill':''}}"></view>
     <view class="{{PageCur=='community'?'text-green':'text-gray'}}">校闻</view>
   </view>
-  <view class="action" bindtap="NavChange" data-cur="me">
+  <view class="action" bindtap="navChange" data-cur="me">
     <view class="cuIcon-my{{PageCur=='me'?'fill':''}}"></view>
     <view class="{{PageCur=='me'?'text-green':'text-gray'}}">我的</view>
   </view>

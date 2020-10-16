@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "wux-fab-button":"/components/wux/fab-button/index"
+  },
   "component": true,
   "enablePullDownRefresh": true,
   "disableSwipeBack": true,

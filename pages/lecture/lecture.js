@@ -1,6 +1,6 @@
 // pages/lecture/lecture.js
-const server = require("../../../utils/server.js");
-const dateUtils = require("../../../utils/date.js");
+const server = require("../../utils/server.js");
+const dateUtils = require("../../utils/date.js");
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 Component({
@@ -15,7 +15,6 @@ Component({
     lectures: {},
     humanityEmpty: false,
     scienceEmpty: false,
-    pullDown: false,
 
     touchS: [0, 0],
     touchE: [0, 0],
@@ -46,31 +45,20 @@ Component({
   },
 
   lifetimes: {
-    // 切换tab会导致组件重新 created
     created: function() {
-      console.log("shedule created");
+      console.log("lecture created");
     },
     attached: function() {
-      console.log("shedule attached");
+      console.log("lecture attached");
       this.onLoad();
     },
     ready: function() {
-      console.log("shedule ready");
+      console.log("lecture ready");
     }
   },
 
   methods: {
     onLoad: function (options) {
-      this.updateLectureInfo();
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-      this.setData({
-        pullDown: true,
-      });
       this.updateLectureInfo();
     },
 
@@ -91,7 +79,8 @@ Component({
           var picIdx = Math.floor(Math.random()*picLen);
           for (var idx in humanityArray) {
             var curLecture = humanityArray[idx];
-            curLecture.imageUrl = this.data.lecturePics[(picIdx++)%picLen];
+            // curLecture.imageUrl = this.data.lecturePics[(picIdx++)%picLen];
+            curLecture.imageUrl = curLecture.pic;
             curLecture.name = curLecture.name.replace(/明德讲堂M[0-9]+[:：]/, '').trim();
             curLecture.start = this.myDateString(new Date(curLecture.start));
             curLecture.end = this.myDateString(new Date(curLecture.end));
@@ -99,7 +88,8 @@ Component({
           }
           for (var idx in scienceArray) {
             var curLecture = scienceArray[idx];
-            curLecture.imageUrl = this.data.lecturePics[(picIdx++)%picLen];
+            // curLecture.imageUrl = this.data.lecturePics[(picIdx++)%picLen];
+            curLecture.imageUrl = curLecture.pic;
             curLecture.start = this.myDateString(new Date(curLecture.start));
             curLecture.end = this.myDateString(new Date(curLecture.end));
             this.data.lectures[curLecture.lid] = curLecture;
@@ -110,21 +100,9 @@ Component({
           });
           globalData.lectures = this.data.lectures;
           wx.hideLoading();
-          if (this.data.pullDown) {
-            wx.stopPullDownRefresh();
-            this.setData({
-              pullDown: false,
-            });
-          }
         }).catch((err)=>{
           wx.hideLoading();
           console.log("get lecture info failed: ", err);
-          if (this.data.pullDown) {
-            wx.stopPullDownRefresh();
-            this.setData({
-              pullDown: false,
-            });
-          }
       });
     },
 
@@ -143,7 +121,7 @@ Component({
       console.log(e);
       var lid = e.currentTarget.id;
       wx.navigateTo({
-        url: '/pages/lecture/detail/detail?lid=' + lid,
+        url: '/pages/detail/detail?lid=' + lid,
       });
     },
 

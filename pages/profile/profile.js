@@ -1,4 +1,4 @@
-const server = require("../../../utils/server.js");
+const server = require("../../utils/server.js");
 const appInstance = getApp();
 const globalData = getApp().globalData;
 Page({
@@ -21,9 +21,16 @@ Page({
     loadingData: false,
     noMore: false,
     page: 0,
+
+    fromShare: false,
   },
 
   onLoad: function (options) {
+    if (options.fromShare == 'yes') {
+      this.data.fromShare = true;
+    } else {
+      this.data.fromShare = false;
+    }
     let sid = options.sid;
     this.setData({
       me: globalData.stuInfo,
@@ -223,9 +230,15 @@ Page({
   },
 
   clickBack: function() {
-    wx.navigateBack({
-      delta: 1
-    });
+    if (this.data.fromShare) {
+      wx.navigateTo({
+        url:'/pages/index/index?page=community',
+      });
+    } else {
+      wx.navigateBack({
+        delta: 1
+      });
+    }
   },
 
   /**
@@ -234,7 +247,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '果壳助手-' + this.data.user.name,
-      path: '/pages/profile/profile?sid=' + this.data.sid,
+      path: '/pages/profile/profile?fromShare=yes&sid=' + this.data.sid,
     }
   }
 })

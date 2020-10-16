@@ -1,14 +1,33 @@
-// pages/detail.js
+const server = require("../../utils/server.js");
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 Page({
   data: {
     curLecture: {},
+    fromShare: false,
   },
 
   onLoad: function (options) {
     console.log(options.lid);
-    var lecture = globalData.lectures[options.lid];
+    if (options.fromShare == 'yes') {
+      this.setData({
+        fromShare: true,
+      });
+      server.getLecture(options.lid)
+        .then((res)=>{
+          console.log(res);
+          
+          this.setLecture(res.data);
+        });
+    } else {
+      this.setData({
+        fromShare: false,
+      });
+      this.setLecture(globalData.lectures[options.lid]);
+    }
+  },
+
+  setLecture: function(lecture) {
     console.log(lecture);
     if (lecture.category == 1) {
       lecture.category = '科技类';
@@ -28,9 +47,15 @@ Page({
   },
 
   tapBack: function() {
-    wx.navigateTo({
-      url:'/pages/index/index?page=lecture',
-    });
+    if (this.data.fromShare) {
+      wx.navigateTo({
+        url:'/pages/index/index?page=lecture',
+      });
+    } else {
+      wx.navigateBack({
+        delta: 1
+      });
+    }
   },
 
   /**
@@ -39,13 +64,13 @@ Page({
   onShareAppMessage: function () {
     return {
       title: this.data.curLecture.name,
-      path: '/pages/lecture/detail/detail?lid=' + this.data.curLecture.lid,
+      path: '/pages/detail/detail?fromShare=yes&lid=' + this.data.curLecture.lid,
     }
   },
   onShareTimeline: function() {
     return {
       title: this.data.curLecture.name,
-      path: '/pages/lecture/detail/detail?lid=' + this.data.curLecture.lid,
+      path: '/pages/detail/detail?fromShare=yes&lid=' + this.data.curLecture.lid,
     }
   }
 })

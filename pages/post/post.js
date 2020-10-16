@@ -1,5 +1,5 @@
-const server = require("../../../utils/server.js");
-const date = require("../../../utils/date.js");
+const server = require("../../utils/server.js");
+const date = require("../../utils/date.js");
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 Page({
@@ -25,6 +25,7 @@ Page({
     ruidToComment: 0,
 
     modalName: '',
+    fromShare: false,
   },
 
   onLoad: function (options) {

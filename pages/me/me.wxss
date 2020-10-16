@@ -14,7 +14,7 @@
   color: #222;
   }
   
-#stu-avatar {
+.stu-avatar {
     width: 200rpx;
     height: 200rpx;
     margin-bottom: 20rpx;

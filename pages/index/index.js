@@ -13,29 +13,28 @@ Page({
         PageCur: page,
       });
     },
-    NavChange(e) {
+    navChange(e) {
       this.setData({
-        PageCur: e.currentTarget.dataset.cur
+        PageCur: e.currentTarget.dataset.cur,
       })
     },
     toPublish(e) {
         wx.navigateTo({
-          url: '/pages/community/publish/publish',
+          url: '/pages/publish/publish',
         });
     },
 
     onShareAppMessage: function() {
       return {
-        title: 'guoke-',
-        imageUrl: '/images/logo.jpg',
-        path: '/pages/index/index?page=' + PageCur,
+        title: '果壳助手',
+        path: '/pages/index/index?page=' + this.data.PageCur,
       }
     },
     onShareTimeline: function() {
       return {
-        title: 'guoke-',
+        title: '果壳助手',
         imageUrl: '/images/logo.jpg',
-        path: '/pages/index/index?page=' + PageCur,
+        path: '/pages/index/index?page=' + this.data.PageCur,
       }
     }
   })

@@ -9,6 +9,9 @@
     </view>
   </view>
 </scroll-view>
+<button class="cu-btn icon update-icon text-sl" catchtap="updateLectureInfo">
+    <text class="cuIcon-refresh text-green"></text>
+</button>
 <view class='body-container' bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
     <view class="cu-card article" wx:if="{{curTab == 1}}">
         <view id="{{item.lid}}" class="cu-item shadow" wx:for="{{humanity}}" wx:key="lid" catchtap="showLectureDetail">

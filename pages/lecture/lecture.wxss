@@ -1,0 +1,11 @@
+/* pages/lecture/lecture.wxss */
+.cu-card>.cu-item {
+    margin: 5rpx 10rpx;
+}
+.update-icon {
+    position: fixed;
+    width:160rpx;
+    height:160rpx;
+    bottom: 120rpx;
+    right: 40rpx;
+}

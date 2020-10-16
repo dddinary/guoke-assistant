@@ -1,17 +1,17 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/shedule/home/home",
-    "pages/community/home/home",
-    "pages/community/notification/notification",
-    "pages/community/post/post",
-    "pages/community/profile/profile",
-    "pages/community/publish/publish",
-    "pages/lecture/home/home",
-    "pages/lecture/detail/detail",
-    "pages/me/home/home",
-    "pages/me/login/login",
-    "pages/me/stared/stared"
+    "pages/shedule/shedule",
+    "pages/community/community",
+    "pages/notification/notification",
+    "pages/post/post",
+    "pages/profile/profile",
+    "pages/publish/publish",
+    "pages/lecture/lecture",
+    "pages/detail/detail",
+    "pages/me/me",
+    "pages/login/login",
+    "pages/stared/stared"
   ],
   "window": {
     "backgroundTextStyle": "light",

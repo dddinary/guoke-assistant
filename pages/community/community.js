@@ -1,4 +1,4 @@
-const server = require("../../../utils/server.js");
+const server = require("../../utils/server.js");
 const appInstance = getApp();
 const globalData = getApp().globalData;
 Component({
@@ -42,15 +42,20 @@ Component({
   lifetimes: {
     // 切换tab会导致组件重新 created
     created: function() {
-      console.log("shedule created");
+      console.log("community created");
     },
     attached: function() {
-      console.log("shedule attached");
+      console.log("community attached");
       this.onLoad();
     },
     ready: function() {
-      console.log("shedule ready");
+      console.log("community ready");
       this.onShow();
+    }
+  },
+  pageLifetimes: {
+    show: function() {
+      
     }
   },
   methods: {
@@ -60,7 +65,6 @@ Component({
           messageCount: val,
         });
       });
-      this.updateBodyHeight();
       this.updateNewsFeed();
     },
 
@@ -74,11 +78,12 @@ Component({
         globalData.communityShouldUpdate = -1;
         this.updateNewsFeed();
       }
+      this.updateBodyHeight();
       this.getNewMessage();
     },
 
     updateBodyHeight: function() {
-      let query = wx.createSelectorQuery();
+      let query = this.createSelectorQuery();
       query.select(".head-container").boundingClientRect();
       query.select(".foot-container").boundingClientRect();
       query.exec((rect)=>{

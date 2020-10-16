@@ -1,5 +1,5 @@
-const date = require("../../../utils/date.js");
-const course = require("../../../utils/course.js");
+const date = require("../../utils/date.js");
+const course = require("../../utils/course.js");
 const appInstance = getApp();
 const globalData = appInstance.globalData;
 
@@ -57,7 +57,6 @@ Component({
         this.updateWeekCourse();
       });
       this.updateWeekDay();
-      this.updateWeekCourse();
     },
 
     onShow: function () {
@@ -110,14 +109,14 @@ Component({
     },
 
     skipToLecture: function () {
-      wx.switchTab({
-        url: '/pages/lecture/lecture',
+      wx.navigateTo({
+        url: '/pages/index/index?page=lecture',
       });
     },
 
     skipToNews: function () {
-      wx.switchTab({
-        url: '/pages/news/news',
+      wx.navigateTo({
+        url: '/pages/index/index?page=community',
       });
     },
 

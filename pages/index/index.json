@@ -1,8 +1,8 @@
 {
     "usingComponents": {
-        "shedule": "/pages/shedule/home/home",
-        "lecture": "/pages/lecture/home/home",
-        "community": "/pages/community/home/home",
-        "me": "/pages/me/home/home"
+        "shedule": "/pages/shedule/shedule",
+        "lecture": "/pages/lecture/lecture",
+        "community": "/pages/community/community",
+        "me": "/pages/me/me"
     }
   }

@@ -61,4 +61,3 @@
   <i-divider wx:if="{{noMore}}" content="加载已经完成,没有其他数据"></i-divider>
   <view class="foot-container cu-bar bg-gray" style="z-index: 1;"></view>
 </view>
-<custom-tab-bar  PageCur='community'></custom-tab-bar>
