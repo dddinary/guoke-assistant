@@ -20,7 +20,7 @@ function getDayCourseList(weekNo, dayNo, courseData) {
 
 function getWeekCourseList(weekNo, courseData) {
     let timeTable = courseData.timeTable;
-    if (timeTable.length == 0) {
+    if (weekNo < 0 || timeTable.length == 0) {
         return [];
     }
     let cl = timeTable[weekNo];
