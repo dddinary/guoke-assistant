@@ -13,7 +13,8 @@
         <picker mode="selector" bindchange="changeWeekNo" value="{{dispWeek}}" range="{{weekText}}">
           <view class="flex text-xl">
             <text class="cuIcon-triangleupfill sm text-gray margin-top-xs"></text>
-            <view class="text-black text-bold">{{weekText[dispWeek]}}</view>
+            <view class="text-black text-bold" wx:if="{{dispWeek >= 0}}">{{weekText[dispWeek]}}</view>
+            <view class="text-black text-bold" wx:else>假期中</view>
             <text class="cuIcon-triangledownfill sm text-gray margin-top-xs"></text>
           </view>
         </picker>
